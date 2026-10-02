@@ -1,0 +1,960 @@
+:root{
+    --cor-fundo:#F4F1EA;
+    --cor-verde-suave:#CBE1D1;
+    --cor-verde-claro:#9FC7AA;
+    --cor-verde-oliva:#A8B379;
+    --cor-verde-escuro:#3C482F;
+    --cor-texto:#393533;
+    --cor-branco:#FFF;
+    --cor-borda:rgba(60,72,47,.18);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--cor-fundo);
+    color:var(--cor-texto);
+}
+
+.pagina-visualizar-cardapio{
+    min-height:100vh;
+    padding-bottom:75px;
+}
+
+.hero-visualizar-cardapio{
+    position:relative;
+    overflow:hidden;
+    padding:58px 24px 76px;
+    background:var(--cor-verde-escuro);
+}
+
+.hero-visualizar-cardapio::before{
+    content:"";
+    position:absolute;
+    width:390px;
+    height:390px;
+    top:-240px;
+    right:-100px;
+    border-radius:50%;
+    background:rgba(255,255,255,.06);
+}
+
+.hero-visualizar-cardapio::after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    bottom:-180px;
+    left:-70px;
+    border-radius:50%;
+    background:rgba(203,225,209,.08);
+}
+
+.hero-visualizar-conteudo{
+    position:relative;
+    z-index:1;
+    width:min(1180px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);
+    gap:45px;
+    align-items:center;
+}
+
+.hero-visualizar-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:18px;
+    padding:8px 13px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;
+    background:rgba(255,255,255,.09);
+    color:var(--cor-verde-suave);
+    font-size:.76rem;
+    font-weight:800;
+    letter-spacing:.065em;
+    text-transform:uppercase;
+}
+
+.hero-visualizar-tag svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.hero-visualizar-texto h1{
+    max-width:740px;
+    margin:0 0 25px;
+    color:var(--cor-branco);
+    font-size:clamp(2.15rem,5vw,4rem);
+    line-height:1.06;
+    letter-spacing:-.045em;
+    overflow-wrap:anywhere;
+}
+
+.hero-nutricionista{
+    width:max-content;
+    max-width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:27px;
+    padding:12px 15px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:15px;
+    background:rgba(255,255,255,.08);
+}
+
+.hero-nutricionista-icone{
+    width:43px;
+    height:43px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.hero-nutricionista-icone svg{
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.hero-nutricionista span{
+    display:block;
+    margin-bottom:3px;
+    color:rgba(255,255,255,.62);
+    font-size:.69rem;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+}
+
+.hero-nutricionista strong{
+    display:block;
+    color:var(--cor-branco);
+    font-size:.92rem;
+    overflow-wrap:anywhere;
+}
+
+.botao-voltar-cardapios{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:45px;
+    padding:0 18px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:13px;
+    background:rgba(255,255,255,.09);
+    color:var(--cor-branco);
+    text-decoration:none;
+    font-size:.9rem;
+    font-weight:800;
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.botao-voltar-cardapios:hover{
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.15);
+}
+
+.botao-voltar-cardapios svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.hero-visualizar-ilustracao{
+    position:relative;
+    min-height:260px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-prato{
+    position:relative;
+    z-index:2;
+    width:190px;
+    height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.15);
+    backdrop-filter:blur(8px);
+}
+
+.hero-prato::before{
+    content:"";
+    position:absolute;
+    inset:20px;
+    border:1px dashed rgba(255,255,255,.18);
+    border-radius:50%;
+}
+
+.hero-prato svg{
+    width:90px;
+    height:90px;
+    fill:none;
+    stroke:var(--cor-verde-suave);
+    stroke-width:1.35;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.hero-decoracao{
+    position:absolute;
+    display:block;
+    border-radius:50%;
+}
+
+.decoracao-a{
+    width:40px;
+    height:40px;
+    top:25px;
+    right:28px;
+    background:var(--cor-verde-oliva);
+    opacity:.65;
+}
+
+.decoracao-b{
+    width:24px;
+    height:24px;
+    bottom:36px;
+    left:32px;
+    background:var(--cor-verde-claro);
+    opacity:.7;
+}
+
+.decoracao-c{
+    width:13px;
+    height:13px;
+    top:76px;
+    left:22px;
+    background:var(--cor-branco);
+    opacity:.68;
+}
+
+.conteudo-visualizar-cardapio{
+    position:relative;
+    z-index:3;
+    width:min(1180px,calc(100% - 40px));
+    margin:-30px auto 0;
+}
+
+.bloco-observacoes-cardapio{
+    display:flex;
+    align-items:flex-start;
+    gap:17px;
+    margin-bottom:27px;
+    padding:25px 27px;
+    border:1px solid var(--cor-borda);
+    border-radius:21px;
+    background:var(--cor-branco);
+    box-shadow:0 14px 40px rgba(60,72,47,.08);
+}
+
+.observacoes-cardapio-icone{
+    width:50px;
+    height:50px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:15px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.observacoes-cardapio-icone svg{
+    width:25px;
+    height:25px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.bloco-observacoes-cardapio span{
+    display:block;
+    margin-bottom:5px;
+    color:var(--cor-verde-oliva);
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+}
+
+.bloco-observacoes-cardapio h2{
+    margin:0 0 7px;
+    color:var(--cor-verde-escuro);
+    font-size:1.22rem;
+}
+
+.bloco-observacoes-cardapio p{
+    margin:0;
+    color:rgba(57,53,51,.72);
+    line-height:1.7;
+    white-space:pre-line;
+    overflow-wrap:anywhere;
+}
+
+.cabecalho-refeicoes{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:25px;
+    margin-bottom:24px;
+    padding:24px 27px;
+    border:1px solid var(--cor-borda);
+    border-radius:21px;
+    background:rgba(255,255,255,.94);
+    box-shadow:0 12px 35px rgba(60,72,47,.07);
+}
+
+.secao-tag-cardapio{
+    display:inline-block;
+    margin-bottom:7px;
+    color:var(--cor-verde-escuro);
+    font-size:.74rem;
+    font-weight:800;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+}
+
+.cabecalho-refeicoes h2{
+    margin:0 0 8px;
+    color:var(--cor-verde-escuro);
+    font-size:clamp(1.45rem,3vw,2rem);
+    letter-spacing:-.025em;
+}
+
+.cabecalho-refeicoes p{
+    margin:0;
+    color:rgba(57,53,51,.7);
+    line-height:1.6;
+}
+
+.contador-refeicoes{
+    flex:none;
+    min-width:145px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:12px 15px;
+    border:1px solid var(--cor-borda);
+    border-radius:15px;
+    background:var(--cor-fundo);
+}
+
+.contador-refeicoes-icone{
+    width:41px;
+    height:41px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.contador-refeicoes-icone svg{
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.contador-refeicoes strong{
+    display:block;
+    color:var(--cor-verde-escuro);
+    font-size:1.18rem;
+    line-height:1;
+}
+
+.contador-refeicoes span{
+    display:block;
+    margin-top:4px;
+    color:rgba(57,53,51,.62);
+    font-size:.78rem;
+}
+
+.lista-refeicoes-cardapio{
+    display:flex;
+    flex-direction:column;
+    gap:23px;
+}
+
+.card-refeicao-usuario{
+    overflow:hidden;
+    border:1px solid var(--cor-borda);
+    border-radius:23px;
+    background:var(--cor-branco);
+    box-shadow:0 11px 34px rgba(60,72,47,.075);
+}
+
+.refeicao-topo{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    padding:21px 24px;
+    background:
+        linear-gradient(
+            135deg,
+            var(--cor-verde-suave),
+            rgba(203,225,209,.48)
+        );
+}
+
+.refeicao-titulo-area{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    min-width:0;
+}
+
+.refeicao-numero{
+    width:45px;
+    height:45px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(60,72,47,.14);
+    border-radius:13px;
+    background:rgba(255,255,255,.78);
+    color:var(--cor-verde-escuro);
+    font-size:1rem;
+    font-weight:900;
+}
+
+.refeicao-tag-usuario{
+    display:block;
+    margin-bottom:4px;
+    color:rgba(60,72,47,.67);
+    font-size:.7rem;
+    font-weight:800;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+}
+
+.refeicao-topo h2{
+    margin:0;
+    color:var(--cor-verde-escuro);
+    font-size:1.42rem;
+    letter-spacing:-.02em;
+    overflow-wrap:anywhere;
+}
+
+.refeicao-topo-icone{
+    width:48px;
+    height:48px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(60,72,47,.12);
+    border-radius:14px;
+    background:rgba(255,255,255,.7);
+    color:var(--cor-verde-escuro);
+}
+
+.refeicao-topo-icone svg{
+    width:25px;
+    height:25px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.refeicao-conteudo{
+    padding:23px;
+}
+
+.tabela-alimentos-wrapper{
+    overflow-x:auto;
+    border:1px solid var(--cor-borda);
+    border-radius:16px;
+}
+
+.tabela-alimentos-cardapio{
+    width:100%;
+    min-width:840px;
+    border-collapse:collapse;
+}
+
+.tabela-alimentos-cardapio th{
+    padding:14px 15px;
+    border-bottom:1px solid var(--cor-borda);
+    background:rgba(244,241,234,.8);
+    color:var(--cor-verde-escuro);
+    font-size:.73rem;
+    font-weight:800;
+    letter-spacing:.045em;
+    text-align:left;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.tabela-alimentos-cardapio td{
+    padding:15px;
+    border-bottom:1px solid rgba(60,72,47,.1);
+    color:rgba(57,53,51,.8);
+    font-size:.9rem;
+    vertical-align:middle;
+}
+
+.tabela-alimentos-cardapio tbody tr:last-child td{
+    border-bottom:0;
+}
+
+.tabela-alimentos-cardapio tbody tr{
+    transition:background .18s ease;
+}
+
+.tabela-alimentos-cardapio tbody tr:hover{
+    background:rgba(203,225,209,.18);
+}
+
+.alimento-nome{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.alimento-icone{
+    width:35px;
+    height:35px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.alimento-icone svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.alimento-nome strong{
+    color:var(--cor-texto);
+    overflow-wrap:anywhere;
+}
+
+.valor-nutricional{
+    display:inline-flex;
+    align-items:baseline;
+    gap:4px;
+    color:var(--cor-texto);
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.valor-nutricional small{
+    color:rgba(57,53,51,.56);
+    font-size:.72rem;
+    font-weight:600;
+}
+
+.observacoes-refeicao-usuario{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin-top:18px;
+    padding:15px;
+    border:1px solid rgba(60,72,47,.11);
+    border-radius:14px;
+    background:rgba(244,241,234,.72);
+}
+
+.observacoes-refeicao-icone{
+    width:36px;
+    height:36px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.observacoes-refeicao-icone svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.observacoes-refeicao-usuario strong{
+    display:block;
+    margin-bottom:4px;
+    color:var(--cor-verde-escuro);
+    font-size:.87rem;
+}
+
+.observacoes-refeicao-usuario p{
+    margin:0;
+    color:rgba(57,53,51,.72);
+    font-size:.88rem;
+    line-height:1.6;
+    white-space:pre-line;
+    overflow-wrap:anywhere;
+}
+
+.refeicao-sem-alimentos{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:25px;
+    border:1px dashed var(--cor-borda);
+    border-radius:15px;
+    background:rgba(244,241,234,.62);
+    color:rgba(57,53,51,.65);
+    text-align:center;
+}
+
+.refeicao-sem-alimentos svg{
+    width:21px;
+    height:21px;
+    flex:none;
+    fill:none;
+    stroke:var(--cor-verde-escuro);
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.refeicao-sem-alimentos p{
+    margin:0;
+}
+
+.estado-sem-refeicoes,
+.estado-cardapio-nao-encontrado{
+    max-width:700px;
+    margin:0 auto;
+    padding:55px 30px;
+    border:1px solid var(--cor-borda);
+    border-radius:24px;
+    background:var(--cor-branco);
+    box-shadow:0 14px 40px rgba(60,72,47,.08);
+    text-align:center;
+}
+
+.estado-cardapio-nao-encontrado{
+    margin-top:70px;
+}
+
+.estado-sem-refeicoes-icone,
+.estado-cardapio-icone{
+    width:78px;
+    height:78px;
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:22px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.estado-sem-refeicoes-icone svg,
+.estado-cardapio-icone svg{
+    width:39px;
+    height:39px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.estado-cardapio-tag{
+    display:inline-block;
+    margin-bottom:10px;
+    color:var(--cor-verde-oliva);
+    font-size:.74rem;
+    font-weight:800;
+    letter-spacing:.065em;
+    text-transform:uppercase;
+}
+
+.estado-sem-refeicoes h2,
+.estado-cardapio-nao-encontrado h1{
+    margin:0 0 11px;
+    color:var(--cor-verde-escuro);
+    font-size:1.65rem;
+}
+
+.estado-sem-refeicoes p,
+.estado-cardapio-nao-encontrado p{
+    margin:0 auto 24px;
+    color:rgba(57,53,51,.68);
+    line-height:1.7;
+}
+
+.botao-principal-cardapio{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:46px;
+    padding:0 19px;
+    border-radius:13px;
+    background:var(--cor-verde-escuro);
+    color:var(--cor-branco);
+    text-decoration:none;
+    font-size:.9rem;
+    font-weight:800;
+}
+
+.botao-principal-cardapio svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+@media (max-width:900px){
+
+    .hero-visualizar-conteudo{
+        grid-template-columns:minmax(0,1fr) 230px;
+        gap:25px;
+    }
+
+    .hero-prato{
+        width:165px;
+        height:165px;
+    }
+
+}
+
+@media (max-width:720px){
+
+    .hero-visualizar-cardapio{
+        padding:45px 20px 67px;
+    }
+
+    .hero-visualizar-conteudo{
+        grid-template-columns:1fr;
+    }
+
+    .hero-visualizar-ilustracao{
+        display:none;
+    }
+
+    .hero-visualizar-texto h1{
+        font-size:2.45rem;
+    }
+
+    .conteudo-visualizar-cardapio{
+        width:min(100% - 28px,1180px);
+        margin-top:-24px;
+    }
+
+    .cabecalho-refeicoes{
+        align-items:flex-start;
+        flex-direction:column;
+        padding:22px;
+    }
+
+    .contador-refeicoes{
+        width:100%;
+    }
+
+    .bloco-observacoes-cardapio{
+        padding:22px;
+    }
+
+    .refeicao-topo{
+        padding:19px;
+    }
+
+    .refeicao-conteudo{
+        padding:18px;
+    }
+
+}
+
+@media (max-width:600px){
+
+    .tabela-alimentos-wrapper{
+        overflow:visible;
+        border:0;
+        border-radius:0;
+    }
+
+    .tabela-alimentos-cardapio{
+        min-width:0;
+    }
+
+    .tabela-alimentos-cardapio thead{
+        display:none;
+    }
+
+    .tabela-alimentos-cardapio,
+    .tabela-alimentos-cardapio tbody,
+    .tabela-alimentos-cardapio tr,
+    .tabela-alimentos-cardapio td{
+        display:block;
+        width:100%;
+    }
+
+    .tabela-alimentos-cardapio tr{
+        margin-bottom:14px;
+        padding:8px 14px;
+        border:1px solid var(--cor-borda);
+        border-radius:15px;
+        background:var(--cor-branco);
+    }
+
+    .tabela-alimentos-cardapio tr:last-child{
+        margin-bottom:0;
+    }
+
+    .tabela-alimentos-cardapio td{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:18px;
+        padding:11px 0;
+        border-bottom:1px solid rgba(60,72,47,.1);
+        text-align:right;
+    }
+
+    .tabela-alimentos-cardapio td:last-child{
+        border-bottom:0;
+    }
+
+    .tabela-alimentos-cardapio td::before{
+        content:attr(data-label);
+        color:var(--cor-verde-escuro);
+        font-size:.72rem;
+        font-weight:800;
+        letter-spacing:.04em;
+        text-align:left;
+        text-transform:uppercase;
+    }
+
+    .tabela-alimentos-cardapio td:first-child{
+        justify-content:flex-start;
+        padding:12px 0 14px;
+    }
+
+    .tabela-alimentos-cardapio td:first-child::before{
+        display:none;
+    }
+
+    .alimento-nome{
+        width:100%;
+    }
+
+}
+
+@media (max-width:460px){
+
+    .hero-visualizar-cardapio{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .hero-visualizar-tag{
+        font-size:.68rem;
+    }
+
+    .hero-visualizar-texto h1{
+        font-size:2.1rem;
+    }
+
+    .hero-nutricionista{
+        width:100%;
+    }
+
+    .conteudo-visualizar-cardapio{
+        width:calc(100% - 20px);
+    }
+
+    .bloco-observacoes-cardapio{
+        flex-direction:column;
+        padding:19px;
+        border-radius:18px;
+    }
+
+    .cabecalho-refeicoes{
+        padding:19px;
+        border-radius:18px;
+    }
+
+    .card-refeicao-usuario{
+        border-radius:19px;
+    }
+
+    .refeicao-topo-icone{
+        display:none;
+    }
+
+    .refeicao-numero{
+        width:41px;
+        height:41px;
+    }
+
+    .refeicao-topo h2{
+        font-size:1.24rem;
+    }
+
+    .estado-sem-refeicoes,
+    .estado-cardapio-nao-encontrado{
+        padding:42px 20px;
+    }
+
+}

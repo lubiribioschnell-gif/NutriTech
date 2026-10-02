@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/quiz.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="quiz-container">
+
+                <section class="quiz-hero quiz-hero-responder">
+
+                    <div class="quiz-hero-conteudo">
+
+                        <span class="quiz-tag">
+                            Quiz nutricional
+                        </span>
+
+                        <h1>
+                            <%= quiz.titulo %>
+                        </h1>
+
+                        <p>
+                            <%= quiz.descricao || "Leia atentamente e responda todas as perguntas." %>
+                        </p>
+
+                    </div>
+
+                    <div class="quiz-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="54" height="54" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+                        </svg>
+
+                    </div>
+
+                </section>
+
+                <section class="quiz-secao">
+
+                    <div class="quiz-titulo-secao">
+
+                        <div>
+                            <span>Atividade</span>
+                            <h2>Marque uma alternativa</h2>
+                        </div>
+
+                        <div class="quiz-contador">
+                            <strong>
+                                <%= perguntas.length %>
+                            </strong>
+                            <span>
+                                <%= perguntas.length===1 ? "pergunta" : "perguntas" %>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <% if (perguntas.length===0) { %>
+
+                        <section class="quiz-vazio">
+
+                            <div class="quiz-vazio-icone">
+
+                                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor"
+                                    stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 8v4"></path>
+                                    <path d="M12 16h.01"></path>
+                                </svg>
+
+                            </div>
+
+                            <h2>Quiz sem perguntas</h2>
+
+                            <p>
+                                Este quiz ainda não possui perguntas cadastradas.
+                                Aguarde o nutricionista finalizar a atividade.
+                            </p>
+
+                            <a href="/usuario/quizzes" class="quiz-botao-secundario">
+                                Voltar aos quizzes
+                            </a>
+
+                        </section>
+
+                        <% } else { %>
+
+                            <form method="POST" action="/usuario/quizzes/<%= quiz.id_quiz %>/responder"
+                                class="quiz-formulario">
+
+                                <div class="quiz-perguntas">
+
+                                    <% perguntas.forEach((pergunta, indice)=> { %>
+
+                                        <article class="quiz-pergunta-card">
+
+                                            <header class="quiz-pergunta-cabecalho">
+
+                                                <span class="quiz-numero-pergunta">
+                                                    <%= indice + 1 %>
+                                                </span>
+
+                                                <div>
+
+                                                    <span class="quiz-pergunta-label">
+                                                        Pergunta <%= indice + 1 %>
+                                                    </span>
+
+                                                    <h3>
+                                                        <%= pergunta.enunciado %>
+                                                    </h3>
+
+                                                </div>
+
+                                            </header>
+
+                                            <div class="quiz-alternativas">
+
+                                                <% pergunta.alternativas.forEach((alternativa, alternativaIndice)=> { %>
+
+                                                    <label class="quiz-alternativa">
+
+                                                        <input type="radio" name="pergunta_<%= pergunta.id_pergunta %>"
+                                                            value="<%= alternativa.id_alternativa %>" required>
+
+                                                        <span class="quiz-radio-personalizado"></span>
+
+                                                        <span class="quiz-letra">
+                                                            <%= String.fromCharCode(65 + alternativaIndice) %>
+                                                        </span>
+
+                                                        <span class="quiz-texto-alternativa">
+                                                            <%= alternativa.texto %>
+                                                        </span>
+
+                                                    </label>
+
+                                                    <% }) %>
+
+                                            </div>
+
+                                        </article>
+
+                                        <% }) %>
+
+                                </div>
+
+                                <div class="quiz-acoes">
+
+                                    <a href="/usuario/quizzes" class="quiz-botao-secundario">
+                                        Voltar
+                                    </a>
+
+                                    <button type="submit" class="quiz-botao">
+                                        <span>Finalizar quiz</span>
+
+                                        <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="m9 11 3 3L22 4"></path>
+                                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                        </svg>
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                            <% } %>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

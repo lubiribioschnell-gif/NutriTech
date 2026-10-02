@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=logout,person" />
+<header class="navbar">
+
+    <div class="logo">
+
+        <img src="/img/logo.png">
+
+        <h2>NutriTech</h2>
+
+    </div>
+
+    <button type="button" class="botao-menu-mobile" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+
+    <nav class="menu">
+
+        <a href="/usuario/home">Home</a>
+
+        <a href="/usuario/cardapios">Cardápios</a>
+
+        <a href="/usuario/diario">Diário</a>
+
+        <a href="/usuario/quizzes">Quiz</a>
+
+        <a href="/usuario/classificacao">Classificação</a>
+
+            <a href="/usuario/ajuda">Ajuda</a>
+
+    </nav>
+
+    <div class="usuarioNavbar">
+
+        <% if (usuario && usuario.foto) { %>
+            <img
+                src="/uploads/<%= usuario.foto %>"
+                alt="Foto de perfil de <%= usuario.nome %>"
+                class="fotoPerfil"
+            >
+        <% } else { %>
+            <img
+                src="/img/icone_padrao.png"
+                alt="Foto de perfil padrão"
+                class="fotoPerfil"
+            >
+        <% } %>
+
+        <strong><%= usuario.nome %></strong>
+
+        <button type="button" class="botao-menu-usuario" aria-label="Abrir menu do usuário" aria-expanded="false">
+            ☰
+        </button>
+
+        <div class="menu-usuario">
+            <a href="/usuario/perfil">
+                <span class="material-symbols-outlined">person</span>
+                Perfil
+            </a>
+            <a href="/logout">
+                <span class="material-symbols-outlined">logout</span>
+                Sair
+            </a>
+        </div>
+    </div>
+
+</header>
+<script src="/js/navbar.js"></script>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriTech - Cadastro</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <div class="container">
+
+            <div class="left">
+
+                <aside class="auth-lateral">
+                    <div class="auth-logo">
+                        <img src="/img/logo.png" alt="Logo NutriTech">
+                        <h1>NutriTech</h1>
+                        <p>Alimentação saudável e acompanhamento nutricional.</p>
+                    </div>
+                </aside>
+
+            </div>
+
+            <div class="right">
+
+                <div class="card">
+
+                    <h2>Cadastrar-se</h2>
+
+                    <form action="/cadastro" method="POST">
+
+                        <div class="cardsCadastro">
+
+                            <label class="tipoCard">
+
+                                <input type="radio" name="tipo" value="usuario" checked>
+
+                                <div class="conteudo">
+
+
+
+                                    <h3>Usuário</h3>
+
+                                    <p>
+                                        Acompanhe seu peso, IMC, diário alimentar e receba cardápios personalizados.
+                                    </p>
+
+                                </div>
+
+                            </label>
+
+                            <label class="tipoCard">
+
+                                <input type="radio" name="tipo" value="nutricionista">
+
+                                <div class="conteudo">
+
+                                    <h3>Nutricionista</h3>
+
+                                    <p>
+                                        Cadastre pacientes, monte cardápios e acompanhe a evolução dos usuários.
+                                    </p>
+
+                                </div>
+
+                            </label>
+
+                        </div>
+
+                        <button class="btn">
+
+                            Continuar Cadastro
+
+                        </button>
+
+                    </form>
+
+                    <div class="cadastro">
+
+                        Já possui uma conta?
+
+                        <a href="/">
+
+                            Entrar
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+</body>
+
+</html>

@@ -1,0 +1,1063 @@
+:root{
+    --cor-fundo:#F4F1EA;
+    --cor-verde-suave:#CBE1D1;
+    --cor-verde-claro:#9FC7AA;
+    --cor-verde-oliva:#A8B379;
+    --cor-verde-escuro:#3C482F;
+    --cor-texto:#393533;
+    --cor-branco:#FFF;
+    --cor-borda:rgba(60,72,47,.18);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--cor-fundo);
+    color:var(--cor-texto);
+}
+
+.pagina-nutricionistas{
+    min-height:100vh;
+    padding-bottom:75px;
+}
+
+.hero-nutricionistas{
+    position:relative;
+    overflow:hidden;
+    padding:58px 24px 78px;
+    background:var(--cor-verde-escuro);
+}
+
+.hero-nutricionistas::before{
+    content:"";
+    position:absolute;
+    width:390px;
+    height:390px;
+    top:-240px;
+    right:-100px;
+    border-radius:50%;
+    background:rgba(255,255,255,.06);
+}
+
+.hero-nutricionistas::after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    bottom:-180px;
+    left:-75px;
+    border-radius:50%;
+    background:rgba(203,225,209,.08);
+}
+
+.hero-nutricionistas-conteudo{
+    position:relative;
+    z-index:1;
+    width:min(1180px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);
+    gap:45px;
+    align-items:center;
+}
+
+.hero-nutricionistas-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:18px;
+    padding:8px 13px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;
+    background:rgba(255,255,255,.09);
+    color:var(--cor-verde-suave);
+    font-size:.76rem;
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+}
+
+.hero-nutricionistas-tag svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.hero-nutricionistas-texto h1{
+    max-width:760px;
+    margin:0 0 16px;
+    color:var(--cor-branco);
+    font-size:clamp(2.2rem,5vw,4rem);
+    line-height:1.04;
+    letter-spacing:-.045em;
+}
+
+.hero-nutricionistas-texto > p{
+    max-width:640px;
+    margin:0 0 28px;
+    color:rgba(255,255,255,.76);
+    font-size:1.04rem;
+    line-height:1.72;
+}
+
+.botao-voltar-nutricionistas{
+    min-height:45px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:0 18px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:13px;
+    background:rgba(255,255,255,.09);
+    color:var(--cor-branco);
+    text-decoration:none;
+    font-size:.9rem;
+    font-weight:800;
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.botao-voltar-nutricionistas:hover{
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.15);
+}
+
+.botao-voltar-nutricionistas svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.hero-nutricionistas-ilustracao{
+    position:relative;
+    min-height:260px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-profissional-circulo{
+    position:relative;
+    z-index:2;
+    width:190px;
+    height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    box-shadow:
+        0 25px 65px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.15);
+    backdrop-filter:blur(8px);
+}
+
+.hero-profissional-circulo::before{
+    content:"";
+    position:absolute;
+    inset:20px;
+    border:1px dashed rgba(255,255,255,.18);
+    border-radius:50%;
+}
+
+.hero-profissional-circulo svg{
+    width:86px;
+    height:86px;
+    fill:none;
+    stroke:var(--cor-verde-suave);
+    stroke-width:1.35;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.decoracao-nutri{
+    position:absolute;
+    display:block;
+    border-radius:50%;
+}
+
+.decoracao-nutri-um{
+    width:41px;
+    height:41px;
+    top:24px;
+    right:28px;
+    background:var(--cor-verde-oliva);
+    opacity:.65;
+}
+
+.decoracao-nutri-dois{
+    width:24px;
+    height:24px;
+    bottom:38px;
+    left:32px;
+    background:var(--cor-verde-claro);
+    opacity:.68;
+}
+
+.decoracao-nutri-tres{
+    width:13px;
+    height:13px;
+    top:76px;
+    left:23px;
+    background:var(--cor-branco);
+    opacity:.66;
+}
+
+.conteudo-nutricionistas{
+    position:relative;
+    z-index:3;
+    width:min(1180px,calc(100% - 40px));
+    margin:-31px auto 0;
+}
+
+.cabecalho-lista-nutricionistas{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:25px;
+    margin-bottom:25px;
+    padding:25px 28px;
+    border:1px solid var(--cor-borda);
+    border-radius:22px;
+    background:rgba(255,255,255,.95);
+    box-shadow:0 14px 40px rgba(60,72,47,.08);
+}
+
+.secao-nutricionista-tag{
+    display:block;
+    margin-bottom:7px;
+    color:var(--cor-verde-oliva);
+    font-size:.73rem;
+    font-weight:800;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+}
+
+.cabecalho-lista-nutricionistas h2{
+    margin:0 0 8px;
+    color:var(--cor-verde-escuro);
+    font-size:clamp(1.45rem,3vw,2rem);
+    letter-spacing:-.025em;
+}
+
+.cabecalho-lista-nutricionistas p{
+    margin:0;
+    color:rgba(57,53,51,.7);
+    line-height:1.6;
+}
+
+.contador-nutricionistas{
+    flex:none;
+    min-width:155px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:12px 15px;
+    border:1px solid var(--cor-borda);
+    border-radius:15px;
+    background:var(--cor-fundo);
+}
+
+.contador-nutricionistas-icone{
+    width:42px;
+    height:42px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.contador-nutricionistas-icone svg{
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.contador-nutricionistas strong{
+    display:block;
+    color:var(--cor-verde-escuro);
+    font-size:1.18rem;
+    line-height:1;
+}
+
+.contador-nutricionistas span{
+    display:block;
+    margin-top:4px;
+    color:rgba(57,53,51,.62);
+    font-size:.76rem;
+}
+
+.grade-nutricionistas{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:22px;
+}
+
+.card-nutricionista{
+    min-width:0;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--cor-borda);
+    border-radius:23px;
+    background:var(--cor-branco);
+    box-shadow:0 11px 34px rgba(60,72,47,.075);
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+}
+
+.card-nutricionista:hover{
+    transform:translateY(-5px);
+    border-color:rgba(60,72,47,.3);
+    box-shadow:0 18px 43px rgba(60,72,47,.12);
+}
+
+.card-nutricionista-topo{
+    min-height:132px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:15px;
+    padding:20px;
+    background:var(--cor-verde-suave);
+}
+
+.nutricionista-avatar{
+    width:72px;
+    height:72px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:4px;
+    border:1px solid rgba(60,72,47,.14);
+    border-radius:21px;
+    background:rgba(255,255,255,.76);
+    color:var(--cor-verde-escuro);
+    box-shadow:0 9px 24px rgba(60,72,47,.1);
+}
+
+.nutricionista-avatar img{
+    width:100%;
+    height:100%;
+    display:block;
+    border-radius:17px;
+    object-fit:cover;
+}
+
+.nutricionista-avatar svg{
+    width:36px;
+    height:36px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.55;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.nutricionista-disponivel{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:7px 10px;
+    border:1px solid rgba(60,72,47,.12);
+    border-radius:999px;
+    background:rgba(255,255,255,.72);
+    color:var(--cor-verde-escuro);
+    font-size:.72rem;
+    font-weight:800;
+}
+
+.ponto-disponivel{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--cor-verde-escuro);
+    box-shadow:0 0 0 4px rgba(60,72,47,.09);
+}
+
+.card-nutricionista-conteudo{
+    flex:1;
+    padding:23px 21px 18px;
+}
+
+.nutricionista-indice{
+    display:block;
+    margin-bottom:6px;
+    color:var(--cor-verde-oliva);
+    font-size:.7rem;
+    font-weight:800;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+}
+
+.card-nutricionista-conteudo h3{
+    margin:0 0 19px;
+    color:var(--cor-verde-escuro);
+    font-size:1.35rem;
+    line-height:1.28;
+    letter-spacing:-.02em;
+    overflow-wrap:anywhere;
+}
+
+.nutricionista-email{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--cor-borda);
+}
+
+.nutricionista-email-icone{
+    width:40px;
+    height:40px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:11px;
+    background:var(--cor-fundo);
+    color:var(--cor-verde-escuro);
+}
+
+.nutricionista-email-icone svg{
+    width:20px;
+    height:20px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.nutricionista-email span{
+    display:block;
+    margin-bottom:3px;
+    color:rgba(57,53,51,.56);
+    font-size:.67rem;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+}
+
+.nutricionista-email strong{
+    display:block;
+    color:var(--cor-texto);
+    font-size:.84rem;
+    line-height:1.4;
+    overflow-wrap:anywhere;
+}
+
+.nutricionista-beneficios{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:18px;
+}
+
+.beneficio-item{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:rgba(57,53,51,.72);
+    font-size:.82rem;
+}
+
+.beneficio-item svg{
+    width:17px;
+    height:17px;
+    flex:none;
+    padding:3px;
+    border-radius:50%;
+    background:var(--cor-verde-suave);
+    fill:none;
+    stroke:var(--cor-verde-escuro);
+    stroke-width:2.4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.card-nutricionista-rodape{
+    padding:0 21px 21px;
+}
+
+.card-nutricionista-rodape form{
+    width:100%;
+}
+
+.botao-ver-perfil {
+    width:100%;
+    min-height:46px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:10px 15px;
+    border:0;
+    border-radius:13px;
+    background:var(--cor-verde-escuro);
+    color:var(--cor-branco);
+    font:inherit;
+    font-size:.86rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.botao-ver-perfil:hover{
+    transform:translateY(-2px);
+    opacity:.92;
+}
+
+.botao-ver-perfil svg{
+    width:18px;
+    height:16px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.botao-solicitar{
+    width:100%;
+    min-height:46px;
+    margin: 5px 0; 
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:10px 15px;
+    border:0;
+    border-radius:13px;
+    background:var(--cor-verde-escuro);
+    color:var(--cor-branco);
+    font:inherit;
+    font-size:.86rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.botao-solicitar:hover{
+    transform:translateY(-2px);
+    opacity:.92;
+}
+
+.botao-solicitar svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.card-solicitacao-atual{
+    max-width:790px;
+    margin:0 auto;
+    overflow:hidden;
+    border:1px solid var(--cor-borda);
+    border-radius:24px;
+    background:var(--cor-branco);
+    box-shadow:0 15px 45px rgba(60,72,47,.09);
+}
+
+.solicitacao-status-topo{
+    min-height:102px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:21px 25px;
+    background:var(--cor-verde-suave);
+}
+
+.status-solicitacao-icone{
+    width:55px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(60,72,47,.13);
+    border-radius:16px;
+    background:rgba(255,255,255,.72);
+    color:var(--cor-verde-escuro);
+}
+
+.status-solicitacao-icone svg{
+    width:27px;
+    height:27px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.status-solicitacao{
+    display:inline-flex;
+    align-items:center;
+    padding:8px 12px;
+    border:1px solid rgba(60,72,47,.13);
+    border-radius:999px;
+    background:rgba(255,255,255,.72);
+    color:var(--cor-verde-escuro);
+    font-size:.75rem;
+    font-weight:800;
+}
+
+.solicitacao-conteudo{
+    padding:28px;
+}
+
+.solicitacao-conteudo h2{
+    margin:0 0 10px;
+    color:var(--cor-verde-escuro);
+    font-size:1.75rem;
+    letter-spacing:-.025em;
+}
+
+.solicitacao-descricao{
+    margin:0 0 23px;
+    color:rgba(57,53,51,.7);
+    line-height:1.65;
+}
+
+.profissional-solicitacao,
+.profissional-atual{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:18px;
+    border:1px solid var(--cor-borda);
+    border-radius:17px;
+    background:rgba(244,241,234,.65);
+}
+
+.profissional-avatar,
+.profissional-atual-avatar{
+    width:55px;
+    height:55px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.profissional-avatar svg,
+.profissional-atual-avatar svg{
+    width:27px;
+    height:27px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.profissional-solicitacao span,
+.profissional-atual-informacoes > span{
+    display:block;
+    margin-bottom:4px;
+    color:rgba(57,53,51,.57);
+    font-size:.69rem;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+}
+
+.profissional-solicitacao strong{
+    display:block;
+    color:var(--cor-verde-escuro);
+    font-size:1rem;
+    overflow-wrap:anywhere;
+}
+
+.profissional-atual-informacoes h3{
+    margin:0 0 6px;
+    color:var(--cor-verde-escuro);
+    font-size:1.25rem;
+    overflow-wrap:anywhere;
+}
+
+.profissional-email{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:rgba(57,53,51,.67);
+    font-size:.86rem;
+    overflow-wrap:anywhere;
+}
+
+.profissional-email svg{
+    width:17px;
+    height:17px;
+    flex:none;
+    fill:none;
+    stroke:var(--cor-verde-escuro);
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.aviso-solicitacao,
+.acompanhamento-informacao{
+    display:flex;
+    align-items:flex-start;
+    gap:11px;
+    margin-top:18px;
+    padding:15px;
+    border:1px solid rgba(60,72,47,.11);
+    border-radius:14px;
+    background:rgba(203,225,209,.28);
+}
+
+.aviso-solicitacao > svg{
+    width:20px;
+    height:20px;
+    flex:none;
+    margin-top:1px;
+    fill:none;
+    stroke:var(--cor-verde-escuro);
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.aviso-solicitacao p,
+.acompanhamento-informacao p{
+    margin:0;
+    color:rgba(57,53,51,.7);
+    font-size:.84rem;
+    line-height:1.55;
+}
+
+.acompanhamento-informacao-icone{
+    width:37px;
+    height:37px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.acompanhamento-informacao-icone svg{
+    width:19px;
+    height:19px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.acompanhamento-informacao strong{
+    display:block;
+    margin-bottom:4px;
+    color:var(--cor-verde-escuro);
+    font-size:.88rem;
+}
+
+.solicitacao-rodape{
+    padding:0 28px 28px;
+}
+
+.solicitacao-rodape form{
+    width:100%;
+}
+
+.botao-cancelar-solicitacao{
+    width:100%;
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:10px 16px;
+    border:1px solid var(--cor-borda);
+    border-radius:13px;
+    background:var(--cor-branco);
+    color:var(--cor-texto);
+    font:inherit;
+    font-size:.87rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.botao-cancelar-solicitacao:hover{
+    transform:translateY(-2px);
+    background:var(--cor-fundo);
+}
+
+.botao-cancelar-solicitacao svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.estado-sem-nutricionistas{
+    max-width:700px;
+    margin:0 auto;
+    padding:55px 30px;
+    border:1px solid var(--cor-borda);
+    border-radius:24px;
+    background:var(--cor-branco);
+    box-shadow:0 14px 40px rgba(60,72,47,.08);
+    text-align:center;
+}
+
+.estado-sem-nutricionistas-icone{
+    width:78px;
+    height:78px;
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:22px;
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.estado-sem-nutricionistas-icone svg{
+    width:39px;
+    height:39px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.estado-vazio-tag{
+    display:block;
+    margin-bottom:8px;
+    color:var(--cor-verde-oliva);
+    font-size:.74rem;
+    font-weight:800;
+    letter-spacing:.065em;
+    text-transform:uppercase;
+}
+
+.estado-sem-nutricionistas h2{
+    margin:0 0 11px;
+    color:var(--cor-verde-escuro);
+    font-size:1.65rem;
+}
+
+.estado-sem-nutricionistas p{
+    max-width:540px;
+    margin:0 auto 24px;
+    color:rgba(57,53,51,.68);
+    line-height:1.7;
+}
+
+.botao-principal-nutricionistas{
+    min-height:46px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:0 19px;
+    border-radius:13px;
+    background:var(--cor-verde-escuro);
+    color:var(--cor-branco);
+    text-decoration:none;
+    font-size:.9rem;
+    font-weight:800;
+}
+
+.botao-principal-nutricionistas svg{
+    width:19px;
+    height:19px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+@media (max-width:980px){
+
+    .grade-nutricionistas{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media (max-width:760px){
+
+    .hero-nutricionistas{
+        padding:45px 20px 68px;
+    }
+
+    .hero-nutricionistas-conteudo{
+        grid-template-columns:1fr;
+    }
+
+    .hero-nutricionistas-ilustracao{
+        display:none;
+    }
+
+    .hero-nutricionistas-texto h1{
+        font-size:2.45rem;
+    }
+
+    .conteudo-nutricionistas{
+        width:min(100% - 28px,1180px);
+        margin-top:-24px;
+    }
+
+    .cabecalho-lista-nutricionistas{
+        align-items:flex-start;
+        flex-direction:column;
+        padding:22px;
+    }
+
+    .contador-nutricionistas{
+        width:100%;
+    }
+
+}
+
+@media (max-width:620px){
+
+    .grade-nutricionistas{
+        grid-template-columns:1fr;
+    }
+
+    .solicitacao-conteudo{
+        padding:22px;
+    }
+
+    .solicitacao-rodape{
+        padding:0 22px 22px;
+    }
+
+}
+
+@media (max-width:460px){
+
+    .hero-nutricionistas{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .hero-nutricionistas-tag{
+        font-size:.67rem;
+    }
+
+    .hero-nutricionistas-texto h1{
+        font-size:2.1rem;
+    }
+
+    .hero-nutricionistas-texto > p{
+        font-size:.95rem;
+    }
+
+    .conteudo-nutricionistas{
+        width:calc(100% - 20px);
+    }
+
+    .cabecalho-lista-nutricionistas{
+        padding:19px;
+        border-radius:18px;
+    }
+
+    .card-nutricionista,
+    .card-solicitacao-atual{
+        border-radius:19px;
+    }
+
+    .solicitacao-status-topo{
+        padding:18px;
+    }
+
+    .solicitacao-conteudo{
+        padding:19px;
+    }
+
+    .solicitacao-rodape{
+        padding:0 19px 19px;
+    }
+
+    .profissional-solicitacao,
+    .profissional-atual{
+        align-items:flex-start;
+    }
+
+    .estado-sem-nutricionistas{
+        padding:42px 20px;
+    }
+
+}
+
+.botao-encerrar-acompanhamento{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    border:1px solid #b84b4b;
+    border-radius:12px;
+    padding:12px 18px;
+    background:#fff;
+    color:#a93636;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.botao-encerrar-acompanhamento:hover{
+    background:#a93636;
+    color:#fff;
+}
+
+.botao-encerrar-acompanhamento svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+}

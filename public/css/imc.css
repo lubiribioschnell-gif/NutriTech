@@ -1,0 +1,209 @@
+.paginaImc {
+    width: min(1050px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 35px 0 60px;
+}
+
+.voltar {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #3d7f4b;
+    font-weight: 600;
+}
+
+.imcContainer {
+    display: grid;
+    grid-template-columns: 1fr 430px;
+    align-items: center;
+    gap: 55px;
+    padding: 52px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #e2f3e6, #f8fcf9);
+    box-shadow: 0 14px 36px rgba(45, 84, 54, .11);
+}
+
+.introducaoImc>span {
+    color: #4f985e;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.introducaoImc h1 {
+    margin: 10px 0 15px;
+    color: #284f31;
+    font-size: 42px;
+}
+
+.introducaoImc>p {
+    max-width: 500px;
+    color: #667069;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.informacao {
+    margin-top: 32px;
+    padding: 24px;
+    border-left: 5px solid #5aa469;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .7);
+}
+
+.informacao strong {
+    color: #2f653b;
+}
+
+.informacao p {
+    margin: 8px 0 12px;
+    color: #667069;
+    font-size: 14px;
+}
+
+.informacao code {
+    color: #2e7d32;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cardImc {
+    padding: 34px;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 12px 32px rgba(44, 75, 51, .13);
+}
+
+.campoImc {
+    margin-bottom: 21px;
+}
+
+.campoImc label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34483a;
+    font-weight: 600;
+}
+
+.entradaComUnidade {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #cedbd1;
+    border-radius: 12px;
+    background: #fff;
+    transition: .25s;
+}
+
+.entradaComUnidade:focus-within {
+    border-color: #5aa469;
+    box-shadow: 0 0 0 3px rgba(90, 164, 105, .13);
+}
+
+.entradaComUnidade input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.entradaComUnidade span {
+    padding: 0 15px;
+    color: #56705c;
+    font-weight: 600;
+}
+
+.botaoCalcular {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #4c985b;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.botaoCalcular:hover {
+    background: #347b43;
+    transform: translateY(-2px);
+}
+
+.erroImc {
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #ffe3e3;
+    color: #a61c2b;
+    font-size: 14px;
+}
+
+.resultadoImc {
+    margin-top: 25px;
+    padding: 24px;
+    border-radius: 16px;
+    background: #ecf7ee;
+    text-align: center;
+}
+
+.resultadoImc>span {
+    display: block;
+    color: #58705d;
+    font-size: 14px;
+}
+
+.resultadoImc>strong {
+    display: block;
+    margin: 4px 0;
+    color: #2f7f3e;
+    font-size: 48px;
+}
+
+.resultadoImc p {
+    color: #415b47;
+}
+
+.resultadoImc small {
+    display: block;
+    margin-top: 14px;
+    color: #738078;
+    line-height: 1.5;
+}
+
+@media(max-width:850px) {
+
+    .imcContainer {
+        grid-template-columns: 1fr;
+        padding: 35px;
+    }
+
+    .cardImc {
+        width: 100%;
+        max-width: 500px;
+    }
+
+}
+
+@media(max-width:520px) {
+
+    .paginaImc {
+        width: calc(100% - 24px);
+    }
+
+    .imcContainer {
+        padding: 25px 18px;
+    }
+
+    .introducaoImc h1 {
+        font-size: 32px;
+    }
+
+    .cardImc {
+        padding: 24px 18px;
+    }
+
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+        <%= titulo %> | NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <%- include('../partials/navbarAdmin') %>
+        <main class="admin-main">
+            <section class="card perfil-admin"><a class="botao voltar" href="/admin/nutricionistas">Voltar</a>
+                <h1>
+                    <%= nutricionista.nome %>
+                </h1>
+                <% if (nutricionista.foto) { %><img class="foto-perfil" src="/uploads/<%= nutricionista.foto %>"
+                        alt="Foto de <%= nutricionista.nome %>">
+                    <% } %>
+                        <p><strong>E-mail:</strong>
+                            <%= nutricionista.email %>
+                        </p>
+                        <p><strong>CRN:</strong>
+                            <%= nutricionista.crn || 'Não informado' %>
+                        </p>
+                        <p><strong>Telefone:</strong>
+                            <%= nutricionista.telefone || 'Não informado' %>
+                        </p>
+                        <p><strong>Data de nascimento:</strong>
+                            <%= nutricionista.data_nascimento ? new
+                                Date(nutricionista.data_nascimento).toLocaleDateString('pt-BR') : 'Não informada' %>
+                        </p>
+                        <p><strong>Descrição profissional:</strong>
+                            <%= nutricionista.descricao || 'Não informada' %>
+                        </p>
+                        <p><strong>Aprovação:</strong> <span
+                                class="status <%= nutricionista.aprovado ? 'status-aprovado' : 'status-pendente' %>">
+                                <%= nutricionista.aprovado ? 'Aprovado' : 'Pendente' %>
+                            </span></p>
+                        <p><strong>Conta:</strong> <span
+                                class="status <%= nutricionista.ativo ? 'status-ativo' : 'status-inativo' %>">
+                                <%= nutricionista.ativo ? 'Ativa' : 'Desativada' %>
+                            </span></p>
+                        <% if (nutricionista.certificado) { %>
+                            <p><a class="botao secundario" href="/uploads/<%= nutricionista.certificado %>"
+                                    target="_blank" rel="noopener">Abrir certificado</a></p>
+                            <% } else { %>
+                                <p><em>Certificado não enviado.</em></p>
+                                <% } %>
+                                    <div class="acoes">
+                                        <% if (!nutricionista.aprovado) { %>
+                                            <form
+                                                action="/admin/nutricionistas/<%= nutricionista.id_nutricionista %>/aprovar"
+                                                method="POST"><button class="aprovar" type="submit">Aprovar
+                                                    nutricionista</button></form>
+                                            <% } else { %>
+                                                <form
+                                                    action="/admin/nutricionistas/<%= nutricionista.id_nutricionista %>/recusar"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Retirar a aprovação deste nutricionista?')">
+                                                    <button class="recusar" type="submit">Retirar aprovação</button>
+                                                </form>
+                                                <% } %>
+                                                    <% if (nutricionista.ativo) { %>
+                                                        <form
+                                                            action="/admin/nutricionistas/<%= nutricionista.id_nutricionista %>/desativar"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Desativar esta conta?')"><button
+                                                                class="desativar" type="submit">Desativar conta</button>
+                                                        </form>
+                                                        <% } else { %>
+                                                            <form
+                                                                action="/admin/nutricionistas/<%= nutricionista.id_nutricionista %>/reativar"
+                                                                method="POST"><button class="reativar"
+                                                                    type="submit">Reativar conta</button></form>
+                                                            <% } %>
+                                    </div>
+            </section>
+        </main>
+</body>
+
+</html>

@@ -1,0 +1,623 @@
+
+:root {
+    --verde-escuro: #3c482f;
+    --verde: #667653;
+    --verde-oliva: #a8b379;
+    --verde-claro: #cbe1d1;
+    --fundo: #f5f2eb;
+    --branco: #ffffff;
+    --texto: #393533;
+    --texto-suave: #77716b;
+    --borda: rgba(60, 72, 47, 0.12);
+}
+
+/* =========================================================
+   FUNDO
+========================================================= */
+
+body {
+    background: var(--fundo);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+    width: min(1080px, calc(100% - 40px));
+    margin: 45px auto 80px;
+}
+
+/* =========================================================
+   CARD DO PERFIL
+========================================================= */
+
+.perfil-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--branco);
+
+    border-radius: 28px;
+
+    border: 1px solid var(--borda);
+
+    box-shadow:
+        0 20px 55px rgba(60, 72, 47, 0.09);
+}
+
+/* =========================================================
+   FAIXA SUPERIOR
+========================================================= */
+
+.perfil-card::before {
+    content: "";
+
+    display: block;
+
+    height: 185px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(203, 225, 209, 0.35) 0,
+            rgba(203, 225, 209, 0) 35%
+        ),
+        linear-gradient(
+            135deg,
+            #3c482f 0%,
+            #526143 55%,
+            #687653 100%
+        );
+}
+
+/* detalhes decorativos */
+
+.perfil-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: -100px;
+    right: -80px;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* =========================================================
+   TOPO
+========================================================= */
+
+.perfil-topo {
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 28px;
+
+    padding: 0 40px 35px;
+
+    margin-top: -78px;
+}
+
+/* =========================================================
+   FOTO
+========================================================= */
+
+.perfil-foto {
+    position: relative;
+
+    width: 150px;
+    height: 150px;
+
+    flex-shrink: 0;
+
+    padding: 5px;
+
+    border-radius: 32px;
+
+    background: var(--branco);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.16);
+
+    z-index: 2;
+}
+
+.perfil-foto::after {
+    content: "";
+
+    position: absolute;
+
+    right: 7px;
+    bottom: 7px;
+
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    background: #6f9b70;
+
+    border: 4px solid var(--branco);
+}
+
+.perfil-foto img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 27px;
+}
+
+/* =========================================================
+   INFORMAÇÕES
+========================================================= */
+
+.perfil-info {
+    flex: 1;
+
+    padding-bottom: 5px;
+}
+
+.pagina-tag {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 50px;
+
+    background: var(--verde-claro);
+
+    color: var(--verde-escuro);
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.06em;
+
+    text-transform: uppercase;
+}
+
+.pagina-tag::before {
+    content: "✦";
+
+    font-size: 0.7rem;
+}
+
+.perfil-info h1 {
+    margin: 0 0 6px;
+
+    color: var(--verde-escuro);
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    letter-spacing: -0.035em;
+}
+
+.perfil-subtitulo {
+    max-width: 600px;
+
+    margin: 0 0 9px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.88rem;
+
+    line-height: 1.55;
+}
+
+.perfil-info > p:not(.perfil-subtitulo) {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 0;
+
+    color: #66615c;
+
+    font-size: 0.86rem;
+}
+
+.perfil-info > p:not(.perfil-subtitulo)::before {
+    content: "✉";
+
+    color: var(--verde);
+}
+
+/* =========================================================
+   BOTÃO EDITAR
+========================================================= */
+
+.perfil-info .btn {
+    position: absolute;
+
+    top: 202px;
+    right: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 43px;
+
+    padding: 0 18px;
+
+    border-radius: 12px;
+
+    background: var(--branco);
+
+    color: var(--verde-escuro);
+
+    border: 1px solid rgba(60, 72, 47, 0.14);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+
+    text-decoration: none;
+
+    font-size: 0.82rem;
+
+    font-weight: 700;
+
+    transition: all 0.2s ease;
+}
+
+.perfil-info .btn::before {
+    content: "✎";
+
+    margin-right: 7px;
+
+    font-size: 1rem;
+}
+
+.perfil-info .btn:hover {
+    transform: translateY(-2px);
+
+    background: var(--verde-escuro);
+
+    color: var(--branco);
+
+    border-color: var(--verde-escuro);
+
+    box-shadow: 0 8px 20px rgba(60, 72, 47, 0.18);
+}
+
+/* =========================================================
+   ÁREA DOS DADOS
+========================================================= */
+
+.perfil-dados {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 13px;
+
+    padding: 0 40px 30px;
+}
+
+/* =========================================================
+   CADA DADO
+========================================================= */
+
+.dado-item {
+    position: relative;
+
+    min-height: 105px;
+
+    padding: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    border: 1px solid var(--borda);
+
+    border-radius: 18px;
+
+    background: #faf9f6;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.dado-item:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(60, 72, 47, 0.20);
+
+    box-shadow:
+        0 10px 25px rgba(60, 72, 47, 0.07);
+}
+
+.dado-item::before {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    position: absolute;
+
+    top: 17px;
+    right: 17px;
+
+    border-radius: 50%;
+
+    background: var(--verde-oliva);
+}
+
+.dado-item strong {
+    margin-bottom: 8px;
+
+    color: #9a956f;
+
+    font-size: 0.67rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.07em;
+
+    text-transform: uppercase;
+}
+
+.dado-item span {
+    color: var(--texto);
+
+    font-size: 0.91rem;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   DESCRIÇÃO
+========================================================= */
+
+.descricao-perfil {
+    margin: 0 40px 40px;
+
+    padding: 25px 28px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e5efe6,
+            #d7e7da
+        );
+
+    border: 1px solid rgba(60, 72, 47, 0.09);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.descricao-perfil::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -55px;
+    bottom: -80px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(60, 72, 47, 0.08);
+}
+
+.descricao-perfil h2 {
+    position: relative;
+
+    margin: 0 0 9px;
+
+    color: var(--verde-escuro);
+
+    font-size: 1.08rem;
+
+    font-weight: 700;
+
+    z-index: 1;
+}
+
+.descricao-perfil p {
+    position: relative;
+
+    max-width: 850px;
+
+    margin: 0;
+
+    color: #53604f;
+
+    font-size: 0.88rem;
+
+    line-height: 1.7;
+
+    z-index: 1;
+
+    white-space: pre-line;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .perfil-dados {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .perfil-info .btn {
+        position: static;
+
+        margin-top: 15px;
+    }
+}
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .container {
+        width: calc(100% - 24px);
+
+        margin: 25px auto 50px;
+    }
+
+    .perfil-card {
+        border-radius: 22px;
+    }
+
+    .perfil-card::before {
+        height: 150px;
+    }
+
+    .perfil-topo {
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        gap: 16px;
+
+        padding: 0 20px 28px;
+
+        margin-top: -70px;
+    }
+
+    .perfil-foto {
+        width: 125px;
+        height: 125px;
+    }
+
+    .perfil-info {
+        width: 100%;
+    }
+
+    .pagina-tag {
+        margin-bottom: 9px;
+    }
+
+    .perfil-info h1 {
+        font-size: 1.65rem;
+    }
+
+    .perfil-subtitulo {
+        margin-left: auto;
+        margin-right: auto;
+
+        font-size: 0.84rem;
+    }
+
+    .perfil-info > p:not(.perfil-subtitulo) {
+        justify-content: center;
+    }
+
+    .perfil-info .btn {
+        width: 100%;
+
+        margin-top: 17px;
+    }
+
+    .perfil-dados {
+        grid-template-columns: 1fr;
+
+        padding: 0 20px 25px;
+
+        gap: 10px;
+    }
+
+    .dado-item {
+        min-height: 90px;
+    }
+
+    .descricao-perfil {
+        margin: 0 20px 25px;
+
+        padding: 21px;
+    }
+}
+
+/* =========================================================
+   CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .perfil-card::before {
+        height: 135px;
+    }
+
+    .perfil-topo {
+        margin-top: -60px;
+    }
+
+    .perfil-foto {
+        width: 110px;
+        height: 110px;
+
+        border-radius: 25px;
+    }
+
+    .perfil-foto img {
+        border-radius: 20px;
+    }
+
+    .perfil-info h1 {
+        font-size: 1.45rem;
+    }
+
+    .pagina-tag {
+        font-size: 0.62rem;
+    }
+
+    .perfil-dados {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .descricao-perfil {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}

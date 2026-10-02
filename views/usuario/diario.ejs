@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/diario.css">
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="container">
+
+                <section class="hero-diario">
+
+                    <div class="diario-hero-conteudo">
+
+
+                        <span class="diario-tag">
+                            Educação alimentar
+                        </span>
+
+                        <h1>Registre sua alimentação</h1>
+
+                        <p>
+                            Acompanhe sua rotina alimentar registrando tudo o que foi consumido ao longo do dia.
+                        </p>
+
+                        <a href="/usuario/diario/novo" class="quiz-nutri-botao quiz-nutri-botao-claro">
+                            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 5v14"></path>
+                                <path d="M5 12h14"></path>
+                            </svg>
+                             Fazer novo registro
+                             </a>
+                    </div>
+
+                    <div class="quiz-nutri-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11l3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+                       
+                    </div>
+
+                </section>
+                <% if (!registros || registros.length===0) { %>
+
+                    <section class="card mensagem-vazia">
+
+                        <div class="mensagem-vazia-icone">
+                            <i data-lucide="book-open"></i>
+                        </div>
+
+                        <h2>Nenhum registro realizado</h2>
+
+                        <p>
+                            Comece registrando um alimento consumido hoje.
+                        </p>
+
+                        <a href="/usuario/diario/novo" class="botao-novo">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 5v14"></path>
+                                <path d="M5 12h14"></path>
+                            </svg>
+
+                            Fazer primeiro registro
+                        </a>
+
+                    </section>
+
+                    <% } else { %>
+                        <section class="resumo-diario">
+
+                            <article class="resumo-card">
+
+                                <span>Total de registros</span>
+
+                                <strong>
+                                    <%= registros.length %>
+                                </strong>
+
+                            </article>
+
+                        </section>
+                        <section class="lista-diario">
+
+                            <% registros.forEach(registro=> { %>
+
+                                <article class="card card-diario">
+
+                                    <div class="card-diario-topo">
+
+                                        <div>
+
+                                            <span class="pagina-tag">
+                                                Registro alimentar
+                                            </span>
+
+                                            <h2>
+                                                <%= registro.alimento %>
+                                            </h2>
+
+                                        </div>
+
+                                        <span class="data-registro">
+                                            <%= new Date( registro.data_registro ).toLocaleDateString("pt-BR") %>
+                                        </span>
+
+                                    </div>
+
+                                    <p>
+                                        <strong>Quantidade:</strong>
+                                        <%= registro.quantidade %>
+                                    </p>
+
+                                    <% if (registro.observacoes) { %>
+
+                                        <div class="observacoes">
+
+                                            <strong>Observações:</strong>
+
+                                            <p>
+                                                <%= registro.observacoes %>
+                                            </p>
+
+                                        </div>
+
+                                        <% } %>
+<div class="acoes-registro">
+    <a
+        href="/usuario/diario/<%= registro.id_diario %>/editar"
+        class="btn-editar"
+    >
+        Editar
+    </a>
+
+    <form
+        action="/usuario/diario/<%= registro.id_diario %>/excluir"
+        method="POST"
+        onsubmit="return confirm(
+            'Deseja realmente excluir este registro?'
+        )"
+    >
+        <button
+            type="submit"
+            class="btn-excluir"
+        >
+            Excluir
+        </button>
+    </form>
+</div>
+                                </article>
+                                <% }) %>
+
+                        </section>
+
+                        <% } %>
+
+            </main>
+            <script src="https://unpkg.com/lucide@latest"></script>
+
+            <script>
+                lucide.createIcons();
+            </script>
+</body>
+
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= titulo %> - NutriTech</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/classificacao.css">
+</head>
+<body>
+    <%- include("../partials/navbarUsuario") %>
+
+    <%
+        function iconeNivel(nome) {
+            const n = (nome || '').toLowerCase();
+
+            if (n.includes('mestre')) {
+                return `
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 4h12v4a6 6 0 0 1-12 0V4Z"/>
+                        <path d="M6 6H3v1a5 5 0 0 0 5 5"/>
+                        <path d="M18 6h3v1a5 5 0 0 1-5 5"/>
+                        <path d="M12 14v4"/>
+                        <path d="M8 20h8"/>
+                    </svg>`;
+            }
+
+            if (n.includes('expert') || n.includes('especial')) {
+                return `
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m12 3 2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 16.4l-5.25 2.8 1-5.85L3.5 9.2l5.9-.9L12 3Z"/>
+                    </svg>`;
+            }
+
+            if (n.includes('avanç') || n.includes('avanc')) {
+                return `
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 19V9"/>
+                        <path d="M12 19V5"/>
+                        <path d="M19 19v-7"/>
+                        <path d="m3 11 2-2 2 2"/>
+                        <path d="m10 7 2-2 2 2"/>
+                        <path d="m17 14 2-2 2 2"/>
+                    </svg>`;
+            }
+
+            if (n.includes('dedic') || n.includes('foco')) {
+                return `
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 18h6"/>
+                        <path d="M10 21h4"/>
+                        <path d="M8.5 14.5A7 7 0 1 1 15.5 14c-.9.7-1.5 1.6-1.5 3H10c0-1.4-.6-2.3-1.5-3Z"/>
+                    </svg>`;
+            }
+
+            return `
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/>
+                    <path d="M8 13c1.1 1.2 2.4 1.8 4 1.8s2.9-.6 4-1.8"/>
+                    <path d="M9 9h.01M15 9h.01"/>
+                </svg>`;
+        }
+
+        const iconeTrofeu = `
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 4h10v4a5 5 0 0 1-10 0V4Z"/>
+                <path d="M7 6H4v1a4 4 0 0 0 4 4"/>
+                <path d="M17 6h3v1a4 4 0 0 1-4 4"/>
+                <path d="M12 13v5"/>
+                <path d="M8 21h8"/>
+                <path d="M9 18h6"/>
+            </svg>`;
+
+        const iconeMedalha = `
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 3h3l1 6H8L6 3h2Z"/>
+                <path d="M16 3h-3l-1 6h4l2-6h-2Z"/>
+                <circle cx="12" cy="14" r="5"/>
+                <path d="m12 11 1 2 2 .3-1.5 1.5.35 2.2-1.85-1-1.85 1 .35-2.2L8.5 13.3l2-.3 1.5-2Z"/>
+            </svg>`;
+
+        const iconeInformacao = `
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 10.5v5"/>
+                <path d="M12 7.5h.01"/>
+            </svg>`;
+    %>
+
+    <main class="pagina-classificacao">
+        <section class="hero-classificacao">
+            <div class="hero-classificacao-conteudo">
+                <div class="hero-classificacao-texto">
+                    <span class="hero-classificacao-tag">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M8 21h8" />
+                            <path d="M12 17v4" />
+                            <path d="M7 4h10v4a5 5 0 0 1-10 0V4Z" />
+                            <path d="M7 6H4v1a4 4 0 0 0 4 4" />
+                            <path d="M17 6h3v1a4 4 0 0 1-4 4" />
+                        </svg>
+                        Comunidade NutriTech
+                    </span>
+
+                    <h1>Classificação dos usuários</h1>
+
+                    <p>
+                        Continue registrando suas atividades para conquistar pontos,
+                        subir no ranking e avançar de nível.
+                    </p>
+
+                    <a href="/usuario/home" class="botao-voltar-classificacao">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m15 18-6-6 6-6" />
+                        </svg>
+                        Voltar para o início
+                    </a>
+                </div>
+
+                <div class="hero-classificacao-ilustracao">
+                    <div class="hero-classificacao-circulo">
+                        <%- iconeTrofeu %>
+                    </div>
+
+                    <% if (minhaClassificacao) { %>
+                        <article class="minha-posicao">
+                            <span>Sua posição</span>
+                            <strong><%= minhaClassificacao.posicao %>º lugar</strong>
+                            <p>
+                                <%= minhaClassificacao.total_pontos %> pontos
+                                <span class="separador-status">•</span>
+                                <span class="icone-nivel-inline"><%- iconeNivel(minhaClassificacao.nivel.nome) %></span>
+                                <%= minhaClassificacao.nivel.nome %>
+                            </p>
+                        </article>
+                    <% } %>
+
+                    <span class="decoracao-classificacao decoracao-classificacao-um"></span>
+                    <span class="decoracao-classificacao decoracao-classificacao-dois"></span>
+                    <span class="decoracao-classificacao decoracao-classificacao-tres"></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="classificacao-container">
+            <section class="niveis-card">
+                <div class="niveis-cabecalho">
+                    <div>
+                        <span>Jornada NutriTech</span>
+                        <h2>Níveis de evolução</h2>
+                        <p>Conquiste pontos para avançar até Mestre NutriTech.</p>
+                    </div>
+
+                    <% if (minhaClassificacao) { %>
+                        <div class="nivel-atual-resumo">
+                            <strong>
+                                <span class="icone-nivel-resumo"><%- iconeNivel(minhaClassificacao.nivel.nome) %></span>
+                                <%= minhaClassificacao.nivel.nome %>
+                            </strong>
+
+                            <div class="nivel-barra">
+                                <span style="width: <%= minhaClassificacao.nivel.progresso %>%"></span>
+                            </div>
+
+                            <% if (minhaClassificacao.nivel.proximoNivel) { %>
+                                <small>
+                                    Faltam <%= minhaClassificacao.nivel.pontosParaProximoNivel %> pontos
+                                    para <%= minhaClassificacao.nivel.proximoNivel %>.
+                                </small>
+                            <% } else { %>
+                                <small>Você alcançou o nível máximo.</small>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+
+                <div class="niveis-lista">
+                    <% niveis.forEach((nivelItem) => { %>
+                        <%
+                            const nivelConquistado = minhaClassificacao &&
+                                minhaClassificacao.total_pontos >= nivelItem.pontosMinimos;
+                            const nivelAtual = minhaClassificacao &&
+                                minhaClassificacao.nivel.nome === nivelItem.nome;
+                        %>
+
+                        <article class="nivel-item <%= nivelConquistado ? 'nivel-conquistado' : '' %> <%= nivelAtual ? 'nivel-item-atual' : '' %>">
+                            <span class="nivel-icone"><%- iconeNivel(nivelItem.nome) %></span>
+
+                            <div>
+                                <h3><%= nivelItem.nome %></h3>
+                                <p>
+                                    <% if (nivelItem.pontosMaximos === null) { %>
+                                        A partir de <%= nivelItem.pontosMinimos %> pontos
+                                    <% } else { %>
+                                        De <%= nivelItem.pontosMinimos %> a <%= nivelItem.pontosMaximos %> pontos
+                                    <% } %>
+                                </p>
+                            </div>
+
+                            <% if (nivelAtual) { %>
+                                <span class="nivel-status">Seu nível</span>
+                            <% } else if (nivelConquistado) { %>
+                                <span class="nivel-status">Conquistado</span>
+                            <% } %>
+                        </article>
+                    <% }) %>
+                </div>
+            </section>
+
+            <section class="ranking-card">
+                <div class="ranking-titulo">
+                    <div>
+                        <h2>Ranking geral</h2>
+                        <p>Usuários ativos ordenados pelo total de pontos.</p>
+                    </div>
+                    <span><%= classificacao.length %> participantes</span>
+                </div>
+
+                <% if (classificacao.length === 0) { %>
+                    <div class="ranking-vazio">
+                        <span class="ranking-vazio-icone"><%- iconeTrofeu %></span>
+                        <h3>A classificação ainda está vazia</h3>
+                        <p>Os usuários aparecerão aqui quando estiverem ativos.</p>
+                    </div>
+                <% } else { %>
+                    <div class="ranking-lista">
+                        <% classificacao.forEach((item) => { %>
+                            <article class="ranking-item <%= item.usuarioAtual ? 'ranking-item-atual' : '' %>">
+                                <div class="ranking-posicao ranking-posicao-<%= item.posicao <= 3 ? item.posicao : 'geral' %>">
+                                    <% if (item.posicao === 1) { %>
+                                        <span class="podio-icone" aria-label="Primeiro lugar"><%- iconeMedalha %></span>
+                                    <% } else if (item.posicao === 2) { %>
+                                        <span class="podio-icone" aria-label="Segundo lugar"><%- iconeMedalha %></span>
+                                    <% } else if (item.posicao === 3) { %>
+                                        <span class="podio-icone" aria-label="Terceiro lugar"><%- iconeMedalha %></span>
+                                    <% } else { %>
+                                        <span class="posicao-numero"><%= item.posicao %>º</span>
+                                    <% } %>
+                                </div>
+
+                                <div class="ranking-usuario">
+                                    <% if (item.foto) { %>
+                                        <img
+                                            src="/uploads/<%= item.foto %>"
+                                            alt="Foto de <%= item.nome %>"
+                                        >
+                                    <% } else { %>
+                                        <div class="ranking-avatar-padrao">
+                                            <%= item.nome.charAt(0).toUpperCase() %>
+                                        </div>
+                                    <% } %>
+
+                                    <div>
+                                        <h3>
+                                            <%= item.nome %>
+                                            <% if (item.usuarioAtual) { %>
+                                                <span class="voce">Você</span>
+                                            <% } %>
+                                        </h3>
+                                        <p>
+                                            <span class="icone-nivel-ranking"><%- iconeNivel(item.nivel.nome) %></span>
+                                            <%= item.nivel.nome %>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="ranking-pontos">
+                                    <strong><%= item.total_pontos %></strong>
+                                    <span>pontos</span>
+                                </div>
+                            </article>
+                        <% }) %>
+                    </div>
+                <% } %>
+            </section>
+
+            <section class="empates-aviso">
+                <span class="empates-icone"><%- iconeInformacao %></span>
+                <p>
+                    Usuários com a mesma quantidade de pontos ocupam a mesma posição.
+                    A próxima colocação segue a sequência, como 1º, 2º, 2º e 3º.
+                </p>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/global.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="paginaCardapio">
+
+                <a href="/nutricionista/home" class="voltar">
+                    ← Voltar para o início
+                </a>
+
+                <section class="cabecalhoPagina">
+                    <div>
+                        <span>Plano alimentar</span>
+                        <h1>Criar novo cardápio</h1>
+
+                        <p>
+                            Escolha um usuário e informe os dados principais
+                            do cardápio.
+                        </p>
+                    </div>
+                </section>
+
+                <section class="cardFormulario">
+
+                    <% if (erro) { %>
+                        <div class="erro">
+                            <%= erro %>
+                        </div>
+                        <% } %>
+
+                            <% if (usuarios.length===0) { %>
+
+                                <div class="semUsuarios">
+                                    <h2>Nenhum usuário cadastrado</h2>
+
+                                    <p>
+                                        É necessário ter pelo menos um usuário para criar
+                                        um cardápio.
+                                    </p>
+                                </div>
+
+                                <% } else { %>
+
+                                    <form action="/nutricionista/cardapios" method="POST">
+
+                                        <div class="campo">
+                                            <label for="id_usuario">
+                                                Usuário
+                                            </label>
+
+                                            <select id="id_usuario" name="id_usuario" required>
+                                                <option value="">
+                                                    Selecione um usuário
+                                                </option>
+
+                                                <% usuarios.forEach(usuarioLista=> { %>
+
+                                                    <option value="<%= usuarioLista.id_usuario %>">
+                                                        <%= usuarioLista.nome %>
+                                                            — <%= usuarioLista.email %>
+                                                    </option>
+
+                                                    <% }) %>
+                                            </select>
+                                        </div>
+
+                                        <div class="campo">
+                                            <label for="nome">
+                                                Nome do cardápio
+                                            </label>
+
+                                            <input type="text" id="nome" name="nome"
+                                                placeholder="Ex.: Plano alimentar semanal" maxlength="100" required>
+                                        </div>
+
+                                        <div class="campo">
+                                            <label for="observacoes">
+                                                Observações nutricionais
+                                            </label>
+
+                                            <textarea id="observacoes" name="observacoes" rows="5"
+                                                placeholder="Digite recomendações e orientações..."></textarea>
+                                        </div>
+
+                                        <button type="submit" class="botaoSalvar">
+                                            Criar cardápio
+                                        </button>
+
+                                    </form>
+
+                                    <% } %>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

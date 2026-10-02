@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/visualizarCardapioUsuario.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="pagina-visualizar-cardapio">
+
+                <% if (!cardapio) { %>
+
+                    <section class="estado-cardapio-nao-encontrado">
+
+                        <div class="estado-cardapio-icone">
+
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 11h16" />
+                                <path d="M6 11a6 6 0 0 1 12 0" />
+                                <path d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z" />
+                                <path d="M8 18h8" />
+                                <path d="M12 5V3" />
+                                <path d="m9 9 6 6" />
+                                <path d="m15 9-6 6" />
+                            </svg>
+
+                        </div>
+
+                        <span class="estado-cardapio-tag">
+                            Conteúdo indisponível
+                        </span>
+
+                        <h1>Cardápio não encontrado</h1>
+
+                        <p>
+                            Esse cardápio não existe ou não pertence à sua conta.
+                        </p>
+
+                        <a href="/usuario/cardapios" class="botao-principal-cardapio">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="m15 18-6-6 6-6" />
+                            </svg>
+
+                            Voltar para meus cardápios
+                        </a>
+
+                    </section>
+
+                    <% } else { %>
+
+                        <section class="hero-visualizar-cardapio">
+
+                            <div class="hero-visualizar-conteudo">
+
+                                <div class="hero-visualizar-texto">
+
+                                    <span class="hero-visualizar-tag">
+
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M4 11h16" />
+                                            <path d="M6 11a6 6 0 0 1 12 0" />
+                                            <path d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z" />
+                                            <path d="M8 18h8" />
+                                            <path d="M12 5V3" />
+                                        </svg>
+
+                                        Meu cardápio
+                                    </span>
+
+                                    <h1>
+                                        <%= cardapio.nome %>
+                                    </h1>
+
+                                    <div class="hero-nutricionista">
+
+                                        <div class="hero-nutricionista-icone">
+
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="8" r="4" />
+                                                <path d="M4 21a8 8 0 0 1 16 0" />
+                                            </svg>
+
+                                        </div>
+
+                                        <div>
+
+                                            <span>Nutricionista responsável</span>
+
+                                            <strong>
+                                                <%= cardapio.nome_nutricionista || cardapio.nutricionista
+                                                    || "Não informado" %>
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                    <a href="/usuario/cardapios" class="botao-voltar-cardapios">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="m15 18-6-6 6-6" />
+                                        </svg>
+
+                                        Voltar para meus cardápios
+                                    </a>
+
+                                </div>
+
+                                <div class="hero-visualizar-ilustracao">
+
+                                    <div class="hero-prato">
+
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="8" />
+                                            <circle cx="12" cy="12" r="4" />
+                                            <path d="M12 4V2" />
+                                            <path d="M20 12h2" />
+                                            <path d="M12 22v-2" />
+                                            <path d="M2 12h2" />
+                                        </svg>
+
+                                    </div>
+
+                                    <span class="hero-decoracao decoracao-a"></span>
+                                    <span class="hero-decoracao decoracao-b"></span>
+                                    <span class="hero-decoracao decoracao-c"></span>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <section class="conteudo-visualizar-cardapio">
+
+                            <% if (cardapio.observacoes) { %>
+
+                                <section class="bloco-observacoes-cardapio">
+
+                                    <div class="observacoes-cardapio-icone">
+
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" />
+                                            <path d="M8 9h8" />
+                                            <path d="M8 13h5" />
+                                        </svg>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>Orientação profissional</span>
+
+                                        <h2>Observações do nutricionista</h2>
+
+                                        <p>
+                                            <%= cardapio.observacoes %>
+                                        </p>
+
+                                    </div>
+
+                                </section>
+
+                                <% } %>
+
+                                    <div class="cabecalho-refeicoes">
+
+                                        <div>
+
+                                            <span class="secao-tag-cardapio">
+                                                Organização alimentar
+                                            </span>
+
+                                            <h2>Refeições do cardápio</h2>
+
+                                            <p>
+                                                Confira os alimentos, as quantidades e os valores
+                                                nutricionais de cada refeição.
+                                            </p>
+
+                                        </div>
+
+                                        <% if (refeicoes && refeicoes.length> 0) { %>
+
+                                            <div class="contador-refeicoes">
+
+                                                <div class="contador-refeicoes-icone">
+
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <path d="M4 11h16" />
+                                                        <path d="M6 11a6 6 0 0 1 12 0" />
+                                                        <path d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z" />
+                                                    </svg>
+
+                                                </div>
+
+                                                <div>
+
+                                                    <strong>
+                                                        <%= refeicoes.length %>
+                                                    </strong>
+
+                                                    <span>
+                                                        <%= refeicoes.length===1 ? "refeição" : "refeições" %>
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                            <% } %>
+
+                                    </div>
+
+                                    <% if (!refeicoes || refeicoes.length===0) { %>
+
+                                        <section class="estado-sem-refeicoes">
+
+                                            <div class="estado-sem-refeicoes-icone">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M4 11h16" />
+                                                    <path d="M6 11a6 6 0 0 1 12 0" />
+                                                    <path d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z" />
+                                                    <path d="M8 18h8" />
+                                                </svg>
+
+                                            </div>
+
+                                            <h2>Nenhuma refeição cadastrada</h2>
+
+                                            <p>
+                                                Esse cardápio ainda não possui refeições.
+                                            </p>
+
+                                        </section>
+
+                                        <% } else { %>
+
+                                            <section class="lista-refeicoes-cardapio">
+
+                                                <% refeicoes.forEach((refeicao, indice)=> { %>
+
+                                                    <article class="card-refeicao-usuario">
+
+                                                        <header class="refeicao-topo">
+
+                                                            <div class="refeicao-titulo-area">
+
+                                                                <div class="refeicao-numero">
+                                                                    <%= indice + 1 %>
+                                                                </div>
+
+                                                                <div>
+
+                                                                    <span class="refeicao-tag-usuario">
+                                                                        Refeição
+                                                                    </span>
+
+                                                                    <h2>
+                                                                        <%= refeicao.tipo %>
+                                                                    </h2>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="refeicao-topo-icone">
+
+                                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                    <path d="M4 11h16" />
+                                                                    <path d="M6 11a6 6 0 0 1 12 0" />
+                                                                    <path
+                                                                        d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z" />
+                                                                    <path d="M8 18h8" />
+                                                                </svg>
+
+                                                            </div>
+
+                                                        </header>
+
+                                                        <div class="refeicao-conteudo">
+
+                                                            <% if ( !refeicao.alimentos || refeicao.alimentos.length===0
+                                                                ) { %>
+
+                                                                <div class="refeicao-sem-alimentos">
+
+                                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                        <circle cx="12" cy="12" r="9" />
+                                                                        <path d="M12 8v4" />
+                                                                        <path d="M12 16h.01" />
+                                                                    </svg>
+
+                                                                    <p>
+                                                                        Nenhum alimento cadastrado nesta refeição.
+                                                                    </p>
+
+                                                                </div>
+
+                                                                <% } else { %>
+
+                                                                    <div class="tabela-alimentos-wrapper">
+
+                                                                        <table class="tabela-alimentos-cardapio">
+
+                                                                            <thead>
+
+                                                                                <tr>
+                                                                                    <th>Alimento</th>
+                                                                                    <th>Quantidade</th>
+                                                                                    <th>Calorias</th>
+                                                                                    <th>Proteínas</th>
+                                                                                    <th>Carboidratos</th>
+                                                                                    <th>Gorduras</th>
+                                                                                </tr>
+
+                                                                            </thead>
+
+                                                                            <tbody>
+
+                                                                                <% refeicao.alimentos.forEach(alimento=>
+                                                                                    { %>
+
+                                                                                    <tr>
+
+                                                                                        <td data-label="Alimento">
+
+                                                                                            <div class="alimento-nome">
+
+                                                                                                <span
+                                                                                                    class="alimento-icone">
+
+                                                                                                    <svg viewBox="0 0 24 24"
+                                                                                                        aria-hidden="true">
+                                                                                                        <path
+                                                                                                            d="M12 21c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11Z" />
+                                                                                                        <path
+                                                                                                            d="M9 10c1-2 3-3 6-3" />
+                                                                                                    </svg>
+
+                                                                                                </span>
+
+                                                                                                <strong>
+                                                                                                    <%= alimento.nome %>
+                                                                                                </strong>
+
+                                                                                            </div>
+
+                                                                                        </td>
+
+                                                                                        <td data-label="Quantidade">
+                                                                                            <%= alimento.quantidade
+                                                                                                || "-" %>
+                                                                                        </td>
+
+                                                                                        <td data-label="Calorias">
+
+                                                                                            <span
+                                                                                                class="valor-nutricional">
+                                                                                                <%= alimento.calorias ??
+                                                                                                    0 %>
+                                                                                                    <small>kcal</small>
+                                                                                            </span>
+
+                                                                                        </td>
+
+                                                                                        <td data-label="Proteínas">
+
+                                                                                            <span
+                                                                                                class="valor-nutricional">
+                                                                                                <%= alimento.proteinas
+                                                                                                    ?? 0 %>
+                                                                                                    <small>g</small>
+                                                                                            </span>
+
+                                                                                        </td>
+
+                                                                                        <td data-label="Carboidratos">
+
+                                                                                            <span
+                                                                                                class="valor-nutricional">
+                                                                                                <%= alimento.carboidratos
+                                                                                                    ?? 0 %>
+                                                                                                    <small>g</small>
+                                                                                            </span>
+
+                                                                                        </td>
+
+                                                                                        <td data-label="Gorduras">
+
+                                                                                            <span
+                                                                                                class="valor-nutricional">
+                                                                                                <%= alimento.gorduras ??
+                                                                                                    0 %>
+                                                                                                    <small>g</small>
+                                                                                            </span>
+
+                                                                                        </td>
+
+                                                                                    </tr>
+
+                                                                                    <% }) %>
+
+                                                                            </tbody>
+
+                                                                        </table>
+
+                                                                    </div>
+
+                                                                    <% } %>
+
+                                                                        <% if (refeicao.observacoes) { %>
+
+                                                                            <div class="observacoes-refeicao-usuario">
+
+                                                                                <div class="observacoes-refeicao-icone">
+
+                                                                                    <svg viewBox="0 0 24 24"
+                                                                                        aria-hidden="true">
+                                                                                        <path d="M4 4h16v16H4z" />
+                                                                                        <path d="M8 9h8" />
+                                                                                        <path d="M8 13h5" />
+                                                                                    </svg>
+
+                                                                                </div>
+
+                                                                                <div>
+
+                                                                                    <strong>Observações da
+                                                                                        refeição</strong>
+
+                                                                                    <p>
+                                                                                        <%= refeicao.observacoes %>
+                                                                                    </p>
+
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                            <% } %>
+
+                                                        </div>
+
+                                                    </article>
+
+                                                    <% }) %>
+
+                                            </section>
+
+                                            <% } %>
+
+                        </section>
+
+                        <% } %>
+
+            </main>
+
+</body>
+
+</html>

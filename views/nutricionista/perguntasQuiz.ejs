@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/quizNutricionista.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="quiz-nutri-container">
+
+                <a href="/nutricionista/quizzes" class="quiz-nutri-voltar">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
+
+                    Voltar para os quizzes
+                </a>
+
+                <section class="quiz-nutri-hero quiz-nutri-hero-menor">
+
+                    <div class="quiz-nutri-hero-conteudo">
+
+                        <span class="quiz-nutri-tag">
+                            Gerenciamento de perguntas
+                        </span>
+
+                        <h1>
+                            <%= quiz.titulo %>
+                        </h1>
+
+                        <% if (quiz.descricao) { %>
+
+                            <p>
+                                <%= quiz.descricao %>
+                            </p>
+
+                            <% } else { %>
+
+                                <p>
+                                    Cadastre e organize as perguntas que farão parte deste quiz.
+                                </p>
+
+                                <% } %>
+
+                    </div>
+
+                    <div class="quiz-nutri-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"></path>
+                            <path d="M12 18h.01"></path>
+                        </svg>
+
+                    </div>
+
+                </section>
+
+                <section class="quiz-pergunta-layout">
+
+                    <section class="quiz-nutri-formulario-card quiz-pergunta-formulario-card">
+
+                        <div class="quiz-nutri-formulario-cabecalho">
+
+                            <div class="quiz-nutri-formulario-icone">
+
+                                <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+
+                            </div>
+
+                            <div>
+                                <span>Nova questão</span>
+                                <h2>Adicionar pergunta</h2>
+
+                                <p>
+                                    Preencha o enunciado, as quatro alternativas e
+                                    indique qual opção é a correta.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <form method="POST" class="quiz-nutri-formulario quiz-pergunta-formulario">
+
+                            <div class="quiz-nutri-campo quiz-nutri-campo-completo">
+
+                                <label for="enunciado">
+                                    Enunciado da pergunta
+                                </label>
+
+                                <div class="quiz-nutri-input-wrapper">
+
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 7V4h16v3"></path>
+                                        <path d="M9 20h6"></path>
+                                        <path d="M12 4v16"></path>
+                                    </svg>
+
+                                    <input type="text" id="enunciado" name="enunciado"
+                                        placeholder="Ex.: Qual alimento é uma fonte de fibras?" required>
+
+                                </div>
+
+                            </div>
+
+                            <div class="quiz-nutri-alternativas-titulo quiz-nutri-campo-completo">
+
+                                <div>
+                                    <span>Opções de resposta</span>
+                                    <h3>Alternativas</h3>
+                                </div>
+
+                                <p>
+                                    Preencha todas as opções antes de selecionar a
+                                    resposta correta.
+                                </p>
+
+                            </div>
+
+                            <div class="quiz-nutri-campo quiz-nutri-campo-alternativa">
+
+                                <label for="alternativa1">
+
+                                    <span class="quiz-nutri-letra">
+                                        A
+                                    </span>
+
+                                    Alternativa 1
+                                </label>
+
+                                <input type="text" id="alternativa1" name="alternativa1"
+                                    placeholder="Digite a primeira alternativa" required>
+
+                            </div>
+
+                            <div class="quiz-nutri-campo quiz-nutri-campo-alternativa">
+
+                                <label for="alternativa2">
+
+                                    <span class="quiz-nutri-letra">
+                                        B
+                                    </span>
+
+                                    Alternativa 2
+                                </label>
+
+                                <input type="text" id="alternativa2" name="alternativa2"
+                                    placeholder="Digite a segunda alternativa" required>
+
+                            </div>
+
+                            <div class="quiz-nutri-campo quiz-nutri-campo-alternativa">
+
+                                <label for="alternativa3">
+
+                                    <span class="quiz-nutri-letra">
+                                        C
+                                    </span>
+
+                                    Alternativa 3
+                                </label>
+
+                                <input type="text" id="alternativa3" name="alternativa3"
+                                    placeholder="Digite a terceira alternativa" required>
+
+                            </div>
+
+                            <div class="quiz-nutri-campo quiz-nutri-campo-alternativa">
+
+                                <label for="alternativa4">
+
+                                    <span class="quiz-nutri-letra">
+                                        D
+                                    </span>
+
+                                    Alternativa 4
+                                </label>
+
+                                <input type="text" id="alternativa4" name="alternativa4"
+                                    placeholder="Digite a quarta alternativa" required>
+
+                            </div>
+
+                            <div class="quiz-nutri-campo quiz-nutri-campo-completo">
+
+                                <label for="correta">
+                                    Resposta correta
+                                </label>
+
+                                <div class="quiz-nutri-input-wrapper">
+
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 11 3 3L22 4"></path>
+                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                    </svg>
+
+                                    <select id="correta" name="correta" required>
+                                        <option value="">
+                                            Selecione a resposta correta
+                                        </option>
+
+                                        <option value="1">
+                                            Alternativa 1
+                                        </option>
+
+                                        <option value="2">
+                                            Alternativa 2
+                                        </option>
+
+                                        <option value="3">
+                                            Alternativa 3
+                                        </option>
+
+                                        <option value="4">
+                                            Alternativa 4
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                                <small>
+                                    Essa opção será utilizada na correção automática.
+                                </small>
+
+                            </div>
+
+                            <div class="quiz-nutri-formulario-acoes">
+
+                                <button type="reset" class="quiz-nutri-botao-secundario">
+                                    Limpar campos
+                                </button>
+
+                                <button type="submit" class="quiz-nutri-botao">
+                                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 5v14"></path>
+                                        <path d="M5 12h14"></path>
+                                    </svg>
+
+                                    Salvar pergunta
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </section>
+
+                    <section class="quiz-perguntas-listagem">
+
+                        <div class="quiz-nutri-titulo-secao">
+
+                            <div>
+                                <span>Questões</span>
+                                <h2>Perguntas cadastradas</h2>
+                            </div>
+
+                            <div class="quiz-nutri-contador">
+
+                                <strong>
+                                    <%= perguntas ? perguntas.length : 0 %>
+                                </strong>
+
+                                <span>
+                                    <%= perguntas && perguntas.length===1 ? "pergunta" : "perguntas" %>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <% if (!perguntas || perguntas.length===0) { %>
+
+                            <div class="quiz-nutri-vazio quiz-nutri-vazio-menor">
+
+                                <div class="quiz-nutri-vazio-icone">
+
+                                    <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor"
+                                        stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"></path>
+                                        <path d="M12 18h.01"></path>
+                                    </svg>
+
+                                </div>
+
+                                <h2>Nenhuma pergunta cadastrada</h2>
+
+                                <p>
+                                    Utilize o formulário para adicionar a primeira
+                                    questão deste quiz.
+                                </p>
+
+                            </div>
+
+                            <% } else { %>
+
+                                <div class="quiz-perguntas-grade">
+
+                                    <% perguntas.forEach((pergunta, indice)=> { %>
+
+                                        <article class="quiz-pergunta-card">
+
+                                            <header class="quiz-pergunta-card-cabecalho">
+
+                                                <span class="quiz-pergunta-numero">
+                                                    <%= indice + 1 %>
+                                                </span>
+
+                                                <div>
+
+                                                    <span class="quiz-pergunta-tipo">
+                                                        Pergunta
+                                                    </span>
+
+                                                    <h3>
+                                                        <%= pergunta.enunciado %>
+                                                    </h3>
+
+                                                </div>
+
+                                            </header>
+
+                                            <footer class="quiz-pergunta-card-rodape">
+
+                                                <a href="/nutricionista/perguntas/<%= pergunta.id_pergunta %>/editar"
+                                                    class="quiz-nutri-botao-secundario">
+                                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path d="M12 20h9"></path>
+                                                        <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+                                                    </svg>
+
+                                                    Editar
+                                                </a>
+
+                                                <form
+                                                    action="/nutricionista/perguntas/<%= pergunta.id_pergunta %>/excluir"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Deseja realmente excluir esta pergunta?')">
+
+                                                    <button type="submit" class="quiz-nutri-botao-excluir">
+                                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round">
+                                                            <path d="M3 6h18"></path>
+                                                            <path d="M8 6V4h8v2"></path>
+                                                            <path d="M19 6l-1 14H6L5 6"></path>
+                                                            <path d="M10 11v5"></path>
+                                                            <path d="M14 11v5"></path>
+                                                        </svg>
+
+                                                        Excluir
+                                                    </button>
+
+                                                </form>
+
+                                            </footer>
+
+                                        </article>
+
+                                        <% }) %>
+
+                                </div>
+
+                                <% } %>
+
+                    </section>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

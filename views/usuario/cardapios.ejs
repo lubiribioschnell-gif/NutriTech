@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/cardapiosUsuario.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="pagina-cardapios">
+
+                <section class="hero-cardapios">
+
+                    <div class="hero-cardapios-conteudo">
+
+                        <div class="hero-cardapios-texto">
+
+                            <span class="hero-tag">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M12 3v18M7 8c-2.5 0-4-1.7-4-4 2.3 0 4 1.5 4 4Zm10 0c2.5 0 4-1.7 4-4-2.3 0-4 1.5-4 4ZM6 14c-2.5 0-4-1.7-4-4 2.3 0 4 1.5 4 4Zm12 0c2.5 0 4-1.7 4-4-2.3 0-4 1.5-4 4Z" />
+                                </svg>
+
+                                Alimentação personalizada
+                            </span>
+
+                            <h1>Meus cardápios</h1>
+
+                            <p>
+                                Consulte os cardápios preparados especialmente para você
+                                pelo seu nutricionista.
+                            </p>
+
+                            <a href="/usuario/home" class="botao-voltar">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="m15 18-6-6 6-6" />
+                                </svg>
+
+                                Voltar para o início
+                            </a>
+
+                        </div>
+
+                        <div class="hero-cardapios-ilustracao">
+
+                            <div class="hero-ilustracao-circulo">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M4 11h16" />
+                                    <path d="M6 11a6 6 0 0 1 12 0" />
+                                    <path d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z" />
+                                    <path d="M8 18h8" />
+                                    <path d="M12 5V3" />
+                                </svg>
+
+                            </div>
+
+                            <span class="decoracao decoracao-um"></span>
+                            <span class="decoracao decoracao-dois"></span>
+                            <span class="decoracao decoracao-tres"></span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="conteudo-cardapios">
+
+                    <div class="cabecalho-lista">
+
+                        <div>
+
+                            <span class="secao-tag">Planejamento alimentar</span>
+
+                            <h2>Cardápios disponíveis</h2>
+
+                            <p>
+                                Acesse os detalhes das refeições e alimentos recomendados.
+                            </p>
+
+                        </div>
+
+                        <% if (cardapios && cardapios.length> 0) { %>
+
+                            <div class="contador-cardapios">
+
+                                <div class="contador-icone">
+
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M8 2v4" />
+                                        <path d="M16 2v4" />
+                                        <rect x="3" y="5" width="18" height="16" rx="2" />
+                                        <path d="M3 10h18" />
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        <%= cardapios.length %>
+                                    </strong>
+
+                                    <span>
+                                        <%= cardapios.length===1 ? "cardápio" : "cardápios" %>
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <% } %>
+
+                    </div>
+
+                    <% if (!cardapios || cardapios.length===0) { %>
+
+                        <section class="estado-vazio-cardapios">
+
+                            <div class="estado-vazio-icone">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M4 11h16" />
+                                    <path d="M6 11a6 6 0 0 1 12 0" />
+                                    <path d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z" />
+                                    <path d="M8 18h8" />
+                                    <path d="M12 5V3" />
+                                </svg>
+
+                            </div>
+
+                            <span class="estado-vazio-tag">
+                                Nenhum item encontrado
+                            </span>
+
+                            <h2>Nenhum cardápio disponível</h2>
+
+                            <p>
+                                Seu nutricionista ainda não cadastrou um cardápio para
+                                você. Assim que ele estiver disponível, aparecerá nesta
+                                página.
+                            </p>
+
+                            <a href="/usuario/home" class="botao-principal">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M3 11 12 4l9 7" />
+                                    <path d="M5 10v10h14V10" />
+                                    <path d="M9 20v-6h6v6" />
+                                </svg>
+
+                                Ir para o início
+                            </a>
+
+                        </section>
+
+                        <% } else { %>
+
+                            <section class="grade-cardapios">
+
+                                <% cardapios.forEach((cardapio, indice)=> { %>
+
+                                    <article class="card-cardapio-usuario">
+
+                                        <div class="card-cardapio-destaque">
+
+                                            <div class="card-cardapio-icone">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M4 11h16" />
+                                                    <path d="M6 11a6 6 0 0 1 12 0" />
+                                                    <path d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z" />
+                                                    <path d="M8 18h8" />
+                                                    <path d="M12 5V3" />
+                                                </svg>
+
+                                            </div>
+
+                                            <span class="card-cardapio-status">
+
+                                                <span class="status-ponto"></span>
+
+                                                Disponível
+
+                                            </span>
+
+                                        </div>
+
+                                        <div class="card-cardapio-conteudo">
+
+                                            <span class="card-cardapio-numero">
+                                                Cardápio <%= indice + 1 %>
+                                            </span>
+
+                                            <h3>
+                                                <%= cardapio.nome %>
+                                            </h3>
+
+                                            <div class="informacao-nutricionista">
+
+                                                <div class="informacao-nutricionista-icone">
+
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <circle cx="12" cy="8" r="4" />
+                                                        <path d="M4 21a8 8 0 0 1 16 0" />
+                                                    </svg>
+
+                                                </div>
+
+                                                <div>
+
+                                                    <span>Nutricionista responsável</span>
+
+                                                    <strong>
+                                                        <%= cardapio.nome_nutricionista || cardapio.nutricionista
+                                                            || "Não informado" %>
+                                                    </strong>
+
+                                                </div>
+
+                                            </div>
+
+                                            <% if (cardapio.observacoes) { %>
+
+                                                <div class="card-cardapio-observacao">
+
+                                                    <div class="observacao-icone">
+
+                                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                            <path
+                                                                d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" />
+                                                            <path d="M8 9h8" />
+                                                            <path d="M8 13h5" />
+                                                        </svg>
+
+                                                    </div>
+
+                                                    <div>
+
+                                                        <span>Observações</span>
+
+                                                        <p>
+                                                            <%= cardapio.observacoes %>
+                                                        </p>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <% } else { %>
+
+                                                    <div class="card-cardapio-observacao sem-observacao">
+
+                                                        <div class="observacao-icone">
+
+                                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                <circle cx="12" cy="12" r="9" />
+                                                                <path d="M12 8v4" />
+                                                                <path d="M12 16h.01" />
+                                                            </svg>
+
+                                                        </div>
+
+                                                        <div>
+
+                                                            <span>Observações</span>
+
+                                                            <p>
+                                                                Nenhuma observação adicional.
+                                                            </p>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <% } %>
+
+                                        </div>
+
+                                        <div class="card-cardapio-rodape">
+
+                                            <a href="/usuario/cardapios/<%= cardapio.id_cardapio %>"
+                                                class="botao-visualizar-cardapio">
+                                                Visualizar cardápio
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="m9 18 6-6-6-6" />
+                                                </svg>
+                                            </a>
+
+                                        </div>
+
+                                    </article>
+
+                                    <% }) %>
+
+                            </section>
+
+                            <% } %>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

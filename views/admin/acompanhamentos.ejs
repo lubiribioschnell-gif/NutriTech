@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+        <%= titulo %> | NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <%- include('../partials/navbarAdmin') %>
+        <main class="admin-main">
+            <h1>Acompanhamentos</h1>
+            <p>O histórico permanece salvo mesmo após o encerramento.</p>
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Nutricionista</th>
+                            <th>Status</th>
+                            <th>Solicitado em</th>
+                            <th>Respondido em</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (!acompanhamentos.length) { %>
+                            <tr>
+                                <td colspan="5" class="vazio">Nenhum acompanhamento encontrado.</td>
+                            </tr>
+                            <% } %>
+                                <% acompanhamentos.forEach(a=> { %><tr>
+                                        <td><strong>
+                                                <%= a.usuario_nome %>
+                                            </strong><br><small>
+                                                <%= a.usuario_email %>
+                                            </small></td>
+                                        <td><strong>
+                                                <%= a.nutricionista_nome %>
+                                            </strong><br><small>
+                                                <%= a.nutricionista_email %>
+                                            </small></td>
+                                        <td><span
+                                                class="status <%= a.status === 'aceita' ? 'status-ativo' : 'status-inativo' %>">
+                                                <%= a.status %>
+                                            </span></td>
+                                        <td>
+                                            <%= a.data_solicitacao ? new
+                                                Date(a.data_solicitacao).toLocaleString('pt-BR') : '-' %>
+                                        </td>
+                                        <td>
+                                            <%= a.data_resposta ? new Date(a.data_resposta).toLocaleString('pt-BR')
+                                                : '-' %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+</body>
+
+</html>

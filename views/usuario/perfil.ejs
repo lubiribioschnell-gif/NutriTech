@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NutriTech - Meu Perfil</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/perfilUsuario.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="pagina-perfil-usuario">
+
+                <section class="hero-perfil-usuario">
+
+                    <div class="hero-perfil-conteudo">
+
+                        <div class="hero-perfil-texto">
+
+                            <span class="hero-perfil-tag">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle cx="12" cy="8" r="4" />
+
+                                    <path d="M4 21a8 8 0 0 1 16 0" />
+                                </svg>
+
+                                Minha conta
+                            </span>
+
+                            <h1>Meu perfil</h1>
+
+                            <p>
+                                Consulte seus dados pessoais e mantenha suas informações
+                                atualizadas.
+                            </p>
+
+                            <a href="/usuario/home" class="botao-voltar-perfil">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="m15 18-6-6 6-6" />
+                                </svg>
+
+                                Voltar para o início
+                            </a>
+
+                        </div>
+
+                        <div class="hero-perfil-ilustracao">
+
+                            <div class="hero-perfil-circulo">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle cx="12" cy="8" r="4" />
+
+                                    <path d="M4 21a8 8 0 0 1 16 0" />
+                                </svg>
+
+                            </div>
+
+                            <span class="decoracao-perfil decoracao-perfil-um"></span>
+                            <span class="decoracao-perfil decoracao-perfil-dois"></span>
+                            <span class="decoracao-perfil decoracao-perfil-tres"></span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="conteudo-perfil-usuario">
+
+                    <article class="card-principal-perfil">
+
+                        <div class="perfil-identificacao">
+
+                            <div class="perfil-foto-wrapper">
+
+                                <div class="perfil-foto">
+
+                                    <% if (usuario.foto) { %>
+
+                                        <img src="/uploads/<%= usuario.foto %>"
+                                            alt="Foto de perfil de <%= usuario.nome %>">
+
+                                        <% } else { %>
+
+                                            <img src="/img/usuarioPadrao.png" alt="Foto de perfil padrão">
+
+                                            <% } %>
+
+                                </div>
+
+                                <span class="perfil-status" title="Conta ativa">
+
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="m5 12 4 4L19 6" />
+                                    </svg>
+
+                                </span>
+
+                            </div>
+
+                            <div class="perfil-identificacao-texto">
+
+                                <span class="perfil-tipo">
+                                    Usuário NutriTech
+                                </span>
+
+                                <h2>
+                                    <%= usuario.nome %>
+                                </h2>
+
+                                <div class="perfil-email">
+
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="14" rx="2" />
+
+                                        <path d="m3 7 9 6 9-6" />
+                                    </svg>
+
+                                    <span>
+                                        <%= usuario.email %>
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <a href="/usuario/perfil/editar" class="botao-editar-perfil">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 20h9" />
+                                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
+                                </svg>
+
+                                Editar perfil
+                            </a>
+
+                        </div>
+
+                        <div class="perfil-separador"></div>
+
+                        <div class="cabecalho-dados-pessoais">
+
+                            <div>
+
+                                <span class="secao-perfil-tag">
+                                    Informações pessoais
+                                </span>
+
+                                <h2>Seus dados</h2>
+
+                                <p>
+                                    Essas informações ajudam a personalizar sua experiência
+                                    dentro da plataforma.
+                                </p>
+
+                            </div>
+
+                            <div class="icone-dados-pessoais">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="4" y="3" width="16" height="18" rx="2" />
+
+                                    <path d="M8 8h8" />
+                                    <path d="M8 12h8" />
+                                    <path d="M8 16h5" />
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+                        <div class="grade-dados-perfil">
+
+                            <div class="dado-perfil-card">
+
+                                <div class="dado-perfil-icone">
+
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="16" rx="2" />
+
+                                        <path d="M8 3v4" />
+                                        <path d="M16 3v4" />
+                                        <path d="M3 10h18" />
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Data de nascimento</span>
+
+                                    <strong>
+                                        <%= usuario.data_nascimento ? new Date( usuario.data_nascimento
+                                            ).toLocaleDateString("pt-BR") : "Não informado" %>
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                            <div class="dado-perfil-card">
+
+                                <div class="dado-perfil-icone">
+
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="9" />
+
+                                        <path d="M12 7v5" />
+                                        <path d="M12 16h.01" />
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Sexo</span>
+
+                                    <strong>
+                                        <%= usuario.sexo || "Não informado" %>
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                            <div class="dado-perfil-card">
+
+                                <div class="dado-perfil-icone">
+
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M6 20h12" />
+
+                                        <path d="M7 20 5 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2l-2 12" />
+
+                                        <path d="M9 10a3 3 0 0 1 6 0" />
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Peso</span>
+
+                                    <strong>
+                                        <%= usuario.peso ? usuario.peso + " kg" : "Não informado" %>
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                            <div class="dado-perfil-card">
+
+                                <div class="dado-perfil-icone">
+
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M6 3h12" />
+                                        <path d="M6 21h12" />
+                                        <path d="M12 3v18" />
+                                        <path d="m9 6 3-3 3 3" />
+                                        <path d="m9 18 3 3 3-3" />
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Altura</span>
+
+                                    <strong>
+                                        <%= usuario.altura ? usuario.altura + " m" : "Não informado" %>
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <aside class="painel-perfil-lateral">
+
+                        <section class="card-dica-perfil">
+
+                            <div class="dica-perfil-icone">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M9 18h6" />
+                                    <path d="M10 22h4" />
+
+                                    <path
+                                        d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.7 15.1 14 16 14 17h-4c0-1-.7-1.9-1.5-2.5Z" />
+                                </svg>
+
+                            </div>
+
+                            <span class="dica-perfil-tag">
+                                Dica
+                            </span>
+
+                            <h2>Mantenha seus dados atualizados</h2>
+
+                            <p>
+                                Seu peso e sua altura podem ser utilizados em recursos
+                                como o cálculo de IMC e no acompanhamento nutricional.
+                            </p>
+
+                            <a href="/usuario/perfil/editar" class="link-atualizar-perfil">
+                                Atualizar informações
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </a>
+
+                        </section>
+
+                        <section class="card-seguranca-perfil">
+
+                            <div class="seguranca-perfil-topo">
+
+                                <div class="seguranca-perfil-icone">
+
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Conta protegida</span>
+
+                                    <strong>Seus dados pessoais</strong>
+
+                                </div>
+
+                            </div>
+
+                            <p>
+                                Revise suas informações sempre que houver alguma mudança.
+                            </p>
+
+                        </section>
+
+                    </aside>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

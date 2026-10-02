@@ -1,0 +1,144 @@
+.paginaFormulario {
+    width: min(850px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 20px 0 70px;
+}
+
+.voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    color: var(--cor-verde-escuro);
+    font-weight: 600;
+    font-size: 14px;
+
+    transition: .2s;
+}
+
+.voltar:hover {
+    transform: translateX(-4px);
+}
+
+.cardFormulario {
+
+    padding: 38px;
+
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-grande);
+
+    background: var(--cor-branco);
+    box-shadow: var(--sombra-media);
+}
+
+.cardFormulario h1 {
+
+    margin-bottom: 8px;
+
+    font-size: 34px;
+    color: var(--cor-verde-escuro);
+}
+
+.cardFormulario::before {
+
+    content: "Editar alimento";
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--cor-verde-escuro);
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.cardFormulario form {
+
+    display: grid;
+    gap: 20px;
+
+    margin-top: 25px;
+}
+
+.campo label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--cor-texto);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.gradeNutrientes {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.botaoSalvar {
+
+    justify-self: flex-start;
+
+    min-width: 220px;
+
+    padding: 14px 24px;
+
+    border: none;
+    border-radius: var(--raio-pequeno);
+
+    background: var(--cor-verde-escuro);
+    color: var(--cor-branco);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        background .2s;
+}
+
+.botaoSalvar:hover {
+
+    transform: translateY(-2px);
+
+    background: #2f3924;
+
+    box-shadow: 0 10px 22px rgba(60, 72, 47, .20);
+}
+
+@media(max-width:700px) {
+
+    .paginaFormulario {
+
+        width: calc(100% - 24px);
+    }
+
+    .cardFormulario {
+
+        padding: 24px 20px;
+    }
+
+    .gradeNutrientes {
+
+        grid-template-columns: 1fr;
+    }
+
+    .botaoSalvar {
+
+        width: 100%;
+    }
+}

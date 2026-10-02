@@ -1,0 +1,278 @@
+.paginaCardapio {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 20px 0 70px;
+}
+
+.voltar {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--cor-verde-escuro);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cabecalhoPagina {
+    padding: 36px;
+    margin-bottom: 28px;
+
+    border-radius: var(--raio-grande);
+    background: linear-gradient(135deg,
+            #A8B379, #9FC7AA);
+
+    color: var(--cor-branco);
+    box-shadow: var(--sombra-media);
+}
+
+.cabecalhoPagina span {
+    display: block;
+    margin-bottom: 7px;
+
+    color: var(--cor-verde-suave);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.cabecalhoPagina h1 {
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(29px, 4vw, 42px);
+}
+
+.cabecalhoPagina p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+}
+
+.cabecalhoPagina strong {
+    color: var(--cor-branco);
+}
+
+.mensagemSucesso {
+    margin-bottom: 24px;
+    padding: 14px 17px;
+
+    border: 1px solid var(--cor-verde-claro);
+    border-radius: var(--raio-pequeno);
+
+    background: var(--cor-sucesso-fundo);
+    color: var(--cor-sucesso-texto);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.gradeAlimentos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 24px;
+
+    margin-bottom: 32px;
+}
+
+.gradeAlimentos .cardFormulario {
+    padding: 27px;
+}
+
+.cardFormulario h2 {
+    margin-bottom: 20px;
+    font-size: 21px;
+}
+
+.cardFormulario form {
+    display: grid;
+    gap: 16px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 7px;
+
+    color: var(--cor-texto);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.textoApoio {
+    padding: 18px;
+
+    border-radius: var(--raio-pequeno);
+    background: rgba(203, 225, 209, 0.25);
+
+    color: #6c6a65;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.gradeNutrientes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.listaAlimentos {
+    overflow: hidden;
+}
+
+.tituloLista {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 24px 26px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.tituloLista span {
+    display: block;
+    margin-bottom: 4px;
+
+    color: var(--cor-verde-escuro);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.tituloLista h2 {
+    font-size: 23px;
+}
+
+.tituloLista>strong {
+    padding: 7px 12px;
+
+    border-radius: 999px;
+    background: var(--cor-verde-suave);
+    color: var(--cor-verde-escuro);
+
+    font-size: 12px;
+}
+
+.listaAlimentos .estadoVazio {
+    margin: 26px;
+}
+
+.tabelaResponsiva {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabelaAlimentos {
+    min-width: 980px;
+}
+
+.tabelaAlimentos th {
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.tabelaAlimentos td {
+    color: #625e5a;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.tabelaAlimentos td:first-child strong {
+    color: var(--cor-texto);
+    font-size: 14px;
+}
+
+.form-quantidade {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 210px;
+}
+
+.form-quantidade input {
+    min-width: 120px;
+    padding: 9px 10px;
+    font-size: 12px;
+}
+
+.botao-salvar-quantidade {
+    padding: 9px 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--cor-verde-escuro);
+    color: var(--cor-branco);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.acoes-alimento {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.botao-editar-alimento,
+.botao-remover-alimento {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 36px;
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.botao-editar-alimento {
+    border: 1px solid var(--cor-verde-claro);
+    background: var(--cor-verde-suave);
+    color: var(--cor-verde-escuro);
+}
+
+.botao-remover-alimento {
+    border: 1px solid #e5bcbc;
+    background: var(--cor-erro-fundo);
+    color: var(--cor-erro-texto);
+}
+
+.tabelaAlimentos tfoot td {
+    background: rgba(203, 225, 209, 0.28);
+    color: var(--cor-verde-escuro);
+}
+
+@media (max-width: 900px) {
+    .gradeAlimentos {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .paginaCardapio {
+        width: calc(100% - 24px);
+        padding-top: 10px;
+    }
+
+    .cabecalhoPagina {
+        padding: 27px 22px;
+    }
+
+    .gradeAlimentos .cardFormulario {
+        padding: 22px 18px;
+    }
+
+    .gradeNutrientes {
+        grid-template-columns: 1fr;
+    }
+
+    .tituloLista {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

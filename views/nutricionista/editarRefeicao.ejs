@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Editar Refeição</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/editarRefeicao.css">
+
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="paginaFormulario">
+
+                <a href="/nutricionista/cardapios/<%= refeicao.id_cardapio %>/refeicoes" class="voltar">
+                    ← Voltar para as refeições
+                </a>
+
+                <section class="cardFormulario">
+
+                    <span class="etiquetaPagina">
+                        Organização do cardápio
+                    </span>
+
+                    <h1>
+                        <%= refeicao.tipo %>
+                    </h1>
+
+                    <p class="subtituloPagina">
+                        Atualize o tipo desta refeição.
+                    </p>
+
+                    <form action="/nutricionista/refeicoes/<%= refeicao.id_refeicao %>/editar" method="POST">
+                        <input type="hidden" name="id_cardapio" value="<%= refeicao.id_cardapio %>">
+
+                        <div class="campo">
+
+                            <label for="tipo">
+                                Tipo da refeição
+                            </label>
+
+                            <select id="tipo" name="tipo" required>
+                                <option value="">Selecione uma opção</option>
+
+                                <% tiposRefeicao.forEach(tipo=> { %>
+                                    <option value="<%= tipo %>" <%=refeicao.tipo===tipo ? "selected" : "" %>
+                                        >
+                                        <%= tipo %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+
+                        </div>
+
+                        <div class="acoesFormulario">
+
+                            <button type="submit" class="botaoSalvar">
+                                Salvar alterações
+                            </button>
+
+                            <a href="/nutricionista/cardapios/<%= refeicao.id_cardapio %>/refeicoes"
+                                class="botaoCancelar">
+                                Cancelar
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

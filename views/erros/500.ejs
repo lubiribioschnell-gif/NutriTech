@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title><%= titulo %> - NutriTech</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/global.css"
+    >
+</head>
+<body>
+    <main class="container">
+        <h1><%= titulo %></h1>
+
+        <% if (
+            typeof erro !== "undefined" &&
+            erro
+        ) { %>
+            <p><%= erro %></p>
+        <% } else { %>
+            <p>
+                Ocorreu um erro inesperado.
+                Tente novamente mais tarde.
+            </p>
+        <% } %>
+
+        <a href="/">
+            Voltar para o início
+        </a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NutriTech - Nutricionistas</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/nutricionistasUsuario.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="pagina-nutricionistas">
+
+                <section class="hero-nutricionistas">
+
+                    <div class="hero-nutricionistas-conteudo">
+
+                        <div class="hero-nutricionistas-texto">
+
+                            <span class="hero-nutricionistas-tag">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle cx="12" cy="7" r="4" />
+
+                                    <path d="M5 21a7 7 0 0 1 14 0" />
+                                    <path d="M19 8v6" />
+                                    <path d="M16 11h6" />
+                                </svg>
+
+                                Acompanhamento profissional
+                            </span>
+
+                            <% if (solicitacaoAtual) { %>
+
+                                <% if (solicitacaoAtual.status==="pendente" ) { %>
+
+                                    <h1>Sua solicitação está em análise</h1>
+
+                                    <p>
+                                        Aguarde a resposta do nutricionista escolhido para
+                                        começar seu acompanhamento.
+                                    </p>
+
+                                    <% } else { %>
+
+                                        <h1>Seu acompanhamento nutricional</h1>
+
+                                        <p>
+                                            Consulte as informações do profissional responsável
+                                            pelo seu acompanhamento.
+                                        </p>
+
+                                        <% } %>
+
+                                            <% } else { %>
+
+                                                <h1>Escolha seu nutricionista</h1>
+
+                                                <p>
+                                                    Encontre um profissional disponível e solicite um
+                                                    acompanhamento nutricional personalizado.
+                                                </p>
+
+                                                <% } %>
+
+                                                    <a href="/usuario/home" class="botao-voltar-nutricionistas">
+                                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                            <path d="m15 18-6-6 6-6" />
+                                                        </svg>
+
+                                                        Voltar para o início
+                                                    </a>
+
+                        </div>
+
+                        <div class="hero-nutricionistas-ilustracao">
+
+                            <div class="hero-profissional-circulo">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle cx="12" cy="7" r="4" />
+
+                                    <path d="M5 21a7 7 0 0 1 14 0" />
+                                    <path d="M19 8v6" />
+                                    <path d="M16 11h6" />
+                                </svg>
+
+                            </div>
+
+                            <span class="decoracao-nutri decoracao-nutri-um"></span>
+                            <span class="decoracao-nutri decoracao-nutri-dois"></span>
+                            <span class="decoracao-nutri decoracao-nutri-tres"></span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="conteudo-nutricionistas">
+
+                    <% if (solicitacaoAtual) { %>
+
+                        <% if (solicitacaoAtual.status==="pendente" ) { %>
+
+                            <article class="card-solicitacao-atual card-pendente">
+
+                                <div class="solicitacao-status-topo">
+
+                                    <div class="status-solicitacao-icone">
+
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="9" />
+
+                                            <path d="M12 7v5l3 2" />
+                                        </svg>
+
+                                    </div>
+
+                                    <span class="status-solicitacao status-pendente">
+                                        Aguardando resposta
+                                    </span>
+
+                                </div>
+
+                                <div class="solicitacao-conteudo">
+
+                                    <span class="secao-nutricionista-tag">
+                                        Solicitação atual
+                                    </span>
+
+                                    <h2>Solicitação pendente</h2>
+
+                                    <p class="solicitacao-descricao">
+                                        Você solicitou acompanhamento do nutricionista
+                                        abaixo. Aguarde até que o profissional aceite ou
+                                        recuse sua solicitação.
+                                    </p>
+
+                                    <div class="profissional-solicitacao">
+
+                                        <div class="profissional-avatar">
+
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="8" r="4" />
+
+                                                <path d="M4 21a8 8 0 0 1 16 0" />
+                                            </svg>
+
+                                        </div>
+
+                                        <div>
+
+                                            <span>Nutricionista escolhido</span>
+
+                                            <strong>
+                                                <%= solicitacaoAtual.nutricionista_nome %>
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="aviso-solicitacao">
+
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="9" />
+
+                                            <path d="M12 8v4" />
+                                            <path d="M12 16h.01" />
+                                        </svg>
+
+                                        <p>
+                                            Enquanto houver uma solicitação pendente, não
+                                            será possível solicitar outro nutricionista.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <footer class="solicitacao-rodape">
+
+                                    <form
+                                        action="/usuario/nutricionistas/solicitacao/<%= solicitacaoAtual.id_solicitacao %>/cancelar"
+                                        method="POST" onsubmit="return confirm('Deseja cancelar esta solicitação?')">
+                                        <button type="submit" class="botao-cancelar-solicitacao">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M4 7h16" />
+                                                <path d="M9 7V4h6v3" />
+                                                <path d="m10 11 4 4" />
+                                                <path d="m14 11-4 4" />
+                                                <path d="M6 7l1 14h10l1-14" />
+                                            </svg>
+
+                                            Cancelar solicitação
+                                        </button>
+                                    </form>
+
+                                </footer>
+
+                            </article>
+
+                            <% } else { %>
+
+                                <article class="card-solicitacao-atual card-acompanhamento">
+
+                                    <div class="solicitacao-status-topo">
+
+                                        <div class="status-solicitacao-icone">
+
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M20 7 9 18l-5-5" />
+                                            </svg>
+
+                                        </div>
+
+                                        <span class="status-solicitacao status-ativo">
+                                            Acompanhamento ativo
+                                        </span>
+
+                                    </div>
+
+                                    <div class="solicitacao-conteudo">
+
+                                        <span class="secao-nutricionista-tag">
+                                            Profissional responsável
+                                        </span>
+
+                                        <h2>Nutricionista atual</h2>
+
+                                        <p class="solicitacao-descricao">
+                                            Você está sendo acompanhado pelo profissional
+                                            apresentado abaixo.
+                                        </p>
+
+                                        <div class="profissional-atual">
+
+                                            <div class="profissional-atual-avatar">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <circle cx="12" cy="8" r="4" />
+
+                                                    <path d="M4 21a8 8 0 0 1 16 0" />
+                                                </svg>
+
+                                            </div>
+
+                                            <div class="profissional-atual-informacoes">
+
+                                                <span>Nutricionista responsável</span>
+
+                                                <h3>
+                                                    <%= solicitacaoAtual.nutricionista_nome %>
+                                                </h3>
+
+                                                <div class="profissional-email">
+
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <rect x="3" y="5" width="18" height="14" rx="2" />
+
+                                                        <path d="m3 7 9 6 9-6" />
+                                                    </svg>
+
+                                                    <span>
+                                                        <%= solicitacaoAtual.nutricionista_email %>
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="acompanhamento-informacao">
+
+                                            <div class="acompanhamento-informacao-icone">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+                                                    <path d="m9 12 2 2 4-4" />
+                                                </svg>
+
+                                            </div>
+
+                                            <div>
+
+                                                <strong>Acompanhamento confirmado</strong>
+
+                                                <p>
+                                                    O nutricionista poderá acompanhar seu diário,
+                                                    preparar cardápios e aplicar quizzes.
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <footer class="solicitacao-rodape">
+                                        <form
+                                            action="/usuario/acompanhamento/<%= solicitacaoAtual.id_solicitacao %>/encerrar"
+                                            method="POST"
+                                            onsubmit="return confirm('Deseja realmente encerrar este acompanhamento? O histórico continuará salvo.')">
+                                            <button type="submit" class="botao-encerrar-acompanhamento">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M6 6l12 12" />
+                                                    <path d="M18 6 6 18" />
+                                                </svg>
+                                                Encerrar acompanhamento
+                                            </button>
+                                        </form>
+                                    </footer>
+
+                                </article>
+
+                                <% } %>
+
+                                    <% } else { %>
+
+                                        <div class="cabecalho-lista-nutricionistas">
+
+                                            <div>
+
+                                                <span class="secao-nutricionista-tag">
+                                                    Profissionais disponíveis
+                                                </span>
+
+                                                <h2>Escolha quem irá acompanhar você</h2>
+
+                                                <p>
+                                                    Analise os profissionais disponíveis e envie uma
+                                                    solicitação de acompanhamento.
+                                                </p>
+
+                                            </div>
+
+                                            <% if (nutricionistas && nutricionistas.length> 0) { %>
+
+                                                <div class="contador-nutricionistas">
+
+                                                    <div class="contador-nutricionistas-icone">
+
+                                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                            <circle cx="12" cy="7" r="4" />
+
+                                                            <path d="M5 21a7 7 0 0 1 14 0" />
+                                                        </svg>
+
+                                                    </div>
+
+                                                    <div>
+
+                                                        <strong>
+                                                            <%= nutricionistas.length %>
+                                                        </strong>
+
+                                                        <span>
+                                                            <%= nutricionistas.length===1 ? "profissional"
+                                                                : "profissionais" %>
+                                                        </span>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <% } %>
+
+                                        </div>
+
+                                        <% if (!nutricionistas || nutricionistas.length===0) { %>
+
+                                            <section class="estado-sem-nutricionistas">
+
+                                                <div class="estado-sem-nutricionistas-icone">
+
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <circle cx="10" cy="8" r="4" />
+
+                                                        <path d="M3 21a7 7 0 0 1 14 0" />
+                                                        <path d="M17 8h5" />
+                                                    </svg>
+
+                                                </div>
+
+                                                <span class="estado-vazio-tag">
+                                                    Nenhum resultado
+                                                </span>
+
+                                                <h2>Nenhum nutricionista disponível</h2>
+
+                                                <p>
+                                                    No momento não existem nutricionistas disponíveis para
+                                                    acompanhamento. Consulte esta página novamente mais
+                                                    tarde.
+                                                </p>
+
+                                                <a href="/usuario/home" class="botao-principal-nutricionistas">
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <path d="M3 11 12 4l9 7" />
+                                                        <path d="M5 10v10h14V10" />
+                                                        <path d="M9 20v-6h6v6" />
+                                                    </svg>
+
+                                                    Ir para o início
+                                                </a>
+
+                                            </section>
+
+                                            <% } else { %>
+
+                                                <section class="grade-nutricionistas">
+
+                                                    <% nutricionistas.forEach((nutricionista, indice)=> { %>
+
+                                                        <article class="card-nutricionista">
+
+                                                            <div class="card-nutricionista-topo">
+
+                                                                <div class="nutricionista-avatar">
+
+                                                                    <% if (nutricionista.foto) { %>
+
+                                                                        <img src="/uploads/<%= nutricionista.foto %>"
+                                                                            alt="Foto de <%= nutricionista.nome %>">
+
+                                                                        <% } else { %>
+
+                                                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                                <circle cx="12" cy="8" r="4" />
+
+                                                                                <path d="M4 21a8 8 0 0 1 16 0" />
+                                                                            </svg>
+
+                                                                            <% } %>
+
+                                                                </div>
+
+                                                                <span class="nutricionista-disponivel">
+
+                                                                    <span class="ponto-disponivel"></span>
+
+                                                                    Disponível
+                                                                </span>
+
+                                                            </div>
+
+                                                            <div class="card-nutricionista-conteudo">
+
+                                                                <span class="nutricionista-indice">
+                                                                    Profissional <%= indice + 1 %>
+                                                                </span>
+
+                                                                <h3>
+                                                                    <%= nutricionista.nome %>
+                                                                </h3>
+
+                                                                <div class="nutricionista-email">
+
+                                                                    <div class="nutricionista-email-icone">
+
+                                                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                            <rect x="3" y="5" width="18" height="14"
+                                                                                rx="2" />
+
+                                                                            <path d="m3 7 9 6 9-6" />
+                                                                        </svg>
+
+                                                                    </div>
+
+                                                                    <div>
+
+                                                                        <span>E-mail profissional</span>
+
+                                                                        <strong>
+                                                                            <%= nutricionista.email %>
+                                                                        </strong>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="nutricionista-beneficios">
+
+                                                                    <div class="beneficio-item">
+
+                                                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                            <path d="M20 7 9 18l-5-5" />
+                                                                        </svg>
+
+                                                                        <span>Cardápio personalizado</span>
+
+                                                                    </div>
+
+                                                                    <div class="beneficio-item">
+
+                                                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                            <path d="M20 7 9 18l-5-5" />
+                                                                        </svg>
+
+                                                                        <span>Acompanhamento do diário</span>
+
+                                                                    </div>
+
+                                                                    <div class="beneficio-item">
+
+                                                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                                            <path d="M20 7 9 18l-5-5" />
+                                                                        </svg>
+
+                                                                        <span>Orientações individualizadas</span>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <footer class="card-nutricionista-rodape">
+
+                                                                <a href="/usuario/nutricionistas/<%= nutricionista.id_nutricionista %>"
+                                                                    class="botao-ver-perfil">
+                                                                    Ver informações
+                                                                </a>
+
+                                                                <form
+                                                                    action="/usuario/nutricionistas/<%= nutricionista.id_nutricionista %>/solicitar"
+                                                                    method="POST">
+                                                                    <button class="botao-solicitar">
+                                                                        Solicitar acompanhamento
+                                                                    </button>
+                                                                </form>
+
+                                                            </footer>
+
+                                                        </article>
+
+                                                        <% }) %>
+
+                                                </section>
+
+                                                <% } %>
+
+                                                    <% } %>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

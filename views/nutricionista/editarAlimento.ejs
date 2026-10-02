@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/editarAlimento.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="paginaFormulario">
+
+                <a href="/nutricionista/refeicoes/<%= alimento.id_refeicao %>/alimentos" class="voltar">
+                    ← Voltar
+                </a>
+
+                <section class="cardFormulario">
+
+                    <h1>
+                        <%= alimento.nome %>
+                    </h1>
+
+                    <p class="subtituloPagina">
+                        Atualize as informações nutricionais deste alimento.
+                    </p>
+
+                    <form action="/nutricionista/alimentos/<%= alimento.id_alimento %>/editar" method="POST">
+
+                        <div class="campo">
+
+                            <label>Nome</label>
+
+                            <input type="text" name="nome" value="<%= alimento.nome %>" maxlength="100" required>
+
+                        </div>
+
+                        <div class="gradeNutrientes">
+
+                            <div class="campo">
+
+                                <label>Calorias</label>
+
+                                <input type="number" name="calorias" step="0.01" min="0"
+                                    value="<%= alimento.calorias %>" required>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label>Proteínas</label>
+
+                                <input type="number" name="proteinas" step="0.01" min="0"
+                                    value="<%= alimento.proteinas %>" required>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label>Carboidratos</label>
+
+                                <input type="number" name="carboidratos" step="0.01" min="0"
+                                    value="<%= alimento.carboidratos %>" required>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label>Gorduras</label>
+
+                                <input type="number" name="gorduras" step="0.01" min="0"
+                                    value="<%= alimento.gorduras %>" required>
+
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="botaoSalvar">
+                            Salvar alterações
+                        </button>
+
+                    </form>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

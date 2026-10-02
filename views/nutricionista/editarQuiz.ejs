@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/quizNutricionista.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="quiz-nutri-container quiz-nutri-container-formulario">
+
+                <a href="/nutricionista/quizzes" class="quiz-nutri-voltar">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
+
+                    Voltar para os quizzes
+                </a>
+
+                <section class="quiz-nutri-hero quiz-nutri-hero-menor">
+
+                    <div class="quiz-nutri-hero-conteudo">
+
+                        <span class="quiz-nutri-tag">
+                            Gerenciamento
+                        </span>
+
+                        <h1>Editar quiz</h1>
+
+                        <p>
+                            Atualize o paciente, o título ou a descrição da atividade.
+                        </p>
+
+                    </div>
+
+                    <div class="quiz-nutri-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="55" height="55" fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+                        </svg>
+
+                    </div>
+
+                </section>
+
+                <section class="quiz-nutri-formulario-card">
+
+                    <div class="quiz-nutri-formulario-cabecalho">
+
+                        <div class="quiz-nutri-formulario-icone">
+
+                            <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path>
+                                <path d="M14 2v6h6"></path>
+                                <path d="M8 13h8"></path>
+                                <path d="M8 17h8"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+                            <span>Informações</span>
+                            <h2>Dados do quiz</h2>
+
+                            <p>
+                                Altere somente as informações que precisam ser atualizadas.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <% if (erro) { %>
+
+                        <div class="quiz-nutri-erro">
+                            <%= erro %>
+                        </div>
+
+                        <% } %>
+
+                            <form action="/nutricionista/quizzes/<%= quiz.id_quiz %>/editar" method="POST"
+                                class="quiz-nutri-formulario">
+
+                                <div class="quiz-nutri-campo quiz-nutri-campo-completo">
+
+                                    <label for="id_usuario">
+                                        Paciente
+                                    </label>
+
+                                    <div class="quiz-nutri-input-wrapper">
+
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+
+                                        <select id="id_usuario" name="id_usuario" required>
+
+                                            <% usuarios.forEach(item=> { %>
+
+                                                <option value="<%= item.id_usuario %>"
+                                                    <%=Number(item.id_usuario)===Number(quiz.id_usuario) ? "selected"
+                                                    : "" %>
+                                                    >
+                                                    <%= item.nome %> — <%= item.email %>
+                                                </option>
+
+                                                <% }) %>
+
+                                        </select>
+
+                                    </div>
+
+                                    <small>
+                                        Paciente que terá acesso a este quiz.
+                                    </small>
+
+                                </div>
+
+                                <div class="quiz-nutri-campo quiz-nutri-campo-completo">
+
+                                    <label for="titulo">
+                                        Título do quiz
+                                    </label>
+
+                                    <div class="quiz-nutri-input-wrapper">
+
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M4 7V4h16v3"></path>
+                                            <path d="M9 20h6"></path>
+                                            <path d="M12 4v16"></path>
+                                        </svg>
+
+                                        <input type="text" id="titulo" name="titulo" maxlength="150"
+                                            value="<%= quiz.titulo %>" required>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="quiz-nutri-campo quiz-nutri-campo-completo">
+
+                                    <label for="descricao">
+                                        Descrição
+                                    </label>
+
+                                    <textarea id="descricao" name="descricao" rows="5"
+                                        placeholder="Explique o objetivo do quiz."><%= quiz.descricao || "" %></textarea>
+
+                                </div>
+
+                                <div class="quiz-nutri-formulario-acoes">
+
+                                    <a href="/nutricionista/quizzes" class="quiz-nutri-botao-secundario">
+                                        Cancelar
+                                    </a>
+
+                                    <button type="submit" class="quiz-nutri-botao">
+                                        <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z">
+                                            </path>
+                                            <path d="M17 21v-8H7v8"></path>
+                                            <path d="M7 3v5h8"></path>
+                                        </svg>
+
+                                        Salvar alterações
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

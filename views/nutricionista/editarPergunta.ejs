@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/quizNutricionista.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="quiz-nutri-container quiz-nutri-container-formulario">
+
+                <a href="/nutricionista/quizzes/<%= pergunta.id_quiz %>/perguntas" class="quiz-nutri-voltar">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
+
+                    Voltar para as perguntas
+                </a>
+
+                <section class="quiz-nutri-hero quiz-nutri-hero-menor">
+
+                    <div class="quiz-nutri-hero-conteudo">
+
+                        <span class="quiz-nutri-tag">
+                            <%= pergunta.titulo_quiz %>
+                        </span>
+
+                        <h1>Editar pergunta</h1>
+
+                        <p>
+                            Altere o enunciado, as alternativas ou a resposta correta.
+                        </p>
+
+                    </div>
+
+                    <div class="quiz-nutri-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="55" height="55" fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+                        </svg>
+
+                    </div>
+
+                </section>
+
+                <section class="quiz-nutri-formulario-card">
+
+                    <div class="quiz-nutri-formulario-cabecalho">
+
+                        <div class="quiz-nutri-formulario-icone">
+
+                            <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"></path>
+                                <path d="M12 18h.01"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+                            <span>Questão</span>
+                            <h2>Dados da pergunta</h2>
+
+                            <p>
+                                Edite o enunciado e defina qual alternativa é a correta.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <% if (erro) { %>
+
+                        <div class="quiz-nutri-erro">
+                            <%= erro %>
+                        </div>
+
+                        <% } %>
+
+                            <form action="/nutricionista/perguntas/<%= pergunta.id_pergunta %>/editar" method="POST"
+                                class="quiz-nutri-formulario">
+
+                                <div class="quiz-nutri-campo quiz-nutri-campo-completo">
+
+                                    <label for="enunciado">
+                                        Enunciado da pergunta
+                                    </label>
+
+                                    <div class="quiz-nutri-input-wrapper">
+
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M4 7V4h16v3"></path>
+                                            <path d="M9 20h6"></path>
+                                            <path d="M12 4v16"></path>
+                                        </svg>
+
+                                        <input type="text" id="enunciado" name="enunciado"
+                                            value="<%= pergunta.enunciado %>" required>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="quiz-nutri-alternativas-titulo quiz-nutri-campo-completo">
+
+                                    <div>
+                                        <span>Opções de resposta</span>
+                                        <h3>Alternativas</h3>
+                                    </div>
+
+                                    <p>
+                                        Atualize os textos e selecione a resposta correta abaixo.
+                                    </p>
+
+                                </div>
+
+                                <% alternativas.forEach((alternativa, indice)=> { %>
+
+                                    <div class="quiz-nutri-campo quiz-nutri-campo-alternativa">
+
+                                        <label for="alternativa<%= indice + 1 %>">
+
+                                            <span class="quiz-nutri-letra">
+                                                <%= String.fromCharCode(65 + indice) %>
+                                            </span>
+
+                                            Alternativa <%= indice + 1 %>
+                                        </label>
+
+                                        <input type="text" id="alternativa<%= indice + 1 %>"
+                                            name="alternativa<%= indice + 1 %>" value="<%= alternativa.texto %>"
+                                            required>
+
+                                    </div>
+
+                                    <% }) %>
+
+                                        <div class="quiz-nutri-campo quiz-nutri-campo-completo">
+
+                                            <label for="correta">
+                                                Resposta correta
+                                            </label>
+
+                                            <div class="quiz-nutri-input-wrapper">
+
+                                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="m9 11 3 3L22 4"></path>
+                                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
+                                                    </path>
+                                                </svg>
+
+                                                <select id="correta" name="correta" required>
+
+                                                    <% alternativas.forEach((alternativa, indice)=> { %>
+
+                                                        <option value="<%= indice + 1 %>" <%=alternativa.correta
+                                                            ? "selected" : "" %>
+                                                            >
+                                                            Alternativa <%= indice + 1 %>
+                                                        </option>
+
+                                                        <% }) %>
+
+                                                </select>
+
+                                            </div>
+
+                                            <small>
+                                                Esta será a alternativa utilizada na correção automática.
+                                            </small>
+
+                                        </div>
+
+                                        <div class="quiz-nutri-formulario-acoes">
+
+                                            <a href="/nutricionista/quizzes/<%= pergunta.id_quiz %>/perguntas"
+                                                class="quiz-nutri-botao-secundario">
+                                                Cancelar
+                                            </a>
+
+                                            <button type="submit" class="quiz-nutri-botao">
+                                                <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path
+                                                        d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z">
+                                                    </path>
+                                                    <path d="M17 21v-8H7v8"></path>
+                                                    <path d="M7 3v5h8"></path>
+                                                </svg>
+
+                                                Salvar alterações
+                                            </button>
+
+                                        </div>
+
+                            </form>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

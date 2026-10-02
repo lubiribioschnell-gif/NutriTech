@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= titulo %> | NutriTech</title>
+    <style>
+        body{font-family:Arial,sans-serif;background:#f3f6f1;margin:0;display:grid;place-items:center;min-height:100vh;color:#263326}.card{background:white;padding:32px;border-radius:16px;box-shadow:0 10px 30px #0002;width:min(420px,calc(100% - 40px))}h1{margin-top:0;color:#405c35}.campo{margin-bottom:16px}label{display:block;margin-bottom:6px;font-weight:bold}input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #ccd5c8;border-radius:8px}button{width:100%;padding:12px;border:0;border-radius:8px;background:#405c35;color:white;font-weight:bold;cursor:pointer}.erro{background:#ffe5e5;color:#8c1d1d;padding:10px;border-radius:8px;margin-bottom:16px}a{color:#405c35}
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>Administração NutriTech</h1>
+        <% if (erro) { %><div class="erro"><%= erro %></div><% } %>
+        <form action="/admin/login" method="POST">
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <p><a href="/">Voltar ao site</a></p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+        <%= titulo %> | NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <%- include('../partials/navbarAdmin') %>
+        <main class="admin-main">
+            <h1>Painel administrativo</h1>
+            <p>Olá, <strong>
+                    <%= usuario.nome %>
+                </strong>. Acompanhe os principais números do sistema.</p>
+            <section class="cards">
+                <div class="card">
+                    <div class="card-numero">
+                        <%= resumo.usuarios %>
+                    </div>
+                    <p>Usuários cadastrados</p><small>
+                        <%= resumo.usuariosAtivos %> ativos · <%= resumo.usuariosInativos %> desativados
+                    </small>
+                </div>
+                <div class="card">
+                    <div class="card-numero">
+                        <%= resumo.nutricionistas %>
+                    </div>
+                    <p>Nutricionistas cadastrados</p><small>
+                        <%= resumo.nutricionistasAprovados %> aprovados
+                    </small>
+                </div>
+                <div class="card">
+                    <div class="card-numero">
+                        <%= resumo.pendentes %>
+                    </div>
+                    <p>Aguardando aprovação</p><a class="botao primario" href="/admin/nutricionistas">Analisar</a>
+                </div>
+                <div class="card">
+                    <div class="card-numero">
+                        <%= resumo.acompanhamentos %>
+                    </div>
+                    <p>Acompanhamentos ativos</p><small>
+                        <%= resumo.acompanhamentosTotal %> solicitações no histórico
+                    </small>
+                </div>
+                <div class="card">
+                    <div class="card-numero">
+                        <%= resumo.diarios %>
+                    </div>
+                    <p>Registros no diário</p>
+                </div>
+                <div class="card">
+                    <div class="card-numero">
+                        <%= resumo.nutricionistasInativos %>
+                    </div>
+                    <p>Nutricionistas desativados</p>
+                </div>
+            </section>
+        </main>
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/educacao.css">
+</head>
+
+<body>
+<%
+function iconeArtigo(titulo) {
+    const t = (titulo || "").toLowerCase();
+
+    if (t.includes("água") || t.includes("hidrat")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3.5c-3.2 4.2-6 7.2-6 10.7a6 6 0 0 0 12 0c0-3.5-2.8-6.5-6-10.7Z"/>
+            <path d="M9.5 15.5c.4 1.2 1.3 1.9 2.5 2"/>
+        </svg>`;
+    if (t.includes("fruta") || t.includes("verdura") || t.includes("legume") || t.includes("vegetal")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 20c-4.5-2.1-7-5.5-7-9.2C5 8 7 6 10 6c1.2 0 2.2.4 3 1.2C13.8 6.4 14.8 6 16 6c3 0 5 2 5 4.8 0 3.7-2.5 7.1-7 9.2Z"/>
+            <path d="M13 7c.2-2.2 1.5-3.7 3.5-4"/>
+            <path d="M13 7c-1.7-1.2-3.4-1.2-5-.3"/>
+        </svg>`;
+    if (t.includes("café") || t.includes("cafe") || t.includes("manhã") || t.includes("manha")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 9h12v5a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V9Z"/>
+            <path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/>
+            <path d="M8 5c-1-1.2.2-2.2 0-3"/>
+            <path d="M12 5c-1-1.2.2-2.2 0-3"/>
+        </svg>`;
+    if (t.includes("rótulo") || t.includes("rotulo") || t.includes("nutri") || t.includes("caloria")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="3" width="14" height="18" rx="2"/>
+            <path d="M8 7h8M8 11h8M8 15h5"/>
+            <circle cx="16" cy="17" r="1"/>
+        </svg>`;
+    if (t.includes("açúcar") || t.includes("acucar") || t.includes("sal")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 8h12l-1 12H7L6 8Z"/>
+            <path d="M9 8V5h6v3"/>
+            <path d="M9 12h6M10 16h4"/>
+        </svg>`;
+    if (t.includes("exerc") || t.includes("atividade") || t.includes("movimento")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="5" r="2"/>
+            <path d="M9 10l3-2 3 2"/>
+            <path d="M12 8v6M9 20l3-6 3 6M7 12l-3 3M17 12l3 3"/>
+        </svg>`;
+    if (t.includes("planej") || t.includes("rotina") || t.includes("cardápio") || t.includes("cardapio")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="5" width="16" height="15" rx="2"/>
+            <path d="M8 3v4M16 3v4M4 9h16"/>
+            <path d="m8 14 2 2 5-5"/>
+        </svg>`;
+    if (t.includes("sono") || t.includes("dorm")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 18h16"/>
+            <path d="M5 18v-5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v5"/>
+            <path d="M12 14h7v4"/>
+            <path d="M16 5a4 4 0 0 0 4 4 5 5 0 1 1-4-4Z"/>
+        </svg>`;
+    if (t.includes("vitamina") || t.includes("mineral") || t.includes("imun")) return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 4h8M9 4v5.5L5.5 16a3.5 3.5 0 0 0 3 5h7a3.5 3.5 0 0 0 3-5L15 9.5V4"/>
+            <path d="M8 14h8"/>
+            <path d="M10 17h4"/>
+        </svg>`;
+    return `
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+            <path d="M8 7h8M8 11h6"/>
+        </svg>`;
+}
+%>
+
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="educacao-container">
+
+                <section class="educacao-hero">
+
+                    <div class="educacao-hero-conteudo">
+
+                        <span class="educacao-tag">
+                            Educação alimentar
+                        </span>
+
+                        <h1>Aprenda sobre alimentação saudável</h1>
+
+                        <p>
+                            Explore conteúdos educativos preparados para ajudar você
+                            a entender melhor os alimentos, os nutrientes e os hábitos
+                            que fazem parte de uma rotina equilibrada.
+                        </p>
+
+                    </div>
+
+                    <div class="educacao-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"></path>
+                            <path d="M8 7h8"></path>
+                            <path d="M8 11h6"></path>
+                        </svg>
+
+                    </div>
+
+                </section>
+
+                <section class="educacao-secao">
+
+                    <div class="educacao-titulo-secao">
+
+                        <div>
+                            <span>Conteúdos</span>
+                            <h2>Artigos educativos</h2>
+                        </div>
+
+                        <div class="educacao-contador">
+
+                            <strong>
+                                <%= artigos ? artigos.length : 0 %>
+                            </strong>
+
+                            <span>
+                                <%= artigos && artigos.length===1 ? "artigo" : "artigos" %>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <% if (!artigos || artigos.length===0) { %>
+
+                        <section class="educacao-vazio">
+
+                            <div class="educacao-vazio-icone">
+
+                                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor"
+                                    stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"></path>
+                                </svg>
+
+                            </div>
+
+                            <h2>Nenhum conteúdo disponível</h2>
+
+                            <p>
+                                Os artigos educativos aparecerão aqui quando estiverem
+                                disponíveis no sistema.
+                            </p>
+
+                        </section>
+
+                        <% } else { %>
+
+                            <div class="educacao-grade">
+
+                                <% artigos.forEach((artigo, indice)=> { %>
+
+                                    <a class="educacao-card" href="/usuario/educacao/<%= artigo.id %>">
+
+                                        <div class="educacao-card-topo">
+
+                                            <div class="educacao-card-icone">
+                                                <%- iconeArtigo(artigo.titulo) %>
+                                            </div>
+
+                                            <span class="educacao-card-numero">
+                                                <%= String(indice + 1).padStart(2, "0" ) %>
+                                            </span>
+
+                                        </div>
+
+                                        <div class="educacao-card-conteudo">
+
+                                            <span class="educacao-card-categoria">
+                                                Conteúdo educativo
+                                            </span>
+
+                                            <h2>
+                                                <%= artigo.titulo %>
+                                            </h2>
+
+                                            <p>
+                                                Leia este conteúdo e aprenda mais sobre
+                                                alimentação, nutrição e hábitos saudáveis.
+                                            </p>
+
+                                        </div>
+
+                                        <div class="educacao-card-rodape">
+
+                                            <span>Começar leitura</span>
+
+                                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M5 12h14"></path>
+                                                <path d="m13 6 6 6-6 6"></path>
+                                            </svg>
+
+                                        </div>
+
+                                    </a>
+
+                                    <% }) %>
+
+                            </div>
+
+                            <% } %>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

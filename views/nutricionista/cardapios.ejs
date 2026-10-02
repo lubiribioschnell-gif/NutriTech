@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/cardapios.css">
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="pagina-cardapios">
+
+                <section class="cabecalho-cardapios">
+
+                    <div class="cabecalho-cardapios-conteudo">
+
+                        <span class="cabecalho-etiqueta">
+                            Planejamento alimentar
+                        </span>
+
+                        <h1>Meus cardápios</h1>
+
+                        <p>
+                            Visualize os cardápios criados para seus pacientes
+                            e gerencie as refeições de cada planejamento.
+                        </p>
+
+
+                        <a href="/nutricionista/cardapios/novo" class="quiz-nutri-botao quiz-nutri-botao-claro">
+                            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 5v14"></path>
+                                <path d="M5 12h14"></path>
+                            </svg>
+
+                            Criar novo cardápio
+                        </a>
+
+                    </div>
+
+                    <div class="quiz-nutri-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11l3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+
+                    </div>
+                </section>
+
+                <section class="secao-listagem-cardapios">
+                    <div class="titulo-listagem">
+                        <div>
+                            <span>Gerenciamento</span>
+                            <h2>Cardápios cadastrados</h2>
+                        </div>
+
+                        <p>
+                            <strong>
+                                <%= cardapios.length %>
+                            </strong>
+
+                            <%= cardapios.length===1 ? "cardápio encontrado" : "cardápios encontrados" %>
+                        </p>
+                    </div>
+
+                    <% if (cardapios.length===0) { %>
+
+                        <div class="estado-vazio-cardapios">
+                            <div class="estado-vazio-icone">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M3 2h18v20H3z"></path>
+                                    <path d="M7 6h10"></path>
+                                    <path d="M7 10h10"></path>
+                                    <path d="M7 14h6"></path>
+                                </svg>
+                            </div>
+
+                            <h2>Nenhum cardápio cadastrado</h2>
+
+                            <p>
+                                Crie o primeiro cardápio para começar a organizar
+                                as refeições de um paciente.
+                            </p>
+
+                            <a href="/nutricionista/cardapios/novo" class="botao-estado-vazio">
+                                Criar primeiro cardápio
+                            </a>
+                        </div>
+
+                        <% } else { %>
+
+                            <div class="grade-cardapios">
+
+                                <% cardapios.forEach(cardapio=> { %>
+
+                                    <article class="card-cardapio">
+                                        <div class="card-cardapio-topo">
+                                            <div class="card-cardapio-icone">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M3 2h18v20H3z"></path>
+                                                    <path d="M7 6h10"></path>
+                                                    <path d="M7 10h10"></path>
+                                                    <path d="M7 14h6"></path>
+                                                </svg>
+                                            </div>
+
+                                            <span class="quantidade-refeicoes">
+                                                <%= cardapio.total_refeicoes %>
+
+                                                    <%= Number(cardapio.total_refeicoes)===1 ? "refeição" : "refeições"
+                                                        %>
+                                            </span>
+                                        </div>
+
+                                        <div class="card-cardapio-conteudo">
+                                            <span class="rotulo-cardapio">
+                                                Cardápio alimentar
+                                            </span>
+
+                                            <h3>
+                                                <%= cardapio.nome %>
+                                            </h3>
+
+                                            <div class="paciente-cardapio">
+                                                <div class="paciente-inicial">
+                                                    <%= cardapio.nome_usuario ? cardapio.nome_usuario .trim() .charAt(0)
+                                                        .toUpperCase() : "P" %>
+                                                </div>
+
+                                                <div>
+                                                    <span>Paciente</span>
+                                                    <strong>
+                                                        <%= cardapio.nome_usuario %>
+                                                    </strong>
+
+                                                    <small>
+                                                        <%= cardapio.email_usuario %>
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <% if (cardapio.observacoes) { %>
+
+                                                <div class="observacao-cardapio">
+                                                    <span>Observações</span>
+
+                                                    <p>
+                                                        <%= cardapio.observacoes %>
+                                                    </p>
+                                                </div>
+
+                                                <% } else { %>
+
+                                                    <div class="observacao-cardapio sem-observacao">
+                                                        <span>Observações</span>
+
+                                                        <p>
+                                                            Nenhuma observação cadastrada.
+                                                        </p>
+                                                    </div>
+
+                                                    <% } %>
+                                        </div>
+
+                                        <div class="card-cardapio-acoes">
+                                            <a href="/nutricionista/cardapios/<%= cardapio.id_cardapio %>/refeicoes"
+                                                class="botao-gerenciar-refeicoes">
+                                                Gerenciar refeições
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M5 12h14"></path>
+                                                    <path d="m13 6 6 6-6 6"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </article>
+
+                                    <% }) %>
+
+                            </div>
+
+                            <% } %>
+                </section>
+            </main>
+</body>
+
+</html>

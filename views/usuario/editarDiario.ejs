@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= titulo %> - NutriTech</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/novoDiario.css">
+</head>
+<body>
+    <%- include("../partials/mensagem") %>
+    <%- include("../partials/navbarUsuario") %>
+
+    <main class="container">
+        <a href="/usuario/diario" class="voltar-diario">← Voltar para o diário</a>
+
+        <section class="cabecalho-diario-form">
+            <span>Diário alimentar</span>
+            <h1>Editar registro</h1>
+            <p>Atualize as informações do registro selecionado.</p>
+        </section>
+
+        <section class="form-card">
+            <% if (erro) { %>
+                <div class="mensagem-erro"><%= erro %></div>
+            <% } %>
+
+            <form action="/usuario/diario/<%= registro.id_diario %>/editar" method="POST">
+                <div class="form-group">
+                    <label for="alimento">Alimento</label>
+                    <input type="text" id="alimento" name="alimento" maxlength="100"
+                        value="<%= registro.alimento || '' %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantidade">Quantidade</label>
+                    <input type="text" id="quantidade" name="quantidade" maxlength="50"
+                        placeholder="Ex.: 2 unidades, 200 g" value="<%= registro.quantidade || '' %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" name="observacoes" maxlength="500"><%= registro.observacoes || '' %></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <a href="/usuario/diario" class="btn-secundario">Cancelar</a>
+                    <button type="submit" class="btn-primary">Salvar alterações</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

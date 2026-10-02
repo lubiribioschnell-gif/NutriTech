@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/quiz.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="quiz-container quiz-container-resultado">
+
+                <section class="quiz-resultado-card">
+
+                    <div class="quiz-resultado-icone">
+
+                        <% if (percentual>= 70) { %>
+
+                            <svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="currentColor"
+                                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="6"></circle>
+                                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                            </svg>
+
+                            <% } else { %>
+
+                                <svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="currentColor"
+                                    stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+                                </svg>
+
+                                <% } %>
+
+                    </div>
+
+                    <span class="quiz-tag quiz-tag-resultado">
+                        Quiz finalizado
+                    </span>
+
+                    <h1>Confira seu resultado</h1>
+
+                    <p class="quiz-resultado-descricao">
+                        Seu desempenho no quiz
+                        <strong>
+                            <%= tentativa.titulo %>
+                        </strong>
+                    </p>
+
+                    <div class="quiz-percentual-circulo">
+
+                        <strong>
+                            <%= percentual %>%
+                        </strong>
+
+                        <span>de acertos</span>
+
+                    </div>
+
+                    <div class="quiz-pontuacao">
+
+                        <div>
+
+                            <span>Respostas corretas</span>
+
+                            <strong>
+                                <%= tentativa.pontuacao %>
+                            </strong>
+
+                        </div>
+
+                        <div class="quiz-pontuacao-divisor"></div>
+
+                        <div>
+
+                            <span>Total de perguntas</span>
+
+                            <strong>
+                                <%= tentativa.total_perguntas %>
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="quiz-progresso">
+
+                        <div class="quiz-progresso-cabecalho">
+
+                            <span>Desempenho</span>
+
+                            <strong>
+                                <%= tentativa.pontuacao %>/<%= tentativa.total_perguntas %>
+                            </strong>
+
+                        </div>
+
+                        <div class="quiz-progresso-trilho">
+
+                            <div class="quiz-progresso-preenchimento" style="width:<%= percentual %>%"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="quiz-mensagem-resultado">
+
+                        <% if (percentual>= 70) { %>
+
+                            <h2>Excelente desempenho!</h2>
+
+                            <p>
+                                Você demonstrou um ótimo conhecimento sobre o conteúdo.
+                            </p>
+
+                            <% } else if (percentual>= 50) { %>
+
+                                <h2>Bom resultado!</h2>
+
+                                <p>
+                                    Você está no caminho certo. Continue aprendendo e praticando.
+                                </p>
+
+                                <% } else { %>
+
+                                    <h2>Continue aprendendo!</h2>
+
+                                    <p>
+                                        Revise o conteúdo e tente novamente para melhorar seu resultado.
+                                    </p>
+
+                                    <% } %>
+
+                    </div>
+
+                    <a href="/usuario/quizzes" class="quiz-botao">
+                        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m15 18-6-6 6-6"></path>
+                        </svg>
+
+                        <span>Voltar aos quizzes</span>
+                    </a>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

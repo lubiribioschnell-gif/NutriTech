@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriTech - Login</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <div class="container">
+
+            <div class="left">
+                <aside class="auth-lateral">
+                    <div class="auth-logo">
+                        <img src="/img/logo.png" alt="Logo NutriTech">
+                        <h1>NutriTech</h1>
+                        <p>Alimentação saudável e acompanhamento nutricional.</p>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="right">
+
+                <div class="card">
+
+                    <h2>Entrar</h2>
+
+                    <p class="subtituloAuth">
+                        Acesse sua conta para continuar.
+                    </p>
+
+                    <form action="/login" method="POST">
+                        <div class="tipoConta">
+                            <label>Entrar como</label>
+
+                            <div class="opcoesTipo">
+
+                                <label class="opcaoTipo">
+                                    <input type="radio" name="tipo" value="usuario" required>
+
+                                    <span class="conteudoTipo">
+                                        <span class="nomeTipo">Usuário</span>
+                                    </span>
+                                </label>
+
+                                <label class="opcaoTipo">
+                                    <input type="radio" name="tipo" value="nutricionista" required>
+
+                                    <span class="conteudoTipo">
+                                        <span class="nomeTipo">Nutricionista</span>
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>Email</label>
+
+                            <input type="email" name="email" placeholder="Digite seu email" required>
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <label>Senha</label>
+
+                            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+
+                        </div>
+
+                        <div class="mostrar">
+
+                            <input type="checkbox" onclick="mostrarSenha()">
+
+                            Mostrar senha
+
+                        </div>
+                        <button class="btn">
+
+                            Entrar
+
+                        </button>
+
+                        <div class="esqueciSenha">
+                            <a href="/recuperar-senha">Esqueci minha senha</a>
+                        </div>
+
+                    </form>
+
+                    <div class="cadastro">
+
+                        Ainda não possui conta?
+
+                        <a href="/cadastro">
+
+                            Cadastre-se
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script>
+
+            function mostrarSenha() {
+
+                const senha = document.getElementById("senha");
+
+                if (senha.type === "password") {
+
+                    senha.type = "text";
+
+                } else {
+
+                    senha.type = "password";
+
+                }
+
+            }
+
+        </script>
+
+</body>
+
+</html>

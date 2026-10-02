@@ -1,0 +1,199 @@
+/* ==========================================================================
+   FAQS PAGE (NutriTech)
+   ========================================================================== */
+
+.faq-page {
+    width: min(840px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 40px 0 80px;
+}
+
+/* --- Hero Section --- */
+.faq-hero {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.subtitulo-secao {
+    display: inline-block;
+    padding: 6px 16px;
+    margin-bottom: 12px;
+    border-radius: 50px;
+    background: var(--cor-verde-suave);
+    color: var(--cor-verde-escuro);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.faq-hero h1 {
+    margin-bottom: 12px;
+    color: var(--cor-verde-escuro);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.faq-hero p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--cor-texto);
+    opacity: 0.85;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* --- Lista de Pergunta/Resposta (Accordion) --- */
+.faq-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-lista details {
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-medio);
+    background: var(--cor-branco);
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.faq-lista details:hover {
+    border-color: var(--cor-verde-claro);
+    box-shadow: var(--sombra-media);
+}
+
+.faq-lista details[open] {
+    border-color: var(--cor-verde-claro);
+}
+
+/* Summary Header */
+.faq-lista summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    color: var(--cor-verde-escuro);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background-color 0.2s ease;
+}
+
+.faq-lista summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-lista summary:hover {
+    background-color: rgba(203, 225, 209, 0.15);
+}
+
+/* Ícone interativo (+ / - estilizado) */
+.icone-accordion {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--cor-verde-suave);
+    display: grid;
+    place-items: center;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+}
+
+.icone-accordion::before,
+.icone-accordion::after {
+    content: "";
+    position: absolute;
+    background-color: var(--cor-verde-escuro);
+    border-radius: 2px;
+    transition: transform 0.25s ease;
+}
+
+/* Traço horizontal */
+.icone-accordion::before {
+    width: 12px;
+    height: 2px;
+}
+
+/* Traço vertical */
+.icone-accordion::after {
+    width: 2px;
+    height: 12px;
+}
+
+/* Estado aberto */
+.faq-lista details[open] .icone-accordion {
+    background: var(--cor-verde-claro);
+    transform: rotate(90deg);
+}
+
+.faq-lista details[open] .icone-accordion::after {
+    transform: rotate(90deg);
+    opacity: 0;
+}
+
+/* Conteúdo da Resposta */
+.faq-resposta {
+    padding: 0 24px 20px 24px;
+    border-top: 1px solid rgba(60, 72, 47, 0.08);
+    animation: faqFadeIn 0.3s ease-out;
+}
+
+.faq-resposta p {
+    margin-top: 14px;
+    color: var(--cor-texto);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+.faq-resposta strong {
+    color: var(--cor-verde-escuro);
+}
+
+/* --- Botão / Ações de Rodapé --- */
+.faq-acoes {
+    margin-top: 48px;
+    text-align: center;
+}
+
+/* Animação Suave para exibição do texto */
+@keyframes faqFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Adaptatividade para Mobile */
+@media (max-width: 600px) {
+    .faq-page {
+        padding: 24px 0 60px;
+    }
+
+    .faq-lista summary {
+        padding: 16px 18px;
+        font-size: 0.95rem;
+    }
+
+    .faq-resposta {
+        padding: 0 18px 16px 18px;
+    }
+
+    .icone-accordion {
+        width: 24px;
+        height: 24px;
+    }
+
+    .icone-accordion::before { width: 10px; }
+    .icone-accordion::after { height: 10px; }
+}

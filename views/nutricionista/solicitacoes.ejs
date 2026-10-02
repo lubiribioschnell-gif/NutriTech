@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title><%= titulo %> - NutriTech</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/pacientes.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+    <%- include("../partials/navbarNutricionista") %>
+
+    <main class="pacientes-container">
+
+        <section class="pacientes-hero solicitacoes-hero">
+
+            <div class="pacientes-hero-conteudo">
+
+                <span class="pacientes-tag">
+                    Novos acompanhamentos
+                </span>
+
+                <h1>Solicitações pendentes</h1>
+
+                <p>
+                    Analise os pedidos enviados pelos usuários e escolha
+                    quais pacientes serão acompanhados por você.
+                </p>
+
+                <div class="pacientes-hero-acoes">
+
+                    <a
+                        href="/nutricionista/pacientes"
+                        class="pacientes-botao pacientes-botao-claro"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="19"
+                            height="19"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+
+                        Ver pacientes
+                    </a>
+
+                    <a
+                        href="/nutricionista/home"
+                        class="pacientes-botao pacientes-botao-transparente"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="19"
+                            height="19"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="m15 18-6-6 6-6"></path>
+                        </svg>
+
+                        Voltar ao início
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="pacientes-hero-ilustracao" aria-hidden="true">
+
+                <div class="pacientes-hero-circulo">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="70"
+                        height="70"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" x2="12" y1="3" y2="15"></line>
+                    </svg>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="pacientes-resumo">
+
+            <article class="pacientes-resumo-card">
+
+                <div class="pacientes-resumo-icone">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="25"
+                        height="25"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" x2="12" y1="3" y2="15"></line>
+                    </svg>
+
+                </div>
+
+                <div>
+                    <span>Solicitações pendentes</span>
+
+                    <strong>
+                        <%= solicitacoes ? solicitacoes.length : 0 %>
+                    </strong>
+                </div>
+
+            </article>
+
+            <article class="pacientes-resumo-card">
+
+                <div class="pacientes-resumo-icone">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="25"
+                        height="25"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+
+                </div>
+
+                <div>
+                    <span>Status atual</span>
+                    <strong>Aguardando</strong>
+                </div>
+
+            </article>
+
+            <article class="pacientes-resumo-card">
+
+                <div class="pacientes-resumo-icone">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="25"
+                        height="25"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M20 6 9 17l-5-5"></path>
+                    </svg>
+
+                </div>
+
+                <div>
+                    <span>Ação disponível</span>
+                    <strong>Avaliar pedidos</strong>
+                </div>
+
+            </article>
+
+        </section>
+
+        <section class="pacientes-conteudo">
+
+            <div class="pacientes-titulo-secao">
+
+                <div>
+                    <span>Gerenciamento</span>
+                    <h2>Pedidos de acompanhamento</h2>
+
+                    <p>
+                        Aceite ou recuse as solicitações enviadas pelos usuários.
+                    </p>
+                </div>
+
+                <% if (solicitacoes && solicitacoes.length > 0) { %>
+
+                    <div class="pacientes-contador">
+
+                        <strong><%= solicitacoes.length %></strong>
+
+                        <span>
+                            <%= solicitacoes.length === 1
+                                ? "solicitação"
+                                : "solicitações" %>
+                        </span>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+            <% if (!solicitacoes || solicitacoes.length === 0) { %>
+
+                <section class="pacientes-vazio">
+
+                    <div class="pacientes-vazio-icone">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="50"
+                            height="50"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M20 6 9 17l-5-5"></path>
+                            <circle cx="12" cy="12" r="10"></circle>
+                        </svg>
+
+                    </div>
+
+                    <h2>Nenhuma solicitação pendente</h2>
+
+                    <p>
+                        No momento, não existem novos pedidos de
+                        acompanhamento para analisar.
+                    </p>
+
+                    <a
+                        href="/nutricionista/pacientes"
+                        class="pacientes-botao pacientes-botao-principal"
+                    >
+                        Ver pacientes atuais
+                    </a>
+
+                </section>
+
+            <% } else { %>
+
+                <section class="solicitacoes-grade">
+
+                    <% solicitacoes.forEach(s => { %>
+
+                        <article class="solicitacao-card">
+
+                            <div class="solicitacao-card-topo">
+
+                                <div class="solicitacao-avatar">
+
+                                    <%= s.nome
+                                        .charAt(0)
+                                        .toUpperCase() %>
+
+                                </div>
+
+                                <div class="solicitacao-identificacao">
+
+                                    <span>Nova solicitação</span>
+
+                                    <h3>
+                                        <%= s.nome %>
+                                    </h3>
+
+                                    <p>
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            width="16"
+                                            height="16"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <rect
+                                                width="20"
+                                                height="16"
+                                                x="2"
+                                                y="4"
+                                                rx="2"
+                                            ></rect>
+
+                                            <path d="m22 7-10 5L2 7"></path>
+                                        </svg>
+
+                                        <%= s.email %>
+                                    </p>
+
+                                </div>
+
+                                <span class="solicitacao-status">
+
+                                    <span></span>
+                                    Pendente
+
+                                </span>
+
+                            </div>
+
+                            <div class="solicitacao-mensagem">
+
+                                <div class="solicitacao-mensagem-icone">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        width="21"
+                                        height="21"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
+                                    </svg>
+
+                                </div>
+
+                                <p>
+                                    Este usuário deseja iniciar um acompanhamento
+                                    nutricional com você.
+                                </p>
+
+                            </div>
+
+                            <div class="solicitacao-acoes">
+
+                                <form
+                                    action="/nutricionista/solicitacoes/<%= s.id_solicitacao %>/aceitar"
+                                    method="POST"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="solicitacao-botao solicitacao-botao-aceitar"
+                                    >
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            width="19"
+                                            height="19"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path d="M20 6 9 17l-5-5"></path>
+                                        </svg>
+
+                                        Aceitar
+                                    </button>
+
+                                </form>
+
+                                <form
+                                    action="/nutricionista/solicitacoes/<%= s.id_solicitacao %>/recusar"
+                                    method="POST"
+                                    onsubmit="return confirm('Deseja realmente recusar esta solicitação?')"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="solicitacao-botao solicitacao-botao-recusar"
+                                    >
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            width="19"
+                                            height="19"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path d="M18 6 6 18"></path>
+                                            <path d="m6 6 12 12"></path>
+                                        </svg>
+
+                                        Recusar
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                    <% }) %>
+
+                </section>
+
+            <% } %>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

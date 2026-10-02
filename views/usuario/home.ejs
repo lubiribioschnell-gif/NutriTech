@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= titulo %> - NutriTech</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <%- include("../partials/mensagem") %>
+    <%- include("../partials/navbarUsuario") %>
+
+        <%
+            function iconeNivelLucide(nome) {
+                const n = (nome || '').toLowerCase();
+
+                if (n.includes('mestre')) return 'crown';
+                if (n.includes('expert') || n.includes('especial')) return 'star';
+                if (n.includes('avanç') || n.includes('avanc')) return 'trending-up';
+                if (n.includes('dedic') || n.includes('foco')) return 'lightbulb';
+                return 'sprout';
+            }
+        %>
+
+    <main class="dashboard">
+        <section class="dashboard-apresentacao">
+            <div class="apresentacao-conteudo">
+                <span class="apresentacao-tag">Área do usuário</span>
+
+                <h1>Olá, <%= usuario.nome %>!</h1>
+
+                <p>
+                    Acompanhe sua alimentação, consulte seu cardápio e registre
+                    seus hábitos de forma simples.
+                </p>
+
+                <div class="apresentacao-acoes">
+                    <a href="/usuario/diario/novo" class="botao-dashboard botao-claro">
+                        Registrar alimentação
+                    </a>
+                    <a href="/usuario/cardapios" class="link-apresentacao">
+                        Ver meu cardápio <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="apresentacao-perfil" aria-hidden="true">
+                <div class="perfil-circulo">
+                    <%= usuario.nome ? usuario.nome.trim().charAt(0).toUpperCase() : "U" %>
+                </div>
+                <span>Seu espaço NutriTech</span>
+            </div>
+        </section>
+
+        <section class="secao-dashboard">
+            <div class="titulo-secao">
+                <div>
+                    <span>Visão geral</span>
+                    <h2>Seu resumo</h2>
+                </div>
+                <p>Informações atualizadas da sua conta</p>
+            </div>
+
+            <div class="grade-resumo">
+                <article class="card-resumo">
+                    <div class="card-resumo-topo">
+                        <div class="card-resumo-icone" aria-hidden="true">
+                              <i data-lucide="utensils"></i> 
+                        </div>
+                        <span class="card-resumo-status">Cardápio</span>
+                    </div>
+
+                    <strong><%= resumo.cardapios || 0 %></strong>
+                    <p>
+                        <%= (resumo.cardapios || 0) === 1
+                            ? "cardápio disponível"
+                            : "cardápios disponíveis" %>
+                    </p>
+
+                    <a href="/usuario/cardapios" class="card-resumo-link">
+                        Consultar <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+                <article class="card-resumo">
+                    <div class="card-resumo-topo">
+                        <div class="card-resumo-icone" aria-hidden="true">
+                              <i data-lucide="book-open"></i> 
+                        </div>
+                        <span class="card-resumo-status">Diário</span>
+                    </div>
+
+                    <strong><%= resumo.diarios || 0 %></strong>
+                    <p>
+                        <%= (resumo.diarios || 0) === 1
+                            ? "registro realizado"
+                            : "registros realizados" %>
+                    </p>
+
+                    <a href="/usuario/diario" class="card-resumo-link">
+                        Acompanhar <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+                <article class="card-resumo card-resumo-destaque">
+                    <div class="card-resumo-topo">
+                        <div class="card-resumo-icone" aria-hidden="true">
+                          <i data-lucide="trophy"></i>
+                        </div>
+                        <span class="card-resumo-status">Pontuação</span>
+                    </div>
+
+                    <strong><%= resumo.pontos || 0 %></strong>
+                    <p>pontos conquistados</p>
+
+                    <div class="nivel-resumo">
+                        <span class="nivel-resumo-nome">
+                            <i data-lucide="<%= iconeNivelLucide(nivel.nome) %>" aria-hidden="true"></i> <%= nivel.nome %>
+                        </span>
+
+                        <div
+                            class="nivel-progresso"
+                            role="progressbar"
+                            aria-valuenow="<%= nivel.progresso %>"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                        >
+                            <span style="width: <%= nivel.progresso %>%"></span>
+                        </div>
+
+                        <% if (nivel.proximoNivel) { %>
+                            <small>
+                                Faltam <%= nivel.pontosParaProximoNivel %> pontos para
+                                <%= nivel.proximoNivel %>.
+                            </small>
+                        <% } else { %>
+                            <small>Você alcançou o nível máximo!</small>
+                        <% } %>
+                    </div>
+
+                    <a href="/usuario/classificacao" class="card-resumo-link">
+                        Ver níveis e ranking <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <section class="secao-dashboard">
+            <div class="titulo-secao">
+                <div>
+                    <span>Acesso rápido</span>
+                    <h2>O que deseja fazer?</h2>
+                </div>
+                <p>Escolha uma funcionalidade para continuar</p>
+            </div>
+
+            <div class="grade-atalhos">
+                <a href="/usuario/cardapios" class="card-atalho">
+                    <div class="atalho-icone" aria-hidden="true">
+                        <i data-lucide="utensils"></i>
+                    </div>
+                    <div class="atalho-conteudo">
+                        <h3>Meu cardápio</h3>
+                        <p>Consulte as refeições e os alimentos indicados pelo nutricionista.</p>
+                    </div>
+                    <span class="atalho-seta" aria-hidden="true">→</span>
+                </a>
+
+                <a href="/usuario/diario" class="card-atalho">
+                    <div class="atalho-icone" aria-hidden="true">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <div class="atalho-conteudo">
+                        <h3>Diário alimentar</h3>
+                        <p>Registre sua alimentação e acompanhe seus hábitos diariamente.</p>
+                    </div>
+                    <span class="atalho-seta" aria-hidden="true">→</span>
+                </a>
+
+                <a href="/usuario/imc" class="card-atalho">
+                    <div class="atalho-icone" aria-hidden="true">
+                        <i data-lucide="scale"></i>
+                    </div>
+                    <div class="atalho-conteudo">
+                        <h3>Calculadora de IMC</h3>
+                        <p>Calcule seu índice de massa corporal e consulte a classificação.</p>
+                    </div>
+                    <span class="atalho-seta" aria-hidden="true">→</span>
+                </a>
+
+                <a href="/usuario/quizzes" class="card-atalho">
+                    <div class="atalho-icone" aria-hidden="true">
+                    <i data-lucide="trophy"></i>
+                    </div>
+                    <div class="atalho-conteudo">
+                        <h3>Quiz nutricional</h3>
+                        <p>Teste seus conhecimentos sobre alimentação saudável.</p>
+                    </div>
+                    <span class="atalho-seta" aria-hidden="true">→</span>
+                </a>
+
+                <a href="/usuario/educacao" class="card-atalho">
+                    <div class="atalho-icone" aria-hidden="true">
+                        <i data-lucide="graduation-cap"></i>
+                    </div>
+                    <div class="atalho-conteudo">
+                        <h3>Área educativa</h3>
+                        <p>Leia conteúdos e orientações sobre alimentação saudável.</p>
+                    </div>
+                    <span class="atalho-seta" aria-hidden="true">→</span>
+                </a>
+
+                <a href="/usuario/nutricionistas" class="card-atalho">
+                    <div class="atalho-icone" aria-hidden="true">
+                        <i data-lucide="stethoscope"></i>
+                    </div>
+                    <div class="atalho-conteudo">
+                        <h3>Nutricionistas</h3>
+                        <p>Escolha um profissional para acompanhar sua jornada.</p>
+                    </div>
+                    <span class="atalho-seta" aria-hidden="true">→</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="dashboard-banner">
+            <div class="dashboard-banner-icone" aria-hidden="true">
+                <i data-lucide="heart"></i>
+            </div>
+
+            <div class="dashboard-banner-conteudo">
+                <span>Hábitos saudáveis</span>
+                <h3>Continue cuidando da sua saúde</h3>
+                <p>
+                    Pequenas escolhas diárias ajudam a construir hábitos mais
+                    equilibrados e duradouros.
+                </p>
+            </div>
+
+            <a href="/usuario/diario/novo" class="botao-dashboard">
+                Registrar alimentação
+            </a>
+        </section>
+    </main>
+      <script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title><%= titulo %> - NutriTech</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/refeicoesCardapio.css">
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+    <%- include("../partials/navbarNutricionista") %>
+
+    <main class="pagina-refeicoes">
+
+        <a
+            href="/nutricionista/cardapios"
+            class="link-voltar"
+        >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5"></path>
+                <path d="m12 19-7-7 7-7"></path>
+            </svg>
+
+            Voltar para os cardápios
+        </a>
+
+        <section class="hero-cardapio">
+            <div class="hero-cardapio-conteudo">
+                <span class="hero-etiqueta">
+                    Planejamento alimentar
+                </span>
+
+                <h1><%= cardapio.nome %></h1>
+
+                <div class="hero-paciente">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20 21a8 8 0 0 0-16 0"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+
+                    <span>
+                        Paciente:
+                        <strong><%= cardapio.nome_usuario %></strong>
+                    </span>
+                </div>
+
+                <% if (cardapio.observacoes) { %>
+                    <div class="hero-observacoes">
+                        <span>Observações</span>
+                        <p><%= cardapio.observacoes %></p>
+                    </div>
+                <% } %>
+            </div>
+
+            <a
+                href="/nutricionista/cardapios/<%= cardapio.id_cardapio %>/editar"
+                class="botao-editar-cardapio"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                </svg>
+
+                Editar cardápio
+            </a>
+        </section>
+
+        <section class="secao-adicionar-refeicao">
+            <div class="secao-adicionar-cabecalho">
+                <div class="secao-icone">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 5v14"></path>
+                        <path d="M5 12h14"></path>
+                    </svg>
+                </div>
+
+                <div>
+                    <span>Nova refeição</span>
+                    <h2>Adicionar refeição</h2>
+                    <p>
+                        Selecione o tipo de refeição que deseja incluir
+                        neste cardápio.
+                    </p>
+                </div>
+            </div>
+
+            <form
+                action="/nutricionista/cardapios/<%= cardapio.id_cardapio %>/refeicoes"
+                method="POST"
+                class="form-adicionar-refeicao"
+            >
+                <div class="campo-refeicao">
+                    <label for="tipo">
+                        Tipo da refeição
+                    </label>
+
+                    <select
+                        id="tipo"
+                        name="tipo"
+                        required
+                    >
+                        <option value="">Selecione uma opção</option>
+                        <option value="Café da manhã">Café da manhã</option>
+                        <option value="Lanche da manhã">Lanche da manhã</option>
+                        <option value="Almoço">Almoço</option>
+                        <option value="Lanche da tarde">Lanche da tarde</option>
+                        <option value="Jantar">Jantar</option>
+                        <option value="Ceia">Ceia</option>
+                    </select>
+                </div>
+
+                <button
+                    type="submit"
+                    class="botao-adicionar-refeicao"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 5v14"></path>
+                        <path d="M5 12h14"></path>
+                    </svg>
+
+                    Adicionar refeição
+                </button>
+            </form>
+        </section>
+
+        <section class="secao-refeicoes">
+            <div class="cabecalho-lista-refeicoes">
+                <div>
+                    <span>Organização do cardápio</span>
+                    <h2>Refeições cadastradas</h2>
+                </div>
+
+                <p>
+                    <strong><%= refeicoes.length %></strong>
+
+                    <%= refeicoes.length === 1
+                        ? "refeição cadastrada"
+                        : "refeições cadastradas" %>
+                </p>
+            </div>
+
+            <% if (refeicoes.length === 0) { %>
+
+                <div class="estado-vazio-refeicoes">
+                    <div class="estado-vazio-icone">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 11h18"></path>
+                            <path d="M5 11a7 7 0 0 1 14 0"></path>
+                            <path d="M4 11v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
+                            <path d="M9 19h6"></path>
+                        </svg>
+                    </div>
+
+                    <h3>Nenhuma refeição cadastrada</h3>
+
+                    <p>
+                        Use o formulário acima para adicionar a primeira
+                        refeição deste cardápio.
+                    </p>
+                </div>
+
+            <% } else { %>
+
+                <div class="grade-refeicoes">
+                    <% refeicoes.forEach(refeicao => { %>
+
+                        <article class="card-refeicao">
+                            <div class="card-refeicao-topo">
+                                <div class="icone-refeicao">
+                                    <% if (refeicao.tipo === "Café da manhã") { %>
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M17 8h1a4 4 0 0 1 0 8h-1"></path>
+                                            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                                            <path d="M6 2v2"></path>
+                                            <path d="M10 2v2"></path>
+                                            <path d="M14 2v2"></path>
+                                        </svg>
+
+                                    <% } else if (refeicao.tipo.includes("Lanche")) { %>
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M4 11h16"></path>
+                                            <path d="M5 11a7 7 0 0 1 14 0"></path>
+                                            <path d="M5 15h14"></path>
+                                            <path d="M6 19h12"></path>
+                                        </svg>
+
+                                    <% } else if (refeicao.tipo === "Almoço") { %>
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="8"></circle>
+                                            <circle cx="12" cy="12" r="4"></circle>
+                                        </svg>
+
+                                    <% } else if (refeicao.tipo === "Jantar") { %>
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+                                        </svg>
+
+                                    <% } else { %>
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M3 11h18"></path>
+                                            <path d="M5 11a7 7 0 0 1 14 0"></path>
+                                            <path d="M4 11v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
+                                        </svg>
+                                    <% } %>
+                                </div>
+
+                                <span class="etiqueta-refeicao">
+                                    Refeição
+                                </span>
+                            </div>
+
+                            <div class="card-refeicao-conteudo">
+                                <h3><%= refeicao.tipo %></h3>
+
+                                <p>
+                                    Cadastre e organize os alimentos
+                                    pertencentes a esta refeição.
+                                </p>
+                            </div>
+
+                            <div class="acoes-refeicao">
+                                <a
+                                    href="/nutricionista/refeicoes/<%= refeicao.id_refeicao %>/alimentos"
+                                    class="botao-alimentos"
+                                >
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M3 6h18"></path>
+                                        <path d="M3 12h18"></path>
+                                        <path d="M3 18h18"></path>
+                                    </svg>
+
+                                    Alimentos
+                                </a>
+
+                                <a
+                                    href="/nutricionista/refeicoes/<%= refeicao.id_refeicao %>/editar"
+                                    class="botao-editar-refeicao"
+                                    aria-label="Editar <%= refeicao.tipo %>"
+                                >
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 20h9"></path>
+                                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                                    </svg>
+
+                                    Editar
+                                </a>
+
+                                <form
+                                    action="/nutricionista/refeicoes/<%= refeicao.id_refeicao %>/excluir"
+                                    method="POST"
+                                    class="form-excluir"
+                                    onsubmit="return confirmarExclusaoRefeicao()"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="botao-excluir-refeicao"
+                                    >
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M3 6h18"></path>
+                                            <path d="M8 6V4h8v2"></path>
+                                            <path d="M19 6l-1 14H6L5 6"></path>
+                                            <path d="M10 11v5"></path>
+                                            <path d="M14 11v5"></path>
+                                        </svg>
+
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+                        </article>
+
+                    <% }) %>
+                </div>
+
+            <% } %>
+        </section>
+    </main>
+
+    <script>
+        function confirmarExclusaoRefeicao() {
+            return confirm(
+                "Deseja realmente excluir esta refeição? Todos os itens adicionados a ela serão removidos do cardápio."
+            );
+        }
+    </script>
+</body>
+</html>

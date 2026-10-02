@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriTech - Redefinir senha</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body class="pagina-autenticacao">
+    <main class="auth-pagina-simples">
+        <div class="auth-card-simples">
+            <img src="/img/logo.png" alt="Logo NutriTech" class="auth-logo-simples">
+            <span class="etiquetaAuth">Nova senha</span>
+            <h1>Redefinir senha</h1>
+            <p class="subtituloAuth">Escolha uma senha nova para sua conta.</p>
+
+            <% if (erro) { %><div class="mensagem mensagem-erro"><%= erro %></div><% } %>
+
+            <% if (token) { %>
+                <form action="/recuperar-senha/redefinir" method="POST">
+                    <input type="hidden" name="token" value="<%= token %>">
+
+                    <div class="inputBox">
+                        <label for="senha">Nova senha</label>
+                        <input id="senha" type="password" name="senha" minlength="6" maxlength="72" required autocomplete="new-password">
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="confirmarSenha">Confirmar nova senha</label>
+                        <input id="confirmarSenha" type="password" name="confirmarSenha" minlength="6" maxlength="72" required autocomplete="new-password">
+                    </div>
+
+                    <button class="btn" type="submit">Salvar nova senha</button>
+                </form>
+            <% } %>
+
+            <p class="auth-link-voltar"><a href="/login">Voltar para o login</a></p>
+        </div>
+    </main>
+</body>
+</html>

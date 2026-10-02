@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/quizNutricionista.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="quiz-nutri-container">
+
+                <a href="/nutricionista/quizzes" class="quiz-nutri-voltar">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
+
+                    Voltar para os quizzes
+                </a>
+
+                <section class="quiz-nutri-hero quiz-nutri-hero-menor">
+
+                    <div class="quiz-nutri-hero-conteudo">
+
+                        <span class="quiz-nutri-tag">
+                            Estatísticas do quiz
+                        </span>
+
+                        <h1>
+                            <%= quiz.titulo %>
+                        </h1>
+
+                        <p>
+                            Paciente:
+                            <strong>
+                                <%= quiz.nome_usuario %>
+                            </strong>
+                        </p>
+
+                        <% if (quiz.descricao) { %>
+
+                            <p class="quiz-nutri-hero-descricao">
+                                <%= quiz.descricao %>
+                            </p>
+
+                            <% } %>
+
+                    </div>
+
+                    <div class="quiz-nutri-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18"></path>
+                            <path d="M7 16v-4"></path>
+                            <path d="M12 16V8"></path>
+                            <path d="M17 16V5"></path>
+                        </svg>
+
+                    </div>
+
+                </section>
+
+                <section class="quiz-estatisticas-secao">
+
+                    <div class="quiz-nutri-titulo-secao">
+
+                        <div>
+                            <span>Resumo</span>
+                            <h2>Desempenho geral</h2>
+                        </div>
+
+                    </div>
+
+                    <div class="quiz-estatisticas-grade">
+
+                        <article class="quiz-estatistica-card">
+
+                            <div class="quiz-estatistica-icone">
+
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M8 6h13"></path>
+                                    <path d="M8 12h13"></path>
+                                    <path d="M8 18h13"></path>
+                                    <path d="M3 6h.01"></path>
+                                    <path d="M3 12h.01"></path>
+                                    <path d="M3 18h.01"></path>
+                                </svg>
+
+                            </div>
+
+                            <span>Total de tentativas</span>
+
+                            <strong>
+                                <%= estatisticas.total_tentativas %>
+                            </strong>
+
+                        </article>
+
+                        <article class="quiz-estatistica-card">
+
+                            <div class="quiz-estatistica-icone">
+
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 3v18h18"></path>
+                                    <path d="m7 16 4-4 4 3 5-6"></path>
+                                </svg>
+
+                            </div>
+
+                            <span>Média de pontuação</span>
+
+                            <strong>
+                                <%= Number(estatisticas.media_pontuacao).toFixed(1) %>
+                            </strong>
+
+                        </article>
+
+                        <article class="quiz-estatistica-card">
+
+                            <div class="quiz-estatistica-icone">
+
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v20"></path>
+                                    <path d="m17 7-5-5-5 5"></path>
+                                </svg>
+
+                            </div>
+
+                            <span>Maior pontuação</span>
+
+                            <strong>
+                                <%= estatisticas.maior_pontuacao %>
+                            </strong>
+
+                        </article>
+
+                        <article class="quiz-estatistica-card">
+
+                            <div class="quiz-estatistica-icone">
+
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v20"></path>
+                                    <path d="m7 17 5 5 5-5"></path>
+                                </svg>
+
+                            </div>
+
+                            <span>Menor pontuação</span>
+
+                            <strong>
+                                <%= estatisticas.menor_pontuacao %>
+                            </strong>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+                <section class="quiz-estatisticas-secao">
+
+                    <div class="quiz-nutri-titulo-secao">
+
+                        <div>
+                            <span>Gráfico</span>
+                            <h2>Percentual de acertos por pergunta</h2>
+                        </div>
+
+                    </div>
+
+                    <% if (estatisticasPerguntas.length===0) { %>
+
+                        <div class="quiz-nutri-vazio quiz-nutri-vazio-menor">
+
+                            <h2>Nenhuma pergunta cadastrada</h2>
+
+                            <p>
+                                Adicione perguntas ao quiz para visualizar o gráfico.
+                            </p>
+
+                        </div>
+
+                        <% } else { %>
+
+                            <div class="quiz-grafico-card">
+
+                                <div class="quiz-grafico-cabecalho">
+
+                                    <div>
+                                        <span>Visão geral</span>
+                                        <h3>Acertos por questão</h3>
+                                    </div>
+
+                                    <span class="quiz-grafico-legenda">
+                                        Percentual de acertos
+                                    </span>
+
+                                </div>
+
+                                <div class="quiz-grafico-area">
+                                    <canvas id="graficoPerguntas"></canvas>
+                                </div>
+
+                            </div>
+
+                            <% } %>
+
+                </section>
+
+                <section class="quiz-estatisticas-secao">
+
+                    <div class="quiz-nutri-titulo-secao">
+
+                        <div>
+                            <span>Questões</span>
+                            <h2>Detalhes por pergunta</h2>
+                        </div>
+
+                    </div>
+
+                    <div class="quiz-detalhes-grade">
+
+                        <% estatisticasPerguntas.forEach((pergunta, indice)=> { %>
+
+                            <article class="quiz-detalhe-card">
+
+                                <header class="quiz-detalhe-cabecalho">
+
+                                    <span class="quiz-detalhe-numero">
+                                        <%= indice + 1 %>
+                                    </span>
+
+                                    <h3>
+                                        <%= pergunta.enunciado %>
+                                    </h3>
+
+                                </header>
+
+                                <div class="quiz-detalhe-informacoes">
+
+                                    <div>
+                                        <span>Total de respostas</span>
+
+                                        <strong>
+                                            <%= pergunta.total_respostas %>
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Total de acertos</span>
+
+                                        <strong>
+                                            <%= pergunta.total_acertos || 0 %>
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Percentual</span>
+
+                                        <strong>
+                                            <%= pergunta.percentual_acertos || 0 %>%
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                                <div class="quiz-detalhe-progresso">
+
+                                    <div class="quiz-detalhe-progresso-preenchimento"
+                                        style="width: <%= pergunta.percentual_acertos || 0 %>%"></div>
+
+                                </div>
+
+                            </article>
+
+                            <% }) %>
+
+                    </div>
+
+                </section>
+
+                <section class="quiz-estatisticas-secao">
+
+                    <div class="quiz-nutri-titulo-secao">
+
+                        <div>
+                            <span>Histórico</span>
+                            <h2>Tentativas realizadas</h2>
+                        </div>
+
+                        <div class="quiz-nutri-contador">
+
+                            <strong>
+                                <%= tentativas.length %>
+                            </strong>
+
+                            <span>
+                                <%= tentativas.length===1 ? "tentativa" : "tentativas" %>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <% if (tentativas.length===0) { %>
+
+                        <div class="quiz-nutri-vazio quiz-nutri-vazio-menor">
+
+                            <h2>Quiz ainda não respondido</h2>
+
+                            <p>
+                                As tentativas do paciente aparecerão nesta seção.
+                            </p>
+
+                        </div>
+
+                        <% } else { %>
+
+                            <div class="quiz-tabela-container">
+
+                                <table class="quiz-tabela">
+
+                                    <thead>
+
+                                        <tr>
+                                            <th>Usuário</th>
+                                            <th>Pontuação</th>
+                                            <th>Perguntas</th>
+                                            <th>Desempenho</th>
+                                            <th>Data</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        <% tentativas.forEach(tentativa=> { %>
+
+                                            <% const percentual=tentativa.total_perguntas> 0
+                                                ? (
+                                                tentativa.pontuacao /
+                                                tentativa.total_perguntas
+                                                ) * 100
+                                                : 0;
+                                                %>
+
+                                                <tr>
+
+                                                    <td>
+
+                                                        <div class="quiz-tabela-usuario">
+
+                                                            <div class="quiz-tabela-avatar">
+                                                                <%= tentativa.nome_usuario ?
+                                                                    tentativa.nome_usuario.charAt(0).toUpperCase() : "U"
+                                                                    %>
+                                                            </div>
+
+                                                            <div>
+
+                                                                <strong>
+                                                                    <%= tentativa.nome_usuario %>
+                                                                </strong>
+
+                                                                <small>
+                                                                    <%= tentativa.email %>
+                                                                </small>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <strong>
+                                                            <%= tentativa.pontos %>
+                                                        </strong>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= tentativa.total_perguntas %>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <span class="quiz-desempenho-badge">
+                                                            <%= percentual.toFixed(1) %>%
+                                                        </span>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <%= new Date( tentativa.data_resposta ).toLocaleString("pt-BR")
+                                                            %>
+                                                    </td>
+
+                                                </tr>
+
+                                                <% }) %>
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                            <% } %>
+
+                </section>
+
+            </main>
+
+         <% if (estatisticasPerguntas && estatisticasPerguntas.length > 0) { %>
+
+    <script>
+        const nomesPerguntas = <%- JSON.stringify(
+            estatisticasPerguntas.map(
+                (pergunta, indice) => `Pergunta ${indice + 1}`
+            )
+        ) %>;
+
+        const percentuais = <%- JSON.stringify(
+            estatisticasPerguntas.map(
+                pergunta => Number(pergunta.percentual_acertos || 0)
+            )
+        ) %>;
+
+        const canvasPerguntas = document.getElementById("graficoPerguntas");
+
+        if (canvasPerguntas) {
+            const contextoPerguntas = canvasPerguntas.getContext("2d");
+
+            const estilos = getComputedStyle(document.documentElement);
+
+            const verdeEscuro = estilos
+                .getPropertyValue("--cor-verde-escuro")
+                .trim();
+
+            const verdeSuave = estilos
+                .getPropertyValue("--cor-verde-suave")
+                .trim();
+
+            const corTexto = estilos
+                .getPropertyValue("--cor-texto")
+                .trim();
+
+            new Chart(contextoPerguntas, {
+                type: "bar",
+
+                data: {
+                    labels: nomesPerguntas,
+
+                    datasets: [
+                        {
+                            label: "Percentual de acertos",
+                            data: percentuais,
+                            backgroundColor: verdeSuave,
+                            borderColor: verdeEscuro,
+                            borderWidth: 2,
+                            borderRadius: 8
+                        }
+                    ]
+                },
+
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+
+                        tooltip: {
+                            callbacks: {
+                                label: function (contexto) {
+                                    return contexto.raw + "% de acertos";
+                                }
+                            }
+                        }
+                    },
+
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+
+                            ticks: {
+                                color: corTexto
+                            }
+                        },
+
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+
+                            ticks: {
+                                color: corTexto,
+
+                                callback: function (valor) {
+                                    return valor + "%";
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+<% } %>
+
+</body>
+
+</html>

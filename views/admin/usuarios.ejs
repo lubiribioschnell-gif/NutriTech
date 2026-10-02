@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+        <%= titulo %> | NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <%- include('../partials/navbarAdmin') %>
+        <main class="admin-main">
+            <h1>Usuários</h1>
+            <% if (sucesso) { %>
+                <div class="mensagem mensagem-sucesso">
+                    <%= sucesso %>
+                </div>
+                <% } %>
+                    <% if (erro) { %>
+                        <div class="mensagem mensagem-erro">
+                            <%= erro %>
+                        </div>
+                        <% } %>
+                            <div class="tabela-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Pontos</th>
+                                            <th>Nutricionista atual</th>
+                                            <th>Status</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if (!usuarios.length) { %>
+                                            <tr>
+                                                <td colspan="6" class="vazio">Nenhum usuário cadastrado.</td>
+                                            </tr>
+                                            <% } %>
+                                                <% usuarios.forEach(u=> { %><tr>
+                                                        <td><strong>
+                                                                <%= u.nome %>
+                                                            </strong></td>
+                                                        <td>
+                                                            <%= u.email %>
+                                                        </td>
+                                                        <td>
+                                                            <%= u.total_pontos %>
+                                                        </td>
+                                                        <td>
+                                                            <%= u.nutricionista || 'Sem acompanhamento' %>
+                                                        </td>
+                                                        <td><span
+                                                                class="status <%= u.ativo ? 'status-ativo' : 'status-inativo' %>">
+                                                                <%= u.ativo ? 'Ativo' : 'Desativado' %>
+                                                            </span></td>
+                                                        <td>
+                                                            <div class="acoes">
+                                                                <% if (u.ativo) { %>
+                                                                    <form
+                                                                        action="/admin/usuarios/<%= u.id_usuario %>/desativar"
+                                                                        method="POST"
+                                                                        onsubmit="return confirm('Desativar este usuário? Ele perderá o acesso imediatamente.')">
+                                                                        <button class="desativar"
+                                                                            type="submit">Desativar</button></form>
+                                                                    <% } else { %>
+                                                                        <form
+                                                                            action="/admin/usuarios/<%= u.id_usuario %>/reativar"
+                                                                            method="POST"><button class="reativar"
+                                                                                type="submit">Reativar</button></form>
+                                                                        <% } %>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+        </main>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/quiz.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="quiz-container">
+
+                <section class="quiz-hero">
+
+                    <div class="quiz-hero-conteudo">
+
+                        <span class="quiz-tag">
+                            Aprendizado nutricional
+                        </span>
+
+                        <h1>Meus quizzes</h1>
+
+                        <p>
+                            Responda aos quizzes preparados pelo seu nutricionista
+                            e teste seus conhecimentos sobre alimentação saudável.
+                        </p>
+
+                    </div>
+
+                    <div class="quiz-hero-icone" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="54" height="54" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11l3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+
+                    </div>
+
+                </section>
+
+                <section class="quiz-secao">
+
+                    <div class="quiz-titulo-secao">
+
+                        <div>
+                            <span>Atividades</span>
+                            <h2>Quizzes disponíveis</h2>
+                        </div>
+
+                        <div class="quiz-contador">
+                            <strong>
+                                <%= quizzes ? quizzes.length : 0 %>
+                            </strong>
+                            <span>
+                                <%= quizzes && quizzes.length===1 ? "quiz" : "quizzes" %>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <% if (!quizzes || quizzes.length===0) { %>
+
+                        <section class="quiz-vazio">
+
+                            <div class="quiz-vazio-icone">
+
+                                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor"
+                                    stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 11l3 3L22 4"></path>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+
+                            </div>
+
+                            <h2>Nenhum quiz disponível</h2>
+
+                            <p>
+                                Quando seu nutricionista disponibilizar um quiz,
+                                ele aparecerá nesta página.
+                            </p>
+
+                        </section>
+
+                        <% } else { %>
+
+                            <div class="quiz-grade">
+
+                                <% quizzes.forEach(quiz=> { %>
+
+                                    <article class="quiz-card">
+
+                                        <div class="quiz-card-topo">
+
+                                            <div class="quiz-card-icone">
+
+                                                <svg viewBox="0 0 24 24" width="28" height="28" fill="none"
+                                                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M9 11l3 3L22 4"></path>
+                                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
+                                                    </path>
+                                                </svg>
+
+                                            </div>
+
+                                            <span class="quiz-status">
+                                                Disponível
+                                            </span>
+
+                                        </div>
+
+                                        <div class="quiz-card-conteudo">
+
+                                            <h2>
+                                                <%= quiz.titulo %>
+                                            </h2>
+
+                                            <p>
+                                                <%= quiz.descricao
+                                                    || "Responda às perguntas e teste seus conhecimentos." %>
+                                            </p>
+
+                                        </div>
+
+                                        <a class="quiz-botao" href="/usuario/quizzes/<%= quiz.id_quiz %>">
+                                            <span>Responder quiz</span>
+
+                                            <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M5 12h14"></path>
+                                                <path d="m13 6 6 6-6 6"></path>
+                                            </svg>
+                                        </a>
+
+                                    </article>
+
+                                    <% }) %>
+
+                            </div>
+
+                            <% } %>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

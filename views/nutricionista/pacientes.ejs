@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/pacientes.css">
+</head>
+
+<body>
+
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="pacientes-container">
+
+                <section class="pacientes-hero">
+
+                    <div class="pacientes-hero-conteudo">
+
+                        <span class="pacientes-tag">
+                            Acompanhamento nutricional
+                        </span>
+
+                        <h1>Meus pacientes</h1>
+
+                        <p>
+                            Consulte os usuários acompanhados por você e acesse
+                            rapidamente o diário alimentar, os cardápios e os quizzes.
+                        </p>
+
+                        <div class="pacientes-hero-acoes">
+
+                            <a href="/nutricionista/solicitacoes" class="pacientes-botao pacientes-botao-claro">
+                                <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="m19 8 2 2 4-4"></path>
+                                </svg>
+
+                                Ver solicitações
+                            </a>
+
+                            <a href="/nutricionista/home" class="pacientes-botao pacientes-botao-transparente">
+                                <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="m15 18-6-6 6-6"></path>
+                                </svg>
+
+                                Voltar ao início
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="pacientes-hero-ilustracao" aria-hidden="true">
+
+                        <div class="pacientes-hero-circulo">
+
+                            <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="pacientes-resumo">
+
+                    <article class="pacientes-resumo-card">
+
+                        <div class="pacientes-resumo-icone">
+
+                            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+                            <span>Total de pacientes</span>
+
+                            <strong>
+                                <%= pacientes ? pacientes.length : 0 %>
+                            </strong>
+                        </div>
+
+                    </article>
+
+                    <article class="pacientes-resumo-card">
+
+                        <div class="pacientes-resumo-icone">
+
+                            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m9 11 3 3L22 4"></path>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+                            <span>Status</span>
+                            <strong>Ativos</strong>
+                        </div>
+
+                    </article>
+
+                    <article class="pacientes-resumo-card">
+
+                        <div class="pacientes-resumo-icone">
+
+                            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3v18h18"></path>
+                                <path d="m7 16 4-4 3 3 5-6"></path>
+                            </svg>
+
+                        </div>
+
+                        <div>
+                            <span>Acompanhamento</span>
+                            <strong>Individual</strong>
+                        </div>
+
+                    </article>
+
+                </section>
+
+                <section class="pacientes-conteudo">
+
+                    <div class="pacientes-titulo-secao">
+
+                        <div>
+                            <span>Lista de acompanhamento</span>
+                            <h2>Pacientes cadastrados</h2>
+
+                            <p>
+                                Acesse as informações e ferramentas disponíveis
+                                para cada paciente.
+                            </p>
+                        </div>
+
+                        <% if (pacientes && pacientes.length> 0) { %>
+
+                            <div class="pacientes-contador">
+
+                                <strong>
+                                    <%= pacientes.length %>
+                                </strong>
+
+                                <span>
+                                    <%= pacientes.length===1 ? "paciente" : "pacientes" %>
+                                </span>
+
+                            </div>
+
+                            <% } %>
+
+                    </div>
+
+                    <% if (!pacientes || pacientes.length===0) { %>
+
+                        <section class="pacientes-vazio">
+
+                            <div class="pacientes-vazio-icone">
+
+                                <svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="currentColor"
+                                    stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M19 8v6"></path>
+                                    <path d="M22 11h-6"></path>
+                                </svg>
+
+                            </div>
+
+                            <h2>Nenhum paciente encontrado</h2>
+
+                            <p>
+                                Você ainda não possui solicitações de acompanhamento
+                                aceitas.
+                            </p>
+
+                            <a href="/nutricionista/solicitacoes" class="pacientes-botao pacientes-botao-principal">
+                                Ver solicitações pendentes
+                            </a>
+
+                        </section>
+
+                        <% } else { %>
+
+                            <section class="pacientes-grade">
+
+                                <% pacientes.forEach(paciente=> { %>
+
+                                    <article class="paciente-card">
+
+                                        <header class="paciente-card-cabecalho">
+
+                                            <div class="paciente-identificacao">
+
+                                                <% if (paciente.foto) { %>
+
+                                                    <img src="/uploads/<%= paciente.foto %>"
+                                                        alt="Foto de <%= paciente.nome %>" class="paciente-foto">
+
+                                                    <% } else { %>
+
+                                                        <div class="paciente-avatar">
+
+                                                            <%= paciente.nome .charAt(0) .toUpperCase() %>
+
+                                                        </div>
+
+                                                        <% } %>
+
+                                                            <div class="paciente-nome">
+
+                                                                <span>Paciente</span>
+
+                                                                <h3>
+                                                                    <%= paciente.nome %>
+                                                                </h3>
+
+                                                                <p>
+                                                                    <svg viewBox="0 0 24 24" width="16" height="16"
+                                                                        fill="none" stroke="currentColor"
+                                                                        stroke-width="2" stroke-linecap="round"
+                                                                        stroke-linejoin="round">
+                                                                        <rect width="20" height="16" x="2" y="4" rx="2">
+                                                                        </rect>
+
+                                                                        <path d="m22 7-10 5L2 7"></path>
+                                                                    </svg>
+
+                                                                    <%= paciente.email %>
+                                                                </p>
+
+                                                            </div>
+
+                                            </div>
+
+                                            <span class="paciente-status">
+
+                                                <span></span>
+                                                Em acompanhamento
+
+                                            </span>
+
+                                        </header>
+
+                                        <div class="paciente-informacoes">
+
+                                            <% if (paciente.data_nascimento) { %>
+
+                                                <div class="paciente-informacao">
+
+                                                    <div class="paciente-informacao-icone">
+
+                                                        <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round">
+                                                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2">
+                                                            </rect>
+
+                                                            <line x1="16" x2="16" y1="2" y2="6"></line>
+
+                                                            <line x1="8" x2="8" y1="2" y2="6"></line>
+
+                                                            <line x1="3" x2="21" y1="10" y2="10"></line>
+                                                        </svg>
+
+                                                    </div>
+
+                                                    <div>
+                                                        <span>Nascimento</span>
+
+                                                        <strong>
+                                                            <%= new Date( paciente.data_nascimento
+                                                                ).toLocaleDateString("pt-BR", { timeZone: "UTC" }) %>
+                                                        </strong>
+                                                    </div>
+
+                                                </div>
+
+                                                <% } %>
+
+                                                    <% if (paciente.sexo) { %>
+
+                                                        <div class="paciente-informacao">
+
+                                                            <div class="paciente-informacao-icone">
+
+                                                                <svg viewBox="0 0 24 24" width="19" height="19"
+                                                                    fill="none" stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                    <circle cx="12" cy="8" r="5"></circle>
+                                                                    <path d="M12 13v8"></path>
+                                                                    <path d="M9 18h6"></path>
+                                                                </svg>
+
+                                                            </div>
+
+                                                            <div>
+                                                                <span>Sexo</span>
+
+                                                                <strong>
+                                                                    <%= paciente.sexo %>
+                                                                </strong>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <% } %>
+
+                                                            <% if (paciente.altura) { %>
+
+                                                                <div class="paciente-informacao">
+
+                                                                    <div class="paciente-informacao-icone">
+
+                                                                        <svg viewBox="0 0 24 24" width="19" height="19"
+                                                                            fill="none" stroke="currentColor"
+                                                                            stroke-width="2" stroke-linecap="round"
+                                                                            stroke-linejoin="round">
+                                                                            <path d="M12 3v18"></path>
+                                                                            <path d="m8 7 4-4 4 4"></path>
+                                                                            <path d="m8 17 4 4 4-4"></path>
+                                                                        </svg>
+
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <span>Altura</span>
+
+                                                                        <strong>
+                                                                            <%= paciente.altura %> m
+                                                                        </strong>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <% } %>
+
+                                                                    <% if (paciente.peso) { %>
+
+                                                                        <div class="paciente-informacao">
+
+                                                                            <div class="paciente-informacao-icone">
+
+                                                                                <svg viewBox="0 0 24 24" width="19"
+                                                                                    height="19" fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                    <path d="M4 19h16"></path>
+                                                                                    <path d="M5 19 3 7h18l-2 12"></path>
+                                                                                    <path d="M9 7a3 3 0 0 1 6 0"></path>
+                                                                                </svg>
+
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <span>Peso</span>
+
+                                                                                <strong>
+                                                                                    <%= paciente.peso %> kg
+                                                                                </strong>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <% } %>
+
+                                        </div>
+
+                                        <footer class="paciente-acoes">
+
+                                            <a href="/nutricionista/diario/<%= paciente.id_usuario %>"
+                                                class="paciente-acao paciente-acao-principal">
+                                                <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path
+                                                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z">
+                                                    </path>
+                                                    <path d="M14 2v6h6"></path>
+                                                    <path d="M8 13h8"></path>
+                                                    <path d="M8 17h5"></path>
+                                                </svg>
+
+                                                Ver diário
+                                            </a>
+
+                                            <a href="/nutricionista/cardapios/novo?idUsuario=<%= paciente.id_usuario %>"
+                                                class="paciente-acao">
+                                                <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M3 3h18v18H3z"></path>
+                                                    <path d="M8 8h8"></path>
+                                                    <path d="M8 12h8"></path>
+                                                    <path d="M8 16h5"></path>
+                                                </svg>
+
+                                                Criar cardápio
+                                            </a>
+
+                                            <a href="/nutricionista/quizzes/novo?idUsuario=<%= paciente.id_usuario %>"
+                                                class="paciente-acao">
+                                                <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"></path>
+                                                    <path d="M12 18h.01"></path>
+                                                </svg>
+
+                                                Criar quiz
+                                            </a>
+
+                                        </footer>
+
+                                    </article>
+
+                                    <% }) %>
+
+                            </section>
+
+                            <% } %>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

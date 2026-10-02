@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+        <%= titulo %> | NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <%- include('../partials/navbarAdmin') %>
+        <main class="admin-main">
+            <h1>Nutricionistas</h1>
+            <% if (sucesso) { %>
+                <div class="mensagem mensagem-sucesso">
+                    <%= sucesso %>
+                </div>
+                <% } %>
+                    <% if (erro) { %>
+                        <div class="mensagem mensagem-erro">
+                            <%= erro %>
+                        </div>
+                        <% } %>
+                            <div class="tabela-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Profissional</th>
+                                            <th>CRN</th>
+                                            <th>Pacientes</th>
+                                            <th>Aprovação</th>
+                                            <th>Conta</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if (!nutricionistas.length) { %>
+                                            <tr>
+                                                <td colspan="6" class="vazio">Nenhum nutricionista cadastrado.</td>
+                                            </tr>
+                                            <% } %>
+                                                <% nutricionistas.forEach(n=> { %><tr>
+                                                        <td><strong>
+                                                                <%= n.nome %>
+                                                            </strong><br><small>
+                                                                <%= n.email %>
+                                                            </small></td>
+                                                        <td>
+                                                            <%= n.crn || 'Não informado' %>
+                                                        </td>
+                                                        <td>
+                                                            <%= n.total_pacientes %>
+                                                        </td>
+                                                        <td><span
+                                                                class="status <%= n.aprovado ? 'status-aprovado' : 'status-pendente' %>">
+                                                                <%= n.aprovado ? 'Aprovado' : 'Pendente' %>
+                                                            </span></td>
+                                                        <td><span
+                                                                class="status <%= n.ativo ? 'status-ativo' : 'status-inativo' %>">
+                                                                <%= n.ativo ? 'Ativa' : 'Desativada' %>
+                                                            </span></td>
+                                                        <td>
+                                                            <div class="acoes"><a class="botao secundario"
+                                                                    href="/admin/nutricionistas/<%= n.id_nutricionista %>">Analisar</a>
+                                                                <% if (!n.aprovado) { %>
+                                                                    <form
+                                                                        action="/admin/nutricionistas/<%= n.id_nutricionista %>/aprovar"
+                                                                        method="POST"><button class="aprovar"
+                                                                            type="submit">Aprovar</button></form>
+                                                                    <% } %>
+                                                                        <% if (n.ativo) { %>
+                                                                            <form
+                                                                                action="/admin/nutricionistas/<%= n.id_nutricionista %>/desativar"
+                                                                                method="POST"
+                                                                                onsubmit="return confirm('Desativar este nutricionista? Ele perderá o acesso imediatamente.')">
+                                                                                <button class="desativar"
+                                                                                    type="submit">Desativar</button>
+                                                                            </form>
+                                                                            <% } else { %>
+                                                                                <form
+                                                                                    action="/admin/nutricionistas/<%= n.id_nutricionista %>/reativar"
+                                                                                    method="POST"><button
+                                                                                        class="reativar"
+                                                                                        type="submit">Reativar</button>
+                                                                                </form>
+                                                                                <% } %>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+        </main>
+</body>
+
+</html>

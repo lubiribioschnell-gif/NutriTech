@@ -1,0 +1,167 @@
+.paginaFormulario {
+    width: min(760px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 20px 0 70px;
+}
+
+.voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    color: var(--cor-verde-escuro);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.voltar:hover {
+    transform: translateX(-4px);
+}
+
+.cardFormulario {
+
+    padding: 38px;
+
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-grande);
+
+    background: var(--cor-branco);
+
+    box-shadow: var(--sombra-media);
+}
+
+.etiquetaPagina {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--cor-verde-escuro);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.cardFormulario h1 {
+
+    margin-bottom: 8px;
+
+    color: var(--cor-verde-escuro);
+
+    font-size: 34px;
+}
+
+.subtituloPagina {
+
+    margin-bottom: 28px;
+
+    color: #6d6965;
+
+    font-size: 14px;
+}
+
+.cardFormulario form {
+
+    display: grid;
+    gap: 22px;
+}
+
+.campo label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--cor-texto);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.acoesFormulario {
+
+    display: flex;
+    gap: 12px;
+}
+
+.botaoSalvar,
+.botaoCancelar {
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 180px;
+
+    padding: 14px 22px;
+
+    border-radius: var(--raio-pequeno);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: .2s;
+}
+
+.botaoSalvar {
+
+    border: none;
+
+    background: var(--cor-verde-escuro);
+    color: var(--cor-branco);
+}
+
+.botaoSalvar:hover {
+
+    transform: translateY(-2px);
+
+    background: #2f3924;
+}
+
+.botaoCancelar {
+
+    border: 1px solid var(--cor-verde-claro);
+
+    background: var(--cor-verde-suave);
+
+    color: var(--cor-verde-escuro);
+}
+
+.botaoCancelar:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--cor-verde-claro);
+}
+
+@media(max-width:650px) {
+
+    .paginaFormulario {
+
+        width: calc(100% - 24px);
+    }
+
+    .cardFormulario {
+
+        padding: 24px 20px;
+    }
+
+    .acoesFormulario {
+
+        flex-direction: column;
+    }
+
+    .botaoSalvar,
+    .botaoCancelar {
+
+        width: 100%;
+    }
+}

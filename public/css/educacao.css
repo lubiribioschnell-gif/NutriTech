@@ -1,0 +1,701 @@
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.educacao-container,
+.artigo-container{
+    width:min(1160px, calc(100% - 40px));
+    margin:0 auto;
+    padding:28px 0 64px;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.educacao-hero{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+
+    min-height:260px;
+    margin-bottom:36px;
+    padding:44px;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    background:
+        radial-gradient(
+            circle at 84% 22%,
+            rgba(255,255,255,.14),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            var(--cor-verde-escuro),
+            var(--cor-verde-oliva)
+        );
+
+    color:var(--cor-branco);
+
+    box-shadow:
+        0 18px 45px rgba(60,72,47,.18);
+}
+
+.educacao-hero::before{
+    content:"";
+
+    position:absolute;
+    right:-65px;
+    bottom:-120px;
+
+    width:280px;
+    height:280px;
+
+    border:48px solid rgba(255,255,255,.07);
+    border-radius:50%;
+}
+
+.educacao-hero-conteudo{
+    position:relative;
+    z-index:2;
+
+    max-width:690px;
+}
+
+.educacao-tag{
+    display:inline-flex;
+    align-items:center;
+
+    padding:7px 13px;
+
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:999px;
+
+    background:rgba(255,255,255,.12);
+
+    color:var(--cor-branco);
+
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.educacao-hero h1{
+    margin:15px 0 13px;
+
+    color:var(--cor-branco);
+
+    font-size:clamp(32px,5vw,47px);
+    line-height:1.12;
+}
+
+.educacao-hero p{
+    max-width:660px;
+    margin:0;
+
+    color:rgba(255,255,255,.84);
+
+    font-size:16px;
+    line-height:1.75;
+}
+
+.educacao-hero-icone{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+    place-items:center;
+
+    flex:0 0 124px;
+    width:124px;
+    height:124px;
+
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:34px;
+
+    background:rgba(255,255,255,.13);
+    color:var(--cor-branco);
+
+    backdrop-filter:blur(7px);
+}
+
+/* =====================================================
+   TÍTULO DA SEÇÃO
+===================================================== */
+
+.educacao-titulo-secao{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+
+    margin-bottom:25px;
+}
+
+.educacao-titulo-secao > div:first-child > span{
+    display:block;
+    margin-bottom:5px;
+
+    color:var(--cor-verde-oliva);
+
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+}
+
+.educacao-titulo-secao h2{
+    margin:0;
+
+    color:var(--cor-verde-escuro);
+
+    font-size:28px;
+}
+
+.educacao-contador{
+    display:flex;
+    align-items:baseline;
+    gap:7px;
+
+    padding:11px 17px;
+
+    border:1px solid var(--cor-borda);
+    border-radius:14px;
+
+    background:var(--cor-branco);
+}
+
+.educacao-contador strong{
+    color:var(--cor-verde-escuro);
+    font-size:23px;
+}
+
+.educacao-contador span{
+    color:var(--cor-texto);
+    font-size:13px;
+}
+
+/* =====================================================
+   GRADE DE ARTIGOS
+===================================================== */
+
+.educacao-grade{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:22px;
+}
+
+.educacao-card{
+    display:flex;
+    flex-direction:column;
+
+    min-height:330px;
+    padding:25px;
+
+    border:1px solid var(--cor-borda);
+    border-radius:23px;
+
+    background:var(--cor-branco);
+    color:inherit;
+
+    text-decoration:none;
+
+    box-shadow:
+        0 10px 30px rgba(60,72,47,.08);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+}
+
+.educacao-card:hover{
+    transform:translateY(-5px);
+
+    border-color:var(--cor-verde-claro);
+
+    box-shadow:
+        0 18px 40px rgba(60,72,47,.14);
+}
+
+.educacao-card-topo{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:24px;
+}
+
+.educacao-card-icone{
+    display:grid;
+    place-items:center;
+
+    width:62px;
+    height:62px;
+
+    border-radius:19px;
+
+    background:var(--cor-verde-suave);
+
+    font-size:30px;
+}
+
+.educacao-card-numero{
+    color:var(--cor-verde-claro);
+
+    font-size:24px;
+    font-weight:800;
+}
+
+.educacao-card-conteudo{
+    flex:1;
+}
+
+.educacao-card-categoria{
+    display:block;
+    margin-bottom:8px;
+
+    color:var(--cor-verde-oliva);
+
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.educacao-card h2{
+    margin:0 0 12px;
+
+    color:var(--cor-verde-escuro);
+
+    font-size:22px;
+    line-height:1.35;
+}
+
+.educacao-card p{
+    margin:0;
+
+    color:var(--cor-texto);
+
+    font-size:14px;
+    line-height:1.75;
+}
+
+.educacao-card-rodape{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-top:24px;
+    padding-top:18px;
+
+    border-top:1px solid var(--cor-borda);
+
+    color:var(--cor-verde-escuro);
+
+    font-size:14px;
+    font-weight:700;
+}
+
+.educacao-card-rodape svg{
+    transition:transform .2s ease;
+}
+
+.educacao-card:hover .educacao-card-rodape svg{
+    transform:translateX(4px);
+}
+
+/* =====================================================
+   ESTADO VAZIO
+===================================================== */
+
+.educacao-vazio{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    padding:65px 28px;
+
+    border:1px dashed var(--cor-verde-claro);
+    border-radius:24px;
+
+    background:var(--cor-branco);
+
+    text-align:center;
+}
+
+.educacao-vazio-icone{
+    display:grid;
+    place-items:center;
+
+    width:88px;
+    height:88px;
+    margin-bottom:20px;
+
+    border-radius:26px;
+
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.educacao-vazio h2{
+    margin:0 0 10px;
+
+    color:var(--cor-verde-escuro);
+}
+
+.educacao-vazio p{
+    max-width:520px;
+    margin:0;
+
+    color:var(--cor-texto);
+    line-height:1.7;
+}
+
+/* =====================================================
+   PÁGINA DO ARTIGO
+===================================================== */
+
+.artigo-container{
+    max-width:960px;
+}
+
+.artigo-voltar{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    margin-bottom:20px;
+
+    color:var(--cor-verde-escuro);
+
+    font-size:14px;
+    font-weight:700;
+
+    text-decoration:none;
+
+    transition:transform .2s ease;
+}
+
+.artigo-voltar:hover{
+    transform:translateX(-4px);
+}
+
+.artigo-card{
+    overflow:hidden;
+
+    border:1px solid var(--cor-borda);
+    border-radius:30px;
+
+    background:var(--cor-branco);
+
+    box-shadow:
+        0 20px 50px rgba(60,72,47,.12);
+}
+
+.artigo-cabecalho{
+    display:flex;
+    align-items:center;
+    gap:28px;
+
+    padding:42px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(203,225,209,.7),
+            rgba(244,241,234,.8)
+        );
+}
+
+.artigo-icone{
+    display:grid;
+    place-items:center;
+
+    flex:0 0 104px;
+    width:104px;
+    height:104px;
+
+    border:1px solid var(--cor-borda);
+    border-radius:29px;
+
+    background:var(--cor-branco);
+
+    font-size:48px;
+
+    box-shadow:
+        0 12px 26px rgba(60,72,47,.1);
+}
+
+.artigo-cabecalho-conteudo{
+    max-width:670px;
+}
+
+.artigo-categoria{
+    display:inline-flex;
+
+    padding:7px 12px;
+
+    border-radius:999px;
+
+    background:var(--cor-verde-escuro);
+    color:var(--cor-branco);
+
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.artigo-cabecalho h1{
+    margin:14px 0 10px;
+
+    color:var(--cor-verde-escuro);
+
+    font-size:clamp(29px,5vw,42px);
+    line-height:1.18;
+}
+
+.artigo-cabecalho p{
+    margin:0;
+
+    color:var(--cor-texto);
+
+    font-size:15px;
+    line-height:1.7;
+}
+
+.artigo-divisor{
+    height:1px;
+
+    background:var(--cor-borda);
+}
+
+.artigo-conteudo{
+    padding:42px;
+
+    color:var(--cor-texto);
+
+    font-size:17px;
+    line-height:2;
+    white-space:pre-line;
+}
+
+.artigo-conteudo::first-letter{
+    color:var(--cor-verde-escuro);
+
+    font-size:42px;
+    font-weight:800;
+    line-height:1;
+}
+
+.artigo-rodape{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+
+    padding:28px 42px;
+
+    border-top:1px solid var(--cor-borda);
+
+    background:#FCFBF8;
+}
+
+.artigo-dica{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    max-width:560px;
+}
+
+.artigo-dica-icone{
+    display:grid;
+    place-items:center;
+
+    flex:0 0 48px;
+    width:48px;
+    height:48px;
+
+    border-radius:15px;
+
+    background:var(--cor-verde-suave);
+    color:var(--cor-verde-escuro);
+}
+
+.artigo-dica strong{
+    display:block;
+    margin-bottom:4px;
+
+    color:var(--cor-verde-escuro);
+}
+
+.artigo-dica p{
+    margin:0;
+
+    color:var(--cor-texto);
+
+    font-size:13px;
+    line-height:1.55;
+}
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+
+.educacao-botao{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+
+    flex-shrink:0;
+
+    min-height:48px;
+    padding:12px 19px;
+
+    border-radius:14px;
+
+    background:var(--cor-verde-escuro);
+    color:var(--cor-branco);
+
+    font-size:14px;
+    font-weight:700;
+
+    text-decoration:none;
+
+    box-shadow:
+        0 10px 22px rgba(60,72,47,.18);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.educacao-botao:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 14px 28px rgba(60,72,47,.25);
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media(max-width:950px){
+
+    .educacao-grade{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+
+    .artigo-rodape{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .educacao-container,
+    .artigo-container{
+        width:min(100% - 24px,1160px);
+        padding-top:18px;
+    }
+
+    .educacao-hero{
+        flex-direction:column;
+        align-items:flex-start;
+
+        min-height:auto;
+        padding:30px 24px;
+    }
+
+    .educacao-hero-icone{
+        display:none;
+    }
+
+    .educacao-titulo-secao{
+        align-items:flex-start;
+    }
+
+    .educacao-grade{
+        grid-template-columns:1fr;
+    }
+
+    .artigo-cabecalho{
+        align-items:flex-start;
+        flex-direction:column;
+
+        padding:30px 24px;
+    }
+
+    .artigo-icone{
+        width:84px;
+        height:84px;
+        flex-basis:84px;
+
+        font-size:39px;
+    }
+
+    .artigo-conteudo{
+        padding:30px 24px;
+
+        font-size:16px;
+        line-height:1.9;
+    }
+
+    .artigo-rodape{
+        padding:25px 24px;
+    }
+
+    .educacao-botao{
+        width:100%;
+    }
+
+}
+
+@media(max-width:470px){
+
+    .educacao-titulo-secao{
+        flex-direction:column;
+    }
+
+    .educacao-contador{
+        align-self:flex-start;
+    }
+
+    .educacao-card{
+        min-height:auto;
+    }
+
+}
+
+
+/* Ícones dos conteúdos educativos */
+.educacao-card-icone svg,
+.artigo-icone svg {
+    display: block;
+    width: 34px;
+    height: 34px;
+    fill: none;
+    stroke: var(--cor-verde-escuro);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.artigo-icone svg {
+    width: 50px;
+    height: 50px;
+    stroke-width: 1.65;
+}

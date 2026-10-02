@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NutriTech - Editar Perfil</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"rel="stylesheet">
+</head>
+
+<body class="pagina-editar-nutricionista">
+
+    <%- include("../partials/mensagem") %>
+
+        <main class="editar-nutricionista-layout">
+
+            <aside class="editar-nutricionista-lateral">
+
+                <div class="editar-nutricionista-logo">
+
+                    <img src="/img/logo.png" alt="Logo NutriTech">
+
+                    <span>Área profissional</span>
+
+                    <h1>NutriTech</h1>
+
+                    <p>
+                        Atualize suas informações profissionais e mantenha
+                        seu perfil completo para seus pacientes.
+                    </p>
+
+                </div>
+
+            </aside>
+
+            <section class="editar-nutricionista-conteudo">
+
+                <div class="editar-nutricionista-formulario">
+
+                    <div class="editar-nutricionista-cabecalho">
+
+                        <div>
+
+                            <span class="editar-nutricionista-etiqueta">
+                                Configurações da conta
+                            </span>
+
+                            <h2>Editar perfil</h2>
+
+                            <p>
+                                Mantenha seus dados pessoais e profissionais
+                                sempre atualizados.
+                            </p>
+
+                        </div>
+
+                        <a href="/nutricionista/perfil" class="editar-nutricionista-voltar-topo">
+                            Voltar ao perfil
+                        </a>
+
+                    </div>
+
+                    <% if ( typeof erro !=="undefined" && erro ) { %>
+
+                        <div class="mensagem-erro">
+                            <%= erro %>
+                        </div>
+
+                        <% } %>
+
+                            <% if (nutricionista.foto) { %>
+
+                                <div class="editar-nutricionista-foto-atual">
+
+                                    <img src="/uploads/<%= nutricionista.foto %>"
+                                        alt="Foto de perfil de <%= nutricionista.nome %>">
+
+                                    <div>
+
+                                        <strong>Foto atual</strong>
+
+                                        <p>
+                                            Você pode selecionar uma nova imagem
+                                            no final do formulário.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <% } %>
+
+                                    <form action="/nutricionista/perfil/editar" method="POST"
+                                        enctype="multipart/form-data" class="editar-nutricionista-form">
+
+                                        <section class="editar-nutricionista-secao">
+
+                                            <div class="editar-nutricionista-titulo-secao">
+
+                                                <span>01</span>
+
+                                                <div>
+                                                    <h3>Informações pessoais</h3>
+                                                    <p>Dados básicos da sua conta.</p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="editar-nutricionista-grade">
+
+                                                <div class="inputBox">
+
+                                                    <label for="nome">
+                                                        Nome completo
+                                                    </label>
+
+                                                    <input type="text" id="nome" name="nome"
+                                                        value="<%= nutricionista.nome || '' %>" maxlength="150"
+                                                        autocomplete="name" required>
+
+                                                </div>
+
+                                                <div class="inputBox">
+
+                                                    <label for="email">
+                                                        E-mail
+                                                    </label>
+
+                                                    <input type="email" id="email" name="email"
+                                                        value="<%= nutricionista.email || '' %>" maxlength="150"
+                                                        autocomplete="email" required>
+
+                                                </div>
+
+                                                <div class="inputBox">
+
+                                                    <label for="data_nascimento">
+                                                        Data de nascimento
+                                                    </label>
+
+                                                    <input type="date" id="data_nascimento" name="data_nascimento"
+                                                        value="<%=
+                                        nutricionista.data_nascimento
+                                            ? new Date(
+                                                nutricionista.data_nascimento
+                                            ).toISOString().split('T')[0]
+                                            : ''
+                                    %>" required>
+
+                                                </div>
+
+                                                <div class="inputBox">
+
+                                                    <label for="sexo">
+                                                        Sexo
+                                                    </label>
+
+                                                    <select id="sexo" name="sexo" required>
+
+                                                        <option value="">
+                                                            Selecione
+                                                        </option>
+
+                                                        <option value="Masculino" <%=nutricionista.sexo==="Masculino"
+                                                            ? "selected" : "" %>
+                                                            >
+                                                            Masculino
+                                                        </option>
+
+                                                        <option value="Feminino" <%=nutricionista.sexo==="Feminino"
+                                                            ? "selected" : "" %>
+                                                            >
+                                                            Feminino
+                                                        </option>
+
+                                                        <option value="Outro" <%=nutricionista.sexo==="Outro"
+                                                            ? "selected" : "" %>
+                                                            >
+                                                            Outro
+                                                        </option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+
+                                        </section>
+
+                                        <section class="editar-nutricionista-secao">
+
+                                            <div class="editar-nutricionista-titulo-secao">
+
+                                                <span>02</span>
+
+                                                <div>
+                                                    <h3>Informações profissionais</h3>
+                                                    <p>Dados exibidos em seu perfil profissional.</p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="editar-nutricionista-grade">
+
+                                                <div class="inputBox">
+
+                                                    <label for="crn">
+                                                        CRN
+                                                    </label>
+
+                                                    <input type="text" id="crn" name="crn"
+                                                        value="<%= nutricionista.crn || '' %>" maxlength="30"
+                                                        placeholder="Ex.: CRN-2 12345" required>
+
+                                                </div>
+
+                                                <div class="inputBox">
+
+                                                    <label for="telefone">
+                                                        Telefone
+                                                    </label>
+
+                                                    <input type="tel" id="telefone" name="telefone"
+                                                        value="<%= nutricionista.telefone || '' %>"
+                                                        placeholder="(51) 99999-9999" maxlength="20" autocomplete="tel"
+                                                        required>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="inputBox editar-nutricionista-campo-completo">
+
+                                                <label for="descricao">
+                                                    Descrição profissional
+                                                </label>
+
+                                                <textarea id="descricao" name="descricao" rows="6" maxlength="1000"
+                                                    placeholder="Conte um pouco sobre sua experiência e sua forma de atendimento."
+                                                    required><%= nutricionista.descricao || '' %></textarea>
+
+                                                <small>
+                                                    Escreva uma apresentação breve sobre seu trabalho.
+                                                </small>
+
+                                            </div>
+
+                                        </section>
+
+                                        <section class="editar-nutricionista-secao">
+
+                                            <div class="editar-nutricionista-titulo-secao">
+
+                                                <span>03</span>
+
+                                                <div>
+                                                    <h3>Foto de perfil</h3>
+                                                    <p>Atualize sua imagem profissional.</p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="inputBox editar-nutricionista-campo-completo">
+
+                                                <button type="button" class="editar-nutricionista-upload"
+                                                    id="abrirSeletorFoto">
+
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <path d="M12 16V4"></path>
+                                                        <path d="m7 9 5-5 5 5"></path>
+                                                        <path d="M5 20h14"></path>
+                                                    </svg>
+
+                                                    <div>
+                                                        <strong>Selecionar nova foto</strong>
+
+                                                        <span>
+                                                            JPEG, PNG ou WEBP
+                                                        </span>
+                                                    </div>
+
+                                                </button>
+
+                                                <input type="file" id="foto" name="foto"
+                                                    accept="image/jpeg,image/png,image/webp"
+                                                    class="editar-nutricionista-input-arquivo">
+
+                                                <small>
+                                                    Deixe vazio para manter a foto atual.
+                                                </small>
+
+                                                <p id="nomeArquivoFoto" class="editar-nutricionista-arquivo"></p>
+
+                                            </div>
+
+                                        </section>
+
+                                        <div class="editar-nutricionista-acoes">
+
+                                            <a href="/nutricionista/perfil" class="editar-nutricionista-cancelar">
+                                                Cancelar
+                                            </a>
+
+                                            <button type="submit" class="editar-nutricionista-salvar">
+                                                Salvar alterações
+                                            </button>
+
+                                        </div>
+
+                                    </form>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <script>
+            (() => {
+                const campoFoto = document.getElementById("foto");
+                const abrirSeletor = document.getElementById("abrirSeletorFoto");
+                const nomeArquivoFoto = document.getElementById("nomeArquivoFoto");
+
+                if (!campoFoto || !abrirSeletor) return;
+
+                abrirSeletor.addEventListener("click", () => {
+                    campoFoto.click();
+                });
+
+                campoFoto.addEventListener("change", () => {
+                    const arquivo = campoFoto.files && campoFoto.files[0];
+                    if (!arquivo) {
+                        nomeArquivoFoto.textContent = "";
+                        return;
+                    }
+
+                    const tiposPermitidos = ["image/jpeg", "image/png", "image/webp"];
+                    const tamanhoMaximo = 5 * 1024 * 1024;
+
+                    if (!tiposPermitidos.includes(arquivo.type)) {
+                        alert("Selecione uma imagem JPG, PNG ou WEBP.");
+                        campoFoto.value = "";
+                        nomeArquivoFoto.textContent = "";
+                        return;
+                    }
+
+                    if (arquivo.size > tamanhoMaximo) {
+                        alert("A foto deve ter no máximo 5 MB.");
+                        campoFoto.value = "";
+                        nomeArquivoFoto.textContent = "";
+                        return;
+                    }
+
+                    nomeArquivoFoto.textContent = `Arquivo selecionado: ${arquivo.name}`;
+                });
+            })();
+        </script>
+
+</body>
+
+</html>

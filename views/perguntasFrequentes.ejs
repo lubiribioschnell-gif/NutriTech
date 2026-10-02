@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriTech - Perguntas Frequentes</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/faq.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <% if (usuario && usuario.tipo === "usuario") { %>
+            <%- include("partials/navbarUsuario") %>
+        <% } else if (usuario && usuario.tipo === "nutricionista") { %>
+            <%- include("partials/navbarNutricionista") %>
+        <% } else { %>
+            <%- include("partials/navbarPublica") %>
+        <% } %>
+    </header>
+
+    <main class="faq-page">
+        <!-- Hero da seção com selo visual -->
+        <section class="faq-hero">
+            <span class="subtitulo-secao">Central de Ajuda</span>
+            <h1>Perguntas Frequentes</h1>
+            <p>Encontre respostas rápidas e diretas sobre cadastro, acompanhamento nutricional e todos os recursos do NutriTech.</p>
+        </section>
+
+        <!-- Lista de Accordions -->
+        <section class="faq-lista" aria-label="Perguntas frequentes">
+            <details open>
+                <summary>
+                    <span>O que é o NutriTech?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>O NutriTech é uma plataforma de apoio à educação alimentar. Depois do login, você encontra recursos como cardápios, diário alimentar, quizzes, acompanhamento e conteúdos educativos.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>Como funciona o cardápio?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>O cardápio é criado pelo nutricionista para um usuário específico. Ele organiza as refeições, como café da manhã, almoço, jantar e lanches, e apresenta os alimentos e observações nutricionais definidos pelo profissional.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>Onde vejo meu cardápio?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>No menu, acesse <strong>“Cardápios”</strong>. Você poderá consultar os cardápios disponibilizados pelo seu nutricionista e abrir os detalhes de cada refeição.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>Como funciona o diário alimentar?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>Você pode registrar os alimentos consumidos e suas quantidades, além de adicionar observações. O nutricionista que acompanha você também pode consultar esses registros para acompanhar sua rotina alimentar.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>Como funcionam os quizzes?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>Os quizzes apresentam perguntas de múltipla escolha. Após responder, o sistema calcula automaticamente o resultado. Os quizzes e seus resultados ajudam no acompanhamento e na educação alimentar.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>O nutricionista consegue ver meu resultado do quiz?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>Os resultados e estatísticas disponíveis no sistema podem ser consultados pelo nutricionista para acompanhar o desempenho dos usuários.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>Como funciona o acompanhamento com nutricionista?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>Você pode consultar os nutricionistas disponíveis e enviar uma solicitação de acompanhamento. Quando o profissional aceitar, ele poderá utilizar os recursos de acompanhamento previstos no sistema, como visualizar seu diário e criar cardápios.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>Como funcionam os pontos e a classificação?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>O NutriTech possui recursos de gamificação. Ao participar das atividades previstas pelo sistema, você pode conquistar pontos, acompanhar seu nível e consultar a classificação.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>Como altero meus dados pessoais?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>Acesse <strong>“Perfil”</strong> e depois <strong>“Editar perfil”</strong>. Você poderá atualizar seus dados e sua foto, conforme os campos disponíveis para sua conta.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>Esqueci minha senha. O que faço?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>Na tela de login, utilize a opção <strong>“Esqueci minha senha”</strong> e siga as instruções apresentadas pelo sistema para recuperar o acesso.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span>O NutriTech substitui um nutricionista?</span>
+                    <span class="icone-accordion"></span>
+                </summary>
+                <div class="faq-resposta">
+                    <p>Não. A plataforma oferece recursos de organização e educação alimentar. Orientações individualizadas devem ser realizadas por um profissional habilitado.</p>
+                </div>
+            </details>
+        </section>
+
+        <!-- Ação para retornar utilizando a classe global de botão -->
+        <div class="faq-acoes">
+            <a href="<%= usuario && usuario.tipo === 'usuario' ? '/usuario/home' : usuario && usuario.tipo === 'nutricionista' ? '/nutricionista/home' : '/' %>" class="botaoSecundario">
+                ← Voltar ao início
+            </a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<% if (typeof erro !== "undefined" && erro) { %>
+    <div class="mensagem-flash mensagem-flash-erro" role="alert">
+        <span class="mensagem-flash-icone" aria-hidden="true">!</span>
+        <div class="mensagem-flash-conteudo">
+            <strong>Não foi possível concluir</strong>
+            <p><%= erro %></p>
+        </div>
+        <button type="button" class="mensagem-flash-fechar" aria-label="Fechar mensagem">×</button>
+    </div>
+<% } %>
+
+<% if (typeof sucesso !== "undefined" && sucesso) { %>
+    <div class="mensagem-flash mensagem-flash-sucesso" role="status">
+        <span class="mensagem-flash-icone" aria-hidden="true">✓</span>
+        <div class="mensagem-flash-conteudo">
+            <strong>Alteração realizada</strong>
+            <p><%= sucesso %></p>
+        </div>
+        <button type="button" class="mensagem-flash-fechar" aria-label="Fechar mensagem">×</button>
+    </div>
+<% } %>
+
+<script>
+document.querySelectorAll(".mensagem-flash").forEach(function (mensagem) {
+    var fechar = mensagem.querySelector(".mensagem-flash-fechar");
+
+    if (fechar) {
+        fechar.addEventListener("click", function () {
+            mensagem.classList.add("mensagem-flash-saindo");
+            setTimeout(function () { mensagem.remove(); }, 220);
+        });
+    }
+
+    setTimeout(function () {
+        if (document.body.contains(mensagem)) {
+            mensagem.classList.add("mensagem-flash-saindo");
+            setTimeout(function () {
+                if (mensagem.parentNode) mensagem.remove();
+            }, 220);
+        }
+    }, 5500);
+});
+</script>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NutriTech - Meu Perfil</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/perfilNutricionista.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarNutricionista") %>
+
+            <main class="container">
+
+                <section class="card perfil-card">
+
+                    <div class="perfil-topo">
+
+                        <div class="perfil-foto">
+
+                            <% if (nutricionista.foto) { %>
+
+                                <img src="/uploads/<%= nutricionista.foto %>" alt="Foto do nutricionista">
+
+                                <% } else { %>
+
+                                    <img src="/img/usuarioPadrao.png" alt="Foto padrão">
+
+                                    <% } %>
+
+                        </div>
+
+                        <div class="perfil-info">
+
+                            <span class="pagina-tag">
+                                Meu perfil profissional
+                            </span>
+                            <h1>
+                                <%= nutricionista.nome %>
+                            </h1>
+                            <p class="perfil-subtitulo">
+                                Gerencie seus dados profissionais e mantenha suas informações sempre atualizadas.
+                            </p>
+
+                            <p>
+                                <%= nutricionista.email %>
+                            </p>
+
+                            <a href="/nutricionista/perfil/editar" class="btn">
+                                Editar perfil
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="perfil-dados">
+
+                        <div class="dado-item">
+
+                            <strong>CRN</strong>
+
+                            <span>
+                                <%= nutricionista.crn || "Não informado" %>
+                            </span>
+
+                        </div>
+
+                        <div class="dado-item">
+
+                            <strong>Telefone</strong>
+
+                            <span>
+                                <%= nutricionista.telefone || "Não informado" %>
+                            </span>
+
+                        </div>
+
+                        <div class="dado-item">
+
+                            <strong>Data de nascimento</strong>
+
+                            <span>
+                                <%= nutricionista.data_nascimento ? new Date( nutricionista.data_nascimento
+                                    ).toLocaleDateString("pt-BR") : "Não informado" %>
+                            </span>
+
+                        </div>
+
+                        <div class="dado-item">
+
+                            <strong>Sexo</strong>
+
+                            <span>
+                                <%= nutricionista.sexo || "Não informado" %>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="descricao-perfil">
+
+                        <h2>Descrição profissional</h2>
+
+                        <p>
+                            <%= nutricionista.descricao || "Nenhuma descrição informada." %>
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>

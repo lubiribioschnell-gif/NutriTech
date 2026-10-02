@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= titulo %> - NutriTech
+    </title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/imc.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/mensagem") %>
+        <%- include("../partials/navbarUsuario") %>
+
+            <main class="paginaImc">
+
+                <a href="/usuario/home" class="voltar">
+                    ← Voltar para o início
+                </a>
+
+                <section class="imcContainer">
+
+                    <div class="introducaoImc">
+                        <span>Saúde e acompanhamento</span>
+
+                        <h1>Calculadora de IMC</h1>
+
+                        <p>
+                            Informe seu peso e sua altura para calcular o Índice de
+                            Massa Corporal.
+                        </p>
+
+                        <div class="informacao">
+                            <strong>Como é calculado?</strong>
+
+                            <p>
+                                O peso é dividido pela altura multiplicada por ela
+                                mesma.
+                            </p>
+
+                            <code>IMC = peso ÷ altura²</code>
+                        </div>
+                    </div>
+
+                    <div class="cardImc">
+
+                        <% if (erro) { %>
+                            <div class="erroImc">
+                                <%= erro %>
+                            </div>
+                            <% } %>
+
+                                <form action="/usuario/imc" method="POST">
+
+                                    <div class="campoImc">
+                                        <label for="peso">Peso</label>
+
+                                        <div class="entradaComUnidade">
+                                            <input type="number" id="peso" name="peso" min="1" max="500" step="0.1"
+                                                placeholder="Ex.: 65" required>
+
+                                            <span>kg</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="campoImc">
+                                        <label for="altura">Altura</label>
+
+                                        <div class="entradaComUnidade">
+                                            <input type="number" id="altura" name="altura" min="0.5" max="3" step="0.01"
+                                                placeholder="Ex.: 1.65" required>
+
+                                            <span>m</span>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="botaoCalcular">
+                                        Calcular IMC
+                                    </button>
+
+                                </form>
+
+                                <% if (resultado) { %>
+
+                                    <div class="resultadoImc">
+
+                                        <span>Seu IMC é</span>
+
+                                        <strong>
+                                            <%= resultado.imc %>
+                                        </strong>
+
+                                        <p>
+                                            Classificação:
+                                            <b>
+                                                <%= resultado.classificacao %>
+                                            </b>
+                                        </p>
+
+                                        <small>
+                                            O IMC é apenas uma referência e não substitui uma
+                                            avaliação profissional.
+                                        </small>
+
+                                    </div>
+
+                                    <% } %>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+</body>
+
+</html>
