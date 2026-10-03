@@ -98,14 +98,18 @@ exports.solicitar = async (req, res) => {
 
         const protocolo = String(req.headers["x-forwarded-proto"] || req.protocol).split(",")[0].trim();
         const host = req.get("host");
-        const baseUrl = `${protocolo}://${host}`;
+        const baseUrl = String(process.env.APP_URL || `${protocolo}://${host}`).replace(/\/$/, "");
         const link = `${baseUrl}/recuperar-senha/redefinir/${token}`;
 
         const transporter = criarTransportador();
         await transporter.verify();
 
+        const remetente = String(process.env.MAIL_FROM || process.env.SMTP_USER || "")
+            .replace(/^MAIL_FROM\s*=\s*/i, "")
+            .trim();
+
         await transporter.sendMail({
-            from: process.env.MAIL_FROM || process.env.SMTP_USER,
+            from: remetente || user,
             to: email,
             subject: "Redefinição de senha - NutriTech",
             text:

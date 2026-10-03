@@ -382,6 +382,24 @@ tbody tr:hover {
     transition: .2s ease;
 }
 
+.icone-perfil-desktop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    color: #3C482F;
+}
+
+.icone-perfil-desktop svg {
+    width: 24px;
+    height: 24px;
+}
+
+.botao-perfil .fotoPerfil {
+    display: none;
+}
+
 .botao-perfil:hover,
 .botao-perfil[aria-expanded="true"] {
     border-color: rgba(60, 72, 47, .12);
@@ -454,9 +472,15 @@ tbody tr:hover {
 @media(max-width:900px) {
 
     .menu {
-
         display: none;
+    }
 
+    .icone-perfil-desktop {
+        display: none;
+    }
+
+    .botao-perfil .fotoPerfil {
+        display: block;
     }
 
 }
@@ -661,6 +685,7 @@ tbody tr:hover {
     }
 
     .botao-perfil .fotoPerfil {
+        display: block;
         width: 40px;
         height: 40px;
         flex-basis: 40px;
