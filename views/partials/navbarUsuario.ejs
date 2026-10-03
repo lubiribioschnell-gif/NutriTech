@@ -31,24 +31,21 @@
 
     <div class="usuarioNavbar">
 
-        <% if (usuario && usuario.foto) { %>
-            <img
-                src="/uploads/<%= usuario.foto %>"
-                alt="Foto de perfil de <%= usuario.nome %>"
-                class="fotoPerfil"
-            >
-        <% } else { %>
-            <img
-                src="/img/icone_padrao.png"
-                alt="Foto de perfil padrão"
-                class="fotoPerfil"
-            >
-        <% } %>
-
-        <strong><%= usuario.nome %></strong>
-
-        <button type="button" class="botao-menu-usuario" aria-label="Abrir menu do usuário" aria-expanded="false">
-            ☰
+        <button type="button" class="botao-perfil" aria-label="Abrir menu do perfil" aria-expanded="false">
+            <% if (usuario && usuario.foto) { %>
+                <img
+                    src="/uploads/<%= usuario.foto %>"
+                    alt="Foto de perfil de <%= usuario.nome %>"
+                    class="fotoPerfil"
+                >
+            <% } else { %>
+                <img
+                    src="/img/icone_padrao.png"
+                    alt="Foto de perfil padrão"
+                    class="fotoPerfil"
+                >
+            <% } %>
+            <strong><%= usuario.nome %></strong>
         </button>
 
         <div class="menu-usuario">

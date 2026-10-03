@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".navbar").forEach(function (navbar) {
         var botaoMobile = navbar.querySelector(".botao-menu-mobile");
         var menu = navbar.querySelector(".menu");
-        var botaoUsuario = navbar.querySelector(".botao-menu-usuario");
+        var botaoUsuario = navbar.querySelector(".botao-perfil");
         var menuUsuario = navbar.querySelector(".menu-usuario");
 
         if (botaoMobile && menu) {

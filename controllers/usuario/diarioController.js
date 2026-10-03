@@ -118,12 +118,12 @@ exports.cadastrar = async (req, res) => {
 
         const [resultado] = await banco.execute(
             `INSERT INTO diario_alimentar (
-            id_usuario,
-            data,
-            alimento,
-            quantidade,
-            observacoes)
-     VALUES (?, CURDATE(), ?, ?, ?)`,
+                id_usuario,
+                alimento,
+                quantidade,
+                observacoes
+             )
+             VALUES (?, ?, ?, ?)`,
             [
                 idUsuario,
                 registro.alimento,
@@ -295,16 +295,16 @@ exports.excluir = async (req, res) => {
         );
 
         if (resultado.affectedRows === 0) {
-            return res.status(400).render(
-                "usuario/novoDiario",
-                {
-                    titulo: "Novo registro",
-                    usuario: req.session.usuario,
-                    erro: erroValidacao,
-                    sucesso: null,
-                    registro
-                }
-            );
+           return res.status(400).render(
+    "usuario/novoDiario",
+    {
+        titulo: "Novo registro",
+        usuario: req.session.usuario,
+        erro: erroValidacao,
+        sucesso: null,
+        registro
+    }
+);
         }
 
         return res.redirect(
@@ -313,15 +313,15 @@ exports.excluir = async (req, res) => {
     } catch (erro) {
         console.error("Erro ao excluir diário:", erro);
 
-        return res.status(500).render(
-            "usuario/novoDiario",
-            {
-                titulo: "Novo registro",
-                usuario: req.session.usuario,
-                erro: "Não foi possível salvar o registro.",
-                sucesso: null,
-                registro: dadosDiario(req)
-            }
-        );
+      return res.status(500).render(
+    "usuario/novoDiario",
+    {
+        titulo: "Novo registro",
+        usuario: req.session.usuario,
+        erro: "Não foi possível salvar o registro.",
+        sucesso: null,
+        registro: dadosDiario(req)
+    }
+);
     }
 };

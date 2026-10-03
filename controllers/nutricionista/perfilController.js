@@ -30,6 +30,7 @@ exports.mostrarPerfil = async (req, res) => {
 
             res.render("nutricionista/perfil", {
                 titulo: "Meu Perfil",
+                usuario: req.session.usuario,
                 nutricionista: nutricionistas[0]
             });
 
@@ -72,6 +73,7 @@ exports.mostrarEdicao = async (req, res) => {
 
             res.render("nutricionista/editarPerfil", {
                 titulo: "Editar Perfil",
+                usuario: req.session.usuario,
                 nutricionista: nutricionistas[0],
                 erro: null
             });

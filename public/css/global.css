@@ -367,44 +367,44 @@ tbody tr:hover {
 
 }
 
-.usuarioNavbar img {
-
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    object-fit: cover;
-
-    border: 3px solid #CBE1D1;
-
-}
-
-.usuarioNavbar strong {
-
-    color: #3C482F;
-
-}
-
-.botao-menu-usuario {
-    width: 42px;
-    height: 42px;
-    border: 1px solid rgba(60, 72, 47, .16);
-    border-radius: 12px;
-    background: #F7FAF5;
-    color: #3C482F;
-    font-size: 25px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
+.botao-perfil {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    transition: .25s;
+    gap: 10px;
+    min-width: 0;
+    padding: 4px 7px 4px 4px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: transparent;
+    color: #3C482F;
+    cursor: pointer;
+    font: inherit;
+    transition: .2s ease;
 }
 
-.botao-menu-usuario:hover {
-    background: #CBE1D1;
-    transform: translateY(-1px);
+.botao-perfil:hover,
+.botao-perfil[aria-expanded="true"] {
+    border-color: rgba(60, 72, 47, .12);
+    background: #F7FAF5;
+}
+
+.botao-perfil .fotoPerfil {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #CBE1D1;
+}
+
+.botao-perfil strong {
+    max-width: 150px;
+    overflow: hidden;
+    color: #3C482F;
+    font-size: 14px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .menu-usuario {
@@ -652,13 +652,18 @@ tbody tr:hover {
     }
 
     .usuarioNavbar {
-        gap: 6px;
+        gap: 4px;
+        margin-left: 4px;
     }
 
-    .usuarioNavbar img {
+    .botao-perfil {
+        padding: 2px;
+    }
+
+    .botao-perfil .fotoPerfil {
         width: 40px;
         height: 40px;
-        border-width: 2px;
+        flex-basis: 40px;
     }
 
     .mensagem-flash {

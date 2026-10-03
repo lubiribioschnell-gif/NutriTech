@@ -203,6 +203,33 @@ exports.cancelarSolicitacao = async (req, res) => {
         }
     };
 
+async function garantirStatusEncerrada() {
+    const [[coluna]] = await banco.execute(
+        `SELECT COLUMN_TYPE, IS_NULLABLE, COLUMN_DEFAULT
+         FROM INFORMATION_SCHEMA.COLUMNS
+         WHERE TABLE_SCHEMA = DATABASE()
+           AND TABLE_NAME = 'solicitacoes_nutricionista'
+           AND COLUMN_NAME = 'status'`
+    );
+
+    if (!coluna || !String(coluna.COLUMN_TYPE).toLowerCase().startsWith('enum(')) {
+        return;
+    }
+
+    const tipo = String(coluna.COLUMN_TYPE);
+    if (tipo.toLowerCase().includes("'encerrada'")) return;
+
+    const valores = [...tipo.matchAll(/'((?:[^'\\]|\\.)*)'/g)].map(m => m[1].replace(/\\'/g, "'"));
+    valores.push('encerrada');
+    const enumSql = valores.map(v => `'${v.replace(/'/g, "\\'")}'`).join(',');
+    const nullable = String(coluna.IS_NULLABLE).toUpperCase() === 'YES' ? 'NULL' : 'NOT NULL';
+    const defaultSql = coluna.COLUMN_DEFAULT === null ? '' : ` DEFAULT '${String(coluna.COLUMN_DEFAULT).replace(/'/g, "\\'")}'`;
+
+    await banco.execute(
+        `ALTER TABLE solicitacoes_nutricionista MODIFY COLUMN status ENUM(${enumSql}) ${nullable}${defaultSql}`
+    );
+}
+
 exports.encerrarAcompanhamento = async (req, res) => {
     try {
         const idUsuario = req.session.usuario.id;
@@ -212,9 +239,11 @@ exports.encerrarAcompanhamento = async (req, res) => {
             return res.status(400).send("Acompanhamento inválido.");
         }
 
+        await garantirStatusEncerrada();
+
         const [resultado] = await banco.execute(
             `UPDATE solicitacoes_nutricionista
-             SET status = 'encerrada'
+             SET status = 'encerrada', data_resposta = CURRENT_TIMESTAMP
              WHERE id_solicitacao = ?
                AND id_usuario = ?
                AND status = 'aceita'`,

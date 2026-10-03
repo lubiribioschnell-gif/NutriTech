@@ -7,7 +7,7 @@
 .voltar {
     display: inline-block;
     margin-bottom: 25px;
-    color: #3d7f4b;
+    color: var(--cor-verde-escuro);
     font-weight: 600;
 }
 
@@ -18,12 +18,12 @@
     gap: 55px;
     padding: 52px;
     border-radius: 28px;
-    background: linear-gradient(135deg, #e2f3e6, #f8fcf9);
+    background: linear-gradient(135deg, var(--cor-verde-suave), #FBFCF9);
     box-shadow: 0 14px 36px rgba(45, 84, 54, .11);
 }
 
 .introducaoImc>span {
-    color: #4f985e;
+    color: var(--cor-verde-oliva);
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
@@ -32,13 +32,13 @@
 
 .introducaoImc h1 {
     margin: 10px 0 15px;
-    color: #284f31;
+    color: var(--cor-verde-escuro);
     font-size: 42px;
 }
 
 .introducaoImc>p {
     max-width: 500px;
-    color: #667069;
+    color: #6C6A65;
     font-size: 16px;
     line-height: 1.7;
 }
@@ -46,23 +46,23 @@
 .informacao {
     margin-top: 32px;
     padding: 24px;
-    border-left: 5px solid #5aa469;
+    border-left: 5px solid var(--cor-verde-claro);
     border-radius: 12px;
     background: rgba(255, 255, 255, .7);
 }
 
 .informacao strong {
-    color: #2f653b;
+    color: var(--cor-verde-escuro);
 }
 
 .informacao p {
     margin: 8px 0 12px;
-    color: #667069;
+    color: #6C6A65;
     font-size: 14px;
 }
 
 .informacao code {
-    color: #2e7d32;
+    color: var(--cor-verde-escuro);
     font-size: 16px;
     font-weight: 600;
 }
@@ -70,7 +70,7 @@
 .cardImc {
     padding: 34px;
     border-radius: 22px;
-    background: #ffffff;
+    background: var(--cor-branco);
     box-shadow: 0 12px 32px rgba(44, 75, 51, .13);
 }
 
@@ -81,7 +81,7 @@
 .campoImc label {
     display: block;
     margin-bottom: 8px;
-    color: #34483a;
+    color: var(--cor-verde-escuro);
     font-weight: 600;
 }
 
@@ -89,14 +89,14 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    border: 1px solid #cedbd1;
+    border: 1px solid var(--cor-borda);
     border-radius: 12px;
     background: #fff;
     transition: .25s;
 }
 
 .entradaComUnidade:focus-within {
-    border-color: #5aa469;
+    border-color: var(--cor-verde-claro);
     box-shadow: 0 0 0 3px rgba(90, 164, 105, .13);
 }
 
@@ -111,7 +111,7 @@
 
 .entradaComUnidade span {
     padding: 0 15px;
-    color: #56705c;
+    color: var(--cor-verde-escuro);
     font-weight: 600;
 }
 
@@ -120,7 +120,7 @@
     padding: 15px;
     border: none;
     border-radius: 12px;
-    background: #4c985b;
+    background: var(--cor-verde-escuro);
     color: #fff;
     font-size: 16px;
     font-weight: 600;
@@ -129,7 +129,7 @@
 }
 
 .botaoCalcular:hover {
-    background: #347b43;
+    background: #2E3823;
     transform: translateY(-2px);
 }
 
@@ -137,8 +137,8 @@
     margin-bottom: 20px;
     padding: 12px;
     border-radius: 10px;
-    background: #ffe3e3;
-    color: #a61c2b;
+    background: var(--cor-erro-fundo);
+    color: var(--cor-erro-texto);
     font-size: 14px;
 }
 
@@ -146,31 +146,31 @@
     margin-top: 25px;
     padding: 24px;
     border-radius: 16px;
-    background: #ecf7ee;
+    background: var(--cor-sucesso-fundo);
     text-align: center;
 }
 
 .resultadoImc>span {
     display: block;
-    color: #58705d;
+    color: var(--cor-verde-escuro);
     font-size: 14px;
 }
 
 .resultadoImc>strong {
     display: block;
     margin: 4px 0;
-    color: #2f7f3e;
+    color: var(--cor-verde-escuro);
     font-size: 48px;
 }
 
 .resultadoImc p {
-    color: #415b47;
+    color: #53604F;
 }
 
 .resultadoImc small {
     display: block;
     margin-top: 14px;
-    color: #738078;
+    color: #77716B;
     line-height: 1.5;
 }
 

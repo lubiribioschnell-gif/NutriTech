@@ -96,7 +96,9 @@ exports.solicitar = async (req, res) => {
             [email, tokenHash, HORAS_EXPIRACAO]
         );
 
-        const baseUrl = process.env.APP_URL || `http://localhost:${process.env.PORT || 3000}`;
+        const protocolo = String(req.headers["x-forwarded-proto"] || req.protocol).split(",")[0].trim();
+        const host = req.get("host");
+        const baseUrl = `${protocolo}://${host}`;
         const link = `${baseUrl}/recuperar-senha/redefinir/${token}`;
 
         const transporter = criarTransportador();

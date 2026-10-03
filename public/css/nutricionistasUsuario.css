@@ -1061,3 +1061,41 @@ body{
     stroke-width:2;
     stroke-linecap:round;
 }
+
+
+.profissional-avatar img,
+.profissional-atual-avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.botao-ver-perfil-solicitacao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 18px 0 20px;
+    padding: 10px 14px;
+    border: 1px solid var(--cor-verde-claro);
+    border-radius: 11px;
+    background: var(--cor-verde-suave);
+    color: var(--cor-verde-escuro);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.botao-ver-perfil-solicitacao:hover {
+    transform: translateY(-1px);
+    background: var(--cor-verde-claro);
+}
+
+@media (max-width: 520px) {
+    .botao-ver-perfil-solicitacao {
+        width: 100%;
+    }
+}

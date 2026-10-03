@@ -148,13 +148,14 @@
                                     <div class="profissional-solicitacao">
 
                                         <div class="profissional-avatar">
-
-                                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                <circle cx="12" cy="8" r="4" />
-
-                                                <path d="M4 21a8 8 0 0 1 16 0" />
-                                            </svg>
-
+                                            <% if (solicitacaoAtual.nutricionista_foto) { %>
+                                                <img src="/uploads/<%= solicitacaoAtual.nutricionista_foto %>" alt="Foto do nutricionista">
+                                            <% } else { %>
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <circle cx="12" cy="8" r="4" />
+                                                    <path d="M4 21a8 8 0 0 1 16 0" />
+                                                </svg>
+                                            <% } %>
                                         </div>
 
                                         <div>
@@ -168,6 +169,10 @@
                                         </div>
 
                                     </div>
+
+                                    <a class="botao-ver-perfil-solicitacao" href="/usuario/nutricionistas/<%= solicitacaoAtual.id_nutricionista %>">
+                                        Ver informações do nutricionista
+                                    </a>
 
                                     <div class="aviso-solicitacao">
 
@@ -245,13 +250,14 @@
                                         <div class="profissional-atual">
 
                                             <div class="profissional-atual-avatar">
-
-                                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                    <circle cx="12" cy="8" r="4" />
-
-                                                    <path d="M4 21a8 8 0 0 1 16 0" />
-                                                </svg>
-
+                                                <% if (solicitacaoAtual.nutricionista_foto) { %>
+                                                    <img src="/uploads/<%= solicitacaoAtual.nutricionista_foto %>" alt="Foto do nutricionista">
+                                                <% } else { %>
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                        <circle cx="12" cy="8" r="4" />
+                                                        <path d="M4 21a8 8 0 0 1 16 0" />
+                                                    </svg>
+                                                <% } %>
                                             </div>
 
                                             <div class="profissional-atual-informacoes">
@@ -279,6 +285,10 @@
                                             </div>
 
                                         </div>
+
+                                        <a class="botao-ver-perfil-solicitacao" href="/usuario/nutricionistas/<%= solicitacaoAtual.id_nutricionista %>">
+                                            Ver informações do nutricionista
+                                        </a>
 
                                         <div class="acompanhamento-informacao">
 
