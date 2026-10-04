@@ -1,17 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".navbar").forEach(function (navbar) {
-        var botaoMobile = navbar.querySelector(".botao-menu-mobile");
-        var menu = navbar.querySelector(".menu");
-        var botaoUsuario = navbar.querySelector(".botao-perfil");
-        var menuUsuario = navbar.querySelector(".menu-usuario");
+        const botaoMobile = navbar.querySelector(".botao-menu-mobile");
+        const menu = navbar.querySelector(".menu");
+        const botaoUsuario = navbar.querySelector(".botao-perfil");
+        const menuUsuario = navbar.querySelector(".menu-usuario");
 
         if (botaoMobile && menu) {
             botaoMobile.addEventListener("click", function () {
-                var aberto = menu.classList.toggle("ativo");
+                const aberto = menu.classList.toggle("ativo");
                 botaoMobile.setAttribute("aria-expanded", String(aberto));
                 botaoMobile.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
             });
-
             menu.querySelectorAll("a").forEach(function (link) {
                 link.addEventListener("click", function () {
                     menu.classList.remove("ativo");
@@ -23,9 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (botaoUsuario && menuUsuario) {
             botaoUsuario.addEventListener("click", function (event) {
+                event.preventDefault();
                 event.stopPropagation();
-                var aberto = menuUsuario.classList.toggle("ativo");
+                const aberto = menuUsuario.classList.toggle("ativo");
                 botaoUsuario.setAttribute("aria-expanded", String(aberto));
+            });
+
+            menuUsuario.addEventListener("click", function (event) {
+                event.stopPropagation();
             });
 
             menuUsuario.querySelectorAll("a").forEach(function (link) {
@@ -34,13 +38,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     botaoUsuario.setAttribute("aria-expanded", "false");
                 });
             });
-
-            document.addEventListener("click", function (event) {
-                if (!menuUsuario.contains(event.target) && !botaoUsuario.contains(event.target)) {
-                    menuUsuario.classList.remove("ativo");
-                    botaoUsuario.setAttribute("aria-expanded", "false");
-                }
-            });
         }
+    });
+
+    document.addEventListener("click", function () {
+        document.querySelectorAll(".menu-usuario.ativo").forEach(function (menuUsuario) {
+            menuUsuario.classList.remove("ativo");
+            const botao = menuUsuario.parentElement.querySelector(".botao-perfil");
+            if (botao) botao.setAttribute("aria-expanded", "false");
+        });
     });
 });

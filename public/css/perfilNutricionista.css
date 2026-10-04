@@ -1,623 +1,114 @@
 
-:root {
-    --verde-escuro: #3c482f;
-    --verde: #667653;
-    --verde-oliva: #a8b379;
-    --verde-claro: #cbe1d1;
-    --fundo: #f5f2eb;
-    --branco: #ffffff;
-    --texto: #393533;
-    --texto-suave: #77716b;
-    --borda: rgba(60, 72, 47, 0.12);
+:root{
+    --pn-fundo:#F4F1EA;
+    --pn-suave:#CBE1D1;
+    --pn-claro:#9FC7AA;
+    --pn-oliva:#A8B379;
+    --pn-escuro:#3C482F;
+    --pn-texto:#393533;
+    --pn-branco:#FFF;
+    --pn-borda:rgba(60,72,47,.16);
 }
 
-/* =========================================================
-   FUNDO
-========================================================= */
+*{box-sizing:border-box;}
+body.pagina-perfil-nutricionista{margin:0;background:var(--pn-fundo);color:var(--pn-texto);font-family:"Poppins",Arial,sans-serif;}
+.conteudo-perfil-nutricionista{min-height:100vh;padding-bottom:70px;}
 
-body {
-    background: var(--fundo);
+.hero-perfil-nutricionista{position:relative;overflow:hidden;padding:55px 24px 82px;background:var(--pn-escuro);}
+.hero-perfil-nutricionista::before{content:"";position:absolute;width:420px;height:420px;top:-270px;right:-110px;border-radius:50%;background:rgba(203,225,209,.08);}
+.hero-perfil-nutricionista::after{content:"";position:absolute;width:280px;height:280px;bottom:-200px;left:-90px;border-radius:50%;background:rgba(168,179,121,.08);}
+.hero-perfil-nutricionista-conteudo{position:relative;z-index:1;width:min(1180px,100%);margin:auto;display:grid;grid-template-columns:minmax(0,1.3fr) 300px;gap:45px;align-items:center;}
+.hero-perfil-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;padding:8px 13px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.08);color:var(--pn-suave);font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;}
+.hero-perfil-tag svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.hero-perfil-nutricionista h1{margin:0 0 14px;color:#fff;font-size:clamp(2.2rem,5vw,3.7rem);line-height:1.04;letter-spacing:-.045em;}
+.hero-perfil-nutricionista-conteudo>div:first-child>p{max-width:650px;margin:0;color:rgba(255,255,255,.76);font-size:1rem;line-height:1.7;}
+.hero-perfil-ilustracao{position:relative;min-height:230px;display:flex;align-items:center;justify-content:center;}
+.hero-perfil-circulo{position:relative;z-index:2;width:180px;height:180px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.16);border-radius:50%;background:rgba(255,255,255,.08);box-shadow:0 25px 60px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(8px);}
+.hero-perfil-circulo::before{content:"";position:absolute;inset:20px;border:1px dashed rgba(255,255,255,.17);border-radius:50%;}
+.hero-perfil-circulo svg{width:78px;height:78px;fill:none;stroke:var(--pn-suave);stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;}
+.decoracao-perfil{position:absolute;display:block;border-radius:50%;}
+.decoracao-um{width:38px;height:38px;top:18px;right:18px;background:var(--pn-oliva);opacity:.65;}
+.decoracao-dois{width:23px;height:23px;bottom:25px;left:18px;background:var(--pn-claro);opacity:.7;}
+.decoracao-tres{width:12px;height:12px;top:72px;left:5px;background:#fff;opacity:.6;}
+
+.perfil-layout-nutricionista{position:relative;z-index:3;width:min(1180px,calc(100% - 40px));margin:-34px auto 0;display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:24px;align-items:start;}
+.card-principal-nutricionista,.card-dica-nutricionista,.card-seguranca-nutricionista{border:1px solid var(--pn-borda);border-radius:24px;background:#fff;box-shadow:0 15px 45px rgba(60,72,47,.09);}
+.card-principal-nutricionista{min-width:0;padding:28px;}
+.identificacao-nutricionista{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center;}
+.foto-nutricionista-wrapper{position:relative;width:112px;height:112px;flex:none;}
+.foto-nutricionista{width:100%;height:100%;padding:4px;overflow:hidden;border:1px solid var(--pn-borda);border-radius:30px;background:var(--pn-fundo);box-shadow:0 10px 28px rgba(60,72,47,.12);}
+.foto-nutricionista img{width:100%;height:100%;display:block;object-fit:cover;border-radius:25px;}
+.status-nutricionista{position:absolute;right:-4px;bottom:-4px;width:31px;height:31px;display:flex;align-items:center;justify-content:center;border:4px solid #fff;border-radius:50%;background:var(--pn-escuro);color:#fff;}
+.status-nutricionista svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.tipo-nutricionista,.secao-tag-nutricionista,.descricao-nutricionista>div:last-child>span{display:block;color:var(--pn-oliva);font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;}
+.tipo-nutricionista{margin-bottom:6px;}
+.identificacao-texto-nutricionista h2{margin:0 0 10px;color:var(--pn-escuro);font-size:clamp(1.55rem,3vw,2.2rem);line-height:1.15;letter-spacing:-.035em;overflow-wrap:anywhere;}
+.email-nutricionista{display:flex;align-items:center;gap:8px;color:rgba(57,53,51,.68);font-size:.91rem;overflow-wrap:anywhere;}
+.email-nutricionista svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--pn-escuro);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.botao-editar-nutricionista{min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 18px;border-radius:13px;background:var(--pn-escuro);color:#fff;text-decoration:none;font-size:.88rem;font-weight:800;white-space:nowrap;transition:transform .2s,opacity .2s;}
+.botao-editar-nutricionista:hover{transform:translateY(-2px);opacity:.92;}
+.botao-editar-nutricionista svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.separador-nutricionista{height:1px;margin:27px 0;background:var(--pn-borda);}
+.cabecalho-dados-nutricionista{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px;}
+.secao-tag-nutricionista{margin-bottom:6px;}
+.cabecalho-dados-nutricionista h2{margin:0 0 7px;color:var(--pn-escuro);font-size:1.55rem;letter-spacing:-.025em;}
+.cabecalho-dados-nutricionista p{margin:0;color:rgba(57,53,51,.68);font-size:.91rem;line-height:1.6;}
+.icone-secao-nutricionista{width:50px;height:50px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:15px;background:var(--pn-suave);color:var(--pn-escuro);}
+.icone-secao-nutricionista svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.grade-dados-nutricionista{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;}
+.dado-nutricionista-card{min-width:0;display:flex;align-items:center;gap:13px;padding:17px;border:1px solid var(--pn-borda);border-radius:16px;background:rgba(244,241,234,.58);transition:transform .2s,border-color .2s,background .2s;}
+.dado-nutricionista-card:hover{transform:translateY(-2px);border-color:rgba(60,72,47,.28);background:rgba(203,225,209,.25);}
+.dado-icone-nutricionista{width:43px;height:43px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--pn-suave);color:var(--pn-escuro);}
+.dado-icone-nutricionista svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.dado-nutricionista-card span{display:block;margin-bottom:4px;color:rgba(57,53,51,.58);font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.dado-nutricionista-card strong{display:block;color:var(--pn-texto);font-size:.94rem;line-height:1.35;overflow-wrap:anywhere;}
+.descricao-nutricionista{display:grid;grid-template-columns:auto minmax(0,1fr);gap:15px;margin-top:24px;padding:22px;border:1px solid rgba(60,72,47,.1);border-radius:19px;background:linear-gradient(135deg,#edf4ee,#e2eee4);}
+.descricao-icone-nutricionista{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:#fff;color:var(--pn-escuro);box-shadow:0 7px 20px rgba(60,72,47,.07);}
+.descricao-icone-nutricionista svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.descricao-nutricionista h2{margin:3px 0 7px;color:var(--pn-escuro);font-size:1.1rem;}
+.descricao-nutricionista p{margin:0;color:#53604f;font-size:.88rem;line-height:1.7;white-space:pre-line;}
+.lateral-perfil-nutricionista{display:flex;flex-direction:column;gap:18px;}
+.card-dica-nutricionista,.card-seguranca-nutricionista{padding:23px;}
+.dica-icone-nutricionista{width:50px;height:50px;display:flex;align-items:center;justify-content:center;margin-bottom:17px;border-radius:15px;background:var(--pn-suave);color:var(--pn-escuro);}
+.dica-icone-nutricionista svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.card-dica-nutricionista>span{color:var(--pn-oliva);font-size:.7rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;}
+.card-dica-nutricionista h2{margin:6px 0 9px;color:var(--pn-escuro);font-size:1.15rem;line-height:1.3;}
+.card-dica-nutricionista p,.card-seguranca-nutricionista>p{margin:0;color:rgba(57,53,51,.68);font-size:.86rem;line-height:1.65;}
+.card-dica-nutricionista>a{display:inline-flex;align-items:center;gap:5px;margin-top:17px;color:var(--pn-escuro);font-size:.84rem;font-weight:800;text-decoration:none;}
+.card-dica-nutricionista>a:hover{text-decoration:underline;}
+.card-dica-nutricionista>a svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.seguranca-topo-nutricionista{display:flex;align-items:center;gap:12px;margin-bottom:15px;}
+.seguranca-icone-nutricionista{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--pn-escuro);color:#fff;}
+.seguranca-icone-nutricionista svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.seguranca-topo-nutricionista span{display:block;color:rgba(57,53,51,.55);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.seguranca-topo-nutricionista strong{display:block;margin-top:3px;color:var(--pn-escuro);font-size:.9rem;}
+
+@media(max-width:950px){
+    .hero-perfil-nutricionista-conteudo{grid-template-columns:1fr;}
+    .hero-perfil-ilustracao{display:none;}
+    .perfil-layout-nutricionista{grid-template-columns:1fr;}
+    .lateral-perfil-nutricionista{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
 }
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
-.container {
-    width: min(1080px, calc(100% - 40px));
-    margin: 45px auto 80px;
+@media(max-width:720px){
+    .hero-perfil-nutricionista{padding:40px 20px 70px;}
+    .perfil-layout-nutricionista{width:calc(100% - 24px);margin-top:-28px;}
+    .card-principal-nutricionista{padding:22px;}
+    .identificacao-nutricionista{grid-template-columns:auto minmax(0,1fr);}
+    .botao-editar-nutricionista{grid-column:1/-1;width:100%;}
 }
-
-/* =========================================================
-   CARD DO PERFIL
-========================================================= */
-
-.perfil-card {
-    position: relative;
-
-    overflow: hidden;
-
-    background: var(--branco);
-
-    border-radius: 28px;
-
-    border: 1px solid var(--borda);
-
-    box-shadow:
-        0 20px 55px rgba(60, 72, 47, 0.09);
+@media(max-width:600px){
+    .hero-perfil-nutricionista h1{font-size:2.15rem;}
+    .lateral-perfil-nutricionista{grid-template-columns:1fr;}
+    .grade-dados-nutricionista{grid-template-columns:1fr;}
+    .identificacao-nutricionista{grid-template-columns:1fr;text-align:center;justify-items:center;}
+    .identificacao-texto-nutricionista{width:100%;}
+    .email-nutricionista{justify-content:center;}
+    .descricao-nutricionista{grid-template-columns:1fr;}
+    .descricao-icone-nutricionista{display:none;}
 }
-
-/* =========================================================
-   FAIXA SUPERIOR
-========================================================= */
-
-.perfil-card::before {
-    content: "";
-
-    display: block;
-
-    height: 185px;
-
-    background:
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(203, 225, 209, 0.35) 0,
-            rgba(203, 225, 209, 0) 35%
-        ),
-        linear-gradient(
-            135deg,
-            #3c482f 0%,
-            #526143 55%,
-            #687653 100%
-        );
-}
-
-/* detalhes decorativos */
-
-.perfil-card::after {
-    content: "";
-
-    position: absolute;
-
-    top: -100px;
-    right: -80px;
-
-    width: 280px;
-    height: 280px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-/* =========================================================
-   TOPO
-========================================================= */
-
-.perfil-topo {
-    position: relative;
-
-    display: flex;
-
-    align-items: flex-end;
-
-    gap: 28px;
-
-    padding: 0 40px 35px;
-
-    margin-top: -78px;
-}
-
-/* =========================================================
-   FOTO
-========================================================= */
-
-.perfil-foto {
-    position: relative;
-
-    width: 150px;
-    height: 150px;
-
-    flex-shrink: 0;
-
-    padding: 5px;
-
-    border-radius: 32px;
-
-    background: var(--branco);
-
-    box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.16);
-
-    z-index: 2;
-}
-
-.perfil-foto::after {
-    content: "";
-
-    position: absolute;
-
-    right: 7px;
-    bottom: 7px;
-
-    width: 25px;
-    height: 25px;
-
-    border-radius: 50%;
-
-    background: #6f9b70;
-
-    border: 4px solid var(--branco);
-}
-
-.perfil-foto img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-
-    border-radius: 27px;
-}
-
-/* =========================================================
-   INFORMAÇÕES
-========================================================= */
-
-.perfil-info {
-    flex: 1;
-
-    padding-bottom: 5px;
-}
-
-.pagina-tag {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    margin-bottom: 7px;
-
-    padding: 7px 12px;
-
-    border-radius: 50px;
-
-    background: var(--verde-claro);
-
-    color: var(--verde-escuro);
-
-    font-size: 0.68rem;
-
-    font-weight: 800;
-
-    letter-spacing: 0.06em;
-
-    text-transform: uppercase;
-}
-
-.pagina-tag::before {
-    content: "✦";
-
-    font-size: 0.7rem;
-}
-
-.perfil-info h1 {
-    margin: 0 0 6px;
-
-    color: var(--verde-escuro);
-
-    font-size: 2rem;
-
-    font-weight: 700;
-
-    line-height: 1.15;
-
-    letter-spacing: -0.035em;
-}
-
-.perfil-subtitulo {
-    max-width: 600px;
-
-    margin: 0 0 9px;
-
-    color: var(--texto-suave);
-
-    font-size: 0.88rem;
-
-    line-height: 1.55;
-}
-
-.perfil-info > p:not(.perfil-subtitulo) {
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    margin: 0;
-
-    color: #66615c;
-
-    font-size: 0.86rem;
-}
-
-.perfil-info > p:not(.perfil-subtitulo)::before {
-    content: "✉";
-
-    color: var(--verde);
-}
-
-/* =========================================================
-   BOTÃO EDITAR
-========================================================= */
-
-.perfil-info .btn {
-    position: absolute;
-
-    top: 202px;
-    right: 40px;
-
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    min-height: 43px;
-
-    padding: 0 18px;
-
-    border-radius: 12px;
-
-    background: var(--branco);
-
-    color: var(--verde-escuro);
-
-    border: 1px solid rgba(60, 72, 47, 0.14);
-
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
-
-    text-decoration: none;
-
-    font-size: 0.82rem;
-
-    font-weight: 700;
-
-    transition: all 0.2s ease;
-}
-
-.perfil-info .btn::before {
-    content: "✎";
-
-    margin-right: 7px;
-
-    font-size: 1rem;
-}
-
-.perfil-info .btn:hover {
-    transform: translateY(-2px);
-
-    background: var(--verde-escuro);
-
-    color: var(--branco);
-
-    border-color: var(--verde-escuro);
-
-    box-shadow: 0 8px 20px rgba(60, 72, 47, 0.18);
-}
-
-/* =========================================================
-   ÁREA DOS DADOS
-========================================================= */
-
-.perfil-dados {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 13px;
-
-    padding: 0 40px 30px;
-}
-
-/* =========================================================
-   CADA DADO
-========================================================= */
-
-.dado-item {
-    position: relative;
-
-    min-height: 105px;
-
-    padding: 18px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    border: 1px solid var(--borda);
-
-    border-radius: 18px;
-
-    background: #faf9f6;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-}
-
-.dado-item:hover {
-    transform: translateY(-3px);
-
-    border-color: rgba(60, 72, 47, 0.20);
-
-    box-shadow:
-        0 10px 25px rgba(60, 72, 47, 0.07);
-}
-
-.dado-item::before {
-    content: "";
-
-    width: 8px;
-    height: 8px;
-
-    position: absolute;
-
-    top: 17px;
-    right: 17px;
-
-    border-radius: 50%;
-
-    background: var(--verde-oliva);
-}
-
-.dado-item strong {
-    margin-bottom: 8px;
-
-    color: #9a956f;
-
-    font-size: 0.67rem;
-
-    font-weight: 800;
-
-    letter-spacing: 0.07em;
-
-    text-transform: uppercase;
-}
-
-.dado-item span {
-    color: var(--texto);
-
-    font-size: 0.91rem;
-
-    font-weight: 600;
-
-    line-height: 1.4;
-
-    overflow-wrap: anywhere;
-}
-
-/* =========================================================
-   DESCRIÇÃO
-========================================================= */
-
-.descricao-perfil {
-    margin: 0 40px 40px;
-
-    padding: 25px 28px;
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e5efe6,
-            #d7e7da
-        );
-
-    border: 1px solid rgba(60, 72, 47, 0.09);
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-.descricao-perfil::after {
-    content: "";
-
-    position: absolute;
-
-    width: 150px;
-    height: 150px;
-
-    right: -55px;
-    bottom: -80px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(60, 72, 47, 0.08);
-}
-
-.descricao-perfil h2 {
-    position: relative;
-
-    margin: 0 0 9px;
-
-    color: var(--verde-escuro);
-
-    font-size: 1.08rem;
-
-    font-weight: 700;
-
-    z-index: 1;
-}
-
-.descricao-perfil p {
-    position: relative;
-
-    max-width: 850px;
-
-    margin: 0;
-
-    color: #53604f;
-
-    font-size: 0.88rem;
-
-    line-height: 1.7;
-
-    z-index: 1;
-
-    white-space: pre-line;
-}
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .perfil-dados {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .perfil-info .btn {
-        position: static;
-
-        margin-top: 15px;
-    }
-}
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
-@media (max-width: 650px) {
-
-    .container {
-        width: calc(100% - 24px);
-
-        margin: 25px auto 50px;
-    }
-
-    .perfil-card {
-        border-radius: 22px;
-    }
-
-    .perfil-card::before {
-        height: 150px;
-    }
-
-    .perfil-topo {
-        flex-direction: column;
-
-        align-items: center;
-
-        text-align: center;
-
-        gap: 16px;
-
-        padding: 0 20px 28px;
-
-        margin-top: -70px;
-    }
-
-    .perfil-foto {
-        width: 125px;
-        height: 125px;
-    }
-
-    .perfil-info {
-        width: 100%;
-    }
-
-    .pagina-tag {
-        margin-bottom: 9px;
-    }
-
-    .perfil-info h1 {
-        font-size: 1.65rem;
-    }
-
-    .perfil-subtitulo {
-        margin-left: auto;
-        margin-right: auto;
-
-        font-size: 0.84rem;
-    }
-
-    .perfil-info > p:not(.perfil-subtitulo) {
-        justify-content: center;
-    }
-
-    .perfil-info .btn {
-        width: 100%;
-
-        margin-top: 17px;
-    }
-
-    .perfil-dados {
-        grid-template-columns: 1fr;
-
-        padding: 0 20px 25px;
-
-        gap: 10px;
-    }
-
-    .dado-item {
-        min-height: 90px;
-    }
-
-    .descricao-perfil {
-        margin: 0 20px 25px;
-
-        padding: 21px;
-    }
-}
-
-/* =========================================================
-   CELULAR PEQUENO
-========================================================= */
-
-@media (max-width: 400px) {
-
-    .perfil-card::before {
-        height: 135px;
-    }
-
-    .perfil-topo {
-        margin-top: -60px;
-    }
-
-    .perfil-foto {
-        width: 110px;
-        height: 110px;
-
-        border-radius: 25px;
-    }
-
-    .perfil-foto img {
-        border-radius: 20px;
-    }
-
-    .perfil-info h1 {
-        font-size: 1.45rem;
-    }
-
-    .pagina-tag {
-        font-size: 0.62rem;
-    }
-
-    .perfil-dados {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
-    .descricao-perfil {
-        margin-left: 16px;
-        margin-right: 16px;
-    }
+@media(max-width:400px){
+    .hero-perfil-nutricionista{padding-left:16px;padding-right:16px;}
+    .perfil-layout-nutricionista{width:calc(100% - 20px);}
+    .card-principal-nutricionista{padding:18px;}
+    .foto-nutricionista-wrapper{width:100px;height:100px;}
 }

@@ -1,127 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>NutriTech - Meu Perfil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/perfilNutricionista.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
 </head>
-
-<body>
+<body class="pagina-perfil-nutricionista">
     <%- include("../partials/mensagem") %>
-        <%- include("../partials/navbarNutricionista") %>
+    <%- include("../partials/navbarNutricionista") %>
 
-            <main class="container">
+    <main class="conteudo-perfil-nutricionista">
+        <section class="hero-perfil-nutricionista">
+            <div class="hero-perfil-nutricionista-conteudo">
+                <div>
+                    <span class="hero-perfil-tag">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v5c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V7l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+                        Área profissional
+                    </span>
+                    <h1>Meu perfil profissional</h1>
+                    <p>Gerencie seus dados pessoais e profissionais em um só lugar e mantenha suas informações atualizadas para seus pacientes.</p>
+                </div>
+                <div class="hero-perfil-ilustracao" aria-hidden="true">
+                    <div class="hero-perfil-circulo">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20c.7-3.2 3.1-5.2 6.5-5.2s5.8 2 6.5 5.2"/><path d="M19 4v4M17 6h4"/></svg>
+                    </div>
+                    <span class="decoracao-perfil decoracao-um"></span>
+                    <span class="decoracao-perfil decoracao-dois"></span>
+                    <span class="decoracao-perfil decoracao-tres"></span>
+                </div>
+            </div>
+        </section>
 
-                <section class="card perfil-card">
-
-                    <div class="perfil-topo">
-
-                        <div class="perfil-foto">
-
+        <section class="perfil-layout-nutricionista">
+            <article class="card-principal-nutricionista">
+                <div class="identificacao-nutricionista">
+                    <div class="foto-nutricionista-wrapper">
+                        <div class="foto-nutricionista">
                             <% if (nutricionista.foto) { %>
-
-                                <img src="/uploads/<%= nutricionista.foto %>" alt="Foto do nutricionista">
-
-                                <% } else { %>
-
-                                    <img src="/img/usuarioPadrao.png" alt="Foto padrão">
-
-                                    <% } %>
-
+                                <img src="/uploads/<%= nutricionista.foto %>" alt="Foto de perfil de <%= nutricionista.nome %>">
+                            <% } else { %>
+                                <img src="/img/icone_padrao.png" alt="Foto de perfil padrão">
+                            <% } %>
                         </div>
-
-                        <div class="perfil-info">
-
-                            <span class="pagina-tag">
-                                Meu perfil profissional
-                            </span>
-                            <h1>
-                                <%= nutricionista.nome %>
-                            </h1>
-                            <p class="perfil-subtitulo">
-                                Gerencie seus dados profissionais e mantenha suas informações sempre atualizadas.
-                            </p>
-
-                            <p>
-                                <%= nutricionista.email %>
-                            </p>
-
-                            <a href="/nutricionista/perfil/editar" class="btn btn-editar-perfil">
-                                Editar perfil
-                            </a>
-
-                        </div>
-
+                        <span class="status-nutricionista" title="Perfil ativo">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
+                        </span>
                     </div>
 
-                    <div class="perfil-dados">
-
-                        <div class="dado-item">
-
-                            <strong>CRN</strong>
-
-                            <span>
-                                <%= nutricionista.crn || "Não informado" %>
-                            </span>
-
+                    <div class="identificacao-texto-nutricionista">
+                        <span class="tipo-nutricionista">Nutricionista NutriTech</span>
+                        <h2><%= nutricionista.nome %></h2>
+                        <div class="email-nutricionista">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                            <span><%= nutricionista.email %></span>
                         </div>
-
-                        <div class="dado-item">
-
-                            <strong>Telefone</strong>
-
-                            <span>
-                                <%= nutricionista.telefone || "Não informado" %>
-                            </span>
-
-                        </div>
-
-                        <div class="dado-item">
-
-                            <strong>Data de nascimento</strong>
-
-                            <span>
-                                <%= nutricionista.data_nascimento ? new Date( nutricionista.data_nascimento
-                                    ).toLocaleDateString("pt-BR") : "Não informado" %>
-                            </span>
-
-                        </div>
-
-                        <div class="dado-item">
-
-                            <strong>Sexo</strong>
-
-                            <span>
-                                <%= nutricionista.sexo || "Não informado" %>
-                            </span>
-
-                        </div>
-
                     </div>
 
-                    <div class="descricao-perfil">
+                    <a href="/nutricionista/perfil/editar" class="botao-editar-nutricionista">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>
+                        Editar perfil
+                    </a>
+                </div>
 
-                        <h2>Descrição profissional</h2>
+                <div class="separador-nutricionista"></div>
 
-                        <p>
-                            <%= nutricionista.descricao || "Nenhuma descrição informada." %>
-                        </p>
-
+                <div class="cabecalho-dados-nutricionista">
+                    <div>
+                        <span class="secao-tag-nutricionista">Informações profissionais</span>
+                        <h2>Seus dados</h2>
+                        <p>Confira as informações utilizadas no seu perfil profissional.</p>
                     </div>
+                    <div class="icone-secao-nutricionista">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M6 20V8l6-4 6 4v12"/><path d="M9 12h6M9 16h6"/></svg>
+                    </div>
+                </div>
 
+                <div class="grade-dados-nutricionista">
+                    <div class="dado-nutricionista-card">
+                        <div class="dado-icone-nutricionista"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M8 7V4h8v3M8 12h8M8 16h5"/></svg></div>
+                        <div><span>CRN</span><strong><%= nutricionista.crn || "Não informado" %></strong></div>
+                    </div>
+                    <div class="dado-nutricionista-card">
+                        <div class="dado-icone-nutricionista"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+                        <div><span>Telefone</span><strong><%= nutricionista.telefone || "Não informado" %></strong></div>
+                    </div>
+                    <div class="dado-nutricionista-card">
+                        <div class="dado-icone-nutricionista"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div>
+                        <div><span>Data de nascimento</span><strong><%= nutricionista.data_nascimento ? new Date(nutricionista.data_nascimento).toLocaleDateString("pt-BR") : "Não informado" %></strong></div>
+                    </div>
+                    <div class="dado-nutricionista-card">
+                        <div class="dado-icone-nutricionista"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20c.8-3.3 3.1-5 7-5s6.2 1.7 7 5"/></svg></div>
+                        <div><span>Sexo</span><strong><%= nutricionista.sexo || "Não informado" %></strong></div>
+                    </div>
+                </div>
+
+                <div class="descricao-nutricionista">
+                    <div class="descricao-icone-nutricionista">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h6M8 17h4"/></svg>
+                    </div>
+                    <div>
+                        <span>Apresentação profissional</span>
+                        <h2>Sobre você</h2>
+                        <p><%= nutricionista.descricao || "Nenhuma descrição profissional informada. Acesse Editar perfil para adicionar uma apresentação sobre sua atuação." %></p>
+                    </div>
+                </div>
+            </article>
+
+            <aside class="lateral-perfil-nutricionista">
+                <section class="card-dica-nutricionista">
+                    <div class="dica-icone-nutricionista">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M8.5 14.5A7 7 0 1 1 15.5 14.5C14.7 15.1 14 16 14 17h-4c0-1-.7-1.9-1.5-2.5Z"/></svg>
+                    </div>
+                    <span>Dica</span>
+                    <h2>Mantenha seu perfil completo</h2>
+                    <p>Informações profissionais atualizadas ajudam seus pacientes a conhecer melhor seu trabalho.</p>
+                    <a href="/nutricionista/perfil/editar">Atualizar informações <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
                 </section>
 
-            </main>
-
+                <section class="card-seguranca-nutricionista">
+                    <div class="seguranca-topo-nutricionista">
+                        <div class="seguranca-icone-nutricionista"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                        <div><span>Perfil profissional</span><strong>Informações protegidas</strong></div>
+                    </div>
+                    <p>Revise seus dados sempre que houver alguma alteração nas suas informações profissionais.</p>
+                </section>
+            </aside>
+        </section>
+    </main>
 </body>
-
 </html>
