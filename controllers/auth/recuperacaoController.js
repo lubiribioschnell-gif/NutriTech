@@ -1,7 +1,6 @@
 const banco = require("../../config/database");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
 
 const HORAS_EXPIRACAO = 1;
 
@@ -30,24 +29,74 @@ function mensagem(res, sucesso = null, erro = null, status = 200) {
     });
 }
 
-function criarTransportador() {
-    const host = process.env.SMTP_HOST;
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
+async function enviarEmailRecuperacao({ para, nome, link }) {
+    const apiKey = String(process.env.BREVO_API_KEY || "").trim();
+    const remetente = String(
+        process.env.MAIL_FROM || process.env.BREVO_SENDER_EMAIL || ""
+    )
+        .replace(/^MAIL_FROM\s*=\s*/i, "")
+        .trim();
 
-    if (!host || !user || !pass) {
-        throw new Error("SMTP não configurado. Preencha SMTP_HOST, SMTP_USER e SMTP_PASS no arquivo .env.");
+    const nomeRemetente = String(
+        process.env.BREVO_SENDER_NAME || "NutriTech"
+    ).trim();
+
+    if (!apiKey || !remetente) {
+        throw new Error(
+            "E-mail não configurado. Defina BREVO_API_KEY e MAIL_FROM (ou BREVO_SENDER_EMAIL) no Railway."
+        );
     }
 
-    return nodemailer.createTransport({
-        host,
-        port: Number(process.env.SMTP_PORT || 587),
-        secure: String(process.env.SMTP_SECURE).toLowerCase() === "true",
-        auth: { user, pass },
-        connectionTimeout: 10000,
-        greetingTimeout: 10000,
-        socketTimeout: 15000
+    const html = 
+        `<!doctype html><html lang="pt-BR"><body style="font-family:Arial,sans-serif;line-height:1.6;color:#333">` +
+        `<div style="max-width:600px;margin:auto;padding:30px;border:1px solid #e5e7eb;border-radius:12px">` +
+        `<h2 style="margin-top:0">NutriTech</h2>` +
+        `<p>Olá, <strong>${nome}</strong>!</p>` +
+        `<p>Recebemos uma solicitação para redefinir a senha da sua conta.</p>` +
+        `<p><a href="${link}" style="display:inline-block;padding:12px 20px;background:#2e7d32;color:#fff;text-decoration:none;border-radius:8px">Redefinir minha senha</a></p>` +
+        `<p>Este link expira em ${HORAS_EXPIRACAO} hora.</p>` +
+        `<p>Se você não solicitou a alteração, ignore este e-mail.</p>` +
+        `</div></body></html>`;
+
+    const resposta = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+            "accept": "application/json",
+            "api-key": apiKey,
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            sender: {
+                name: nomeRemetente,
+                email: remetente
+            },
+            to: [
+                {
+                    email: para,
+                    name: nome
+                }
+            ],
+            subject: "Redefinição de senha - NutriTech",
+            textContent:
+                `Olá, ${nome}!\n\n` +
+                `Recebemos uma solicitação para redefinir sua senha no NutriTech.\n\n` +
+                `Acesse o link abaixo em até ${HORAS_EXPIRACAO} hora:\n${link}\n\n` +
+                "Se você não fez essa solicitação, ignore este e-mail.",
+            htmlContent: html
+        })
     });
+
+    if (!resposta.ok) {
+        let detalhe = "";
+        try {
+            detalhe = JSON.stringify(await resposta.json());
+        } catch (_) {
+            detalhe = await resposta.text();
+        }
+        throw new Error(`Brevo HTTP ${resposta.status}: ${detalhe}`);
+    }
+
+    return resposta.json();
 }
 
 exports.mostrar = (req, res) => mensagem(res);
@@ -101,32 +150,10 @@ exports.solicitar = async (req, res) => {
         const baseUrl = String(process.env.APP_URL || `${protocolo}://${host}`).replace(/\/$/, "");
         const link = `${baseUrl}/recuperar-senha/redefinir/${token}`;
 
-        const transporter = criarTransportador();
-        await transporter.verify();
-
-        const remetente = String(process.env.MAIL_FROM || process.env.SMTP_USER || "")
-            .replace(/^MAIL_FROM\s*=\s*/i, "")
-            .trim();
-
-        await transporter.sendMail({
-            from: remetente || user,
-            to: email,
-            subject: "Redefinição de senha - NutriTech",
-            text:
-                `Olá, ${conta.nome}!\n\n` +
-                `Recebemos uma solicitação para redefinir sua senha no NutriTech.\n\n` +
-                `Acesse o link abaixo em até ${HORAS_EXPIRACAO} hora:\n${link}\n\n` +
-                "Se você não fez essa solicitação, ignore este e-mail.",
-            html:
-                `<!doctype html><html lang="pt-BR"><body style="font-family:Arial,sans-serif;line-height:1.6;color:#333">` +
-                `<div style="max-width:600px;margin:auto;padding:30px;border:1px solid #e5e7eb;border-radius:12px">` +
-                `<h2 style="margin-top:0">NutriTech</h2>` +
-                `<p>Olá, <strong>${conta.nome}</strong>!</p>` +
-                `<p>Recebemos uma solicitação para redefinir a senha da sua conta.</p>` +
-                `<p><a href="${link}" style="display:inline-block;padding:12px 20px;background:#2e7d32;color:#fff;text-decoration:none;border-radius:8px">Redefinir minha senha</a></p>` +
-                `<p>Este link expira em ${HORAS_EXPIRACAO} hora.</p>` +
-                `<p>Se você não solicitou a alteração, ignore este e-mail.</p>` +
-                `</div></body></html>`
+        await enviarEmailRecuperacao({
+            para: email,
+            nome: conta.nome,
+            link
         });
 
         return mensagem(res, respostaGenerica);
