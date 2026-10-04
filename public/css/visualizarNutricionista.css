@@ -237,7 +237,7 @@ a {
 }
 
 .informacao-item p {
-    color: var(--cor-texto);
+    color: var(--cor-fundo);
     line-height: 1.5;
     overflow-wrap: anywhere;
 }
