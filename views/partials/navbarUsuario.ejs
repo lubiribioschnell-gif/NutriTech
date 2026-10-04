@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=logout,person" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=logout,person" />
 <header class="navbar">
     <div class="logo">
         <img src="/img/logo.png" alt="Logo NutriTech">
@@ -22,16 +23,19 @@
         <button type="button" class="botao-perfil" aria-label="Abrir menu do perfil" aria-expanded="false">
             <% if (usuario && usuario.foto) { %>
                 <img src="/uploads/<%= usuario.foto %>" alt="Foto de perfil de <%= usuario.nome %>" class="fotoPerfil">
-            <% } else { %>
-                <img src="/img/icone_padrao.png" alt="Foto de perfil padrão" class="fotoPerfil">
-            <% } %>
-            <strong><%= usuario.nome %></strong>
-            <span class="icone-perfil-desktop" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/>
-                    <path d="M5.5 20c.7-3.2 3.1-5.2 6.5-5.2s5.8 2 6.5 5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-            </span>
+                <% } else { %>
+                    <img src="/img/icone_padrao.png" alt="Foto de perfil padrão" class="fotoPerfil">
+                    <% } %>
+                        <strong>
+                            <%= usuario.nome %>
+                        </strong>
+                        <span class="icone-menu-desktop" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </span>
         </button>
 
         <div class="menu-usuario">
