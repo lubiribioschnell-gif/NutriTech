@@ -4,22 +4,19 @@ const { dataNascimentoValida, emailValido, numeroValido, textoLimpo } = require(
 exports.mostrarPerfil = async (req, res) => {
     try {
 
-        const [usuarios] = await banco.query(
-            `
-            SELECT
-                id_usuario,
-                nomeLimpo,
-                emailLimpo,
-                altura,
-                peso,
-                sexo,
-                data_nascimento,
-                foto
-            FROM usuarios
-            WHERE id_usuario = ?
-            `,
-            [req.session.usuario.id]
-        );
+ const [usuarios] = await db.query(`
+    SELECT
+        id_usuario,
+        nome,
+        email,
+        altura,
+        peso,
+        sexo,
+        data_nascimento,
+        foto
+    FROM usuarios
+    WHERE id_usuario = ?
+`, [req.session.usuario.id]);
 
         res.render("usuario/perfil", {
             titulo: "Meu Perfil",
