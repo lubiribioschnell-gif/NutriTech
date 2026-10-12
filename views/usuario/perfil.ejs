@@ -10,6 +10,9 @@
 
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/perfilUsuario.css">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 
 <body>
@@ -87,7 +90,7 @@
 
                                     <% if (usuario.foto) { %>
 
-                                        <img src="/uploads/<%= usuario.foto %>"
+                                        <img src="/uploads/<%= usuario.foto %>" onerror="this.onerror=null;this.src='/img/icone_padrao.png'"
                                             alt="Foto de perfil de <%= usuario.nome %>">
 
                                         <% } else { %>

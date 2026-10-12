@@ -20,6 +20,9 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
     >
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 
 <body class="pagina-editar-usuario">
@@ -96,7 +99,7 @@
                     <div class="editar-usuario-foto-atual">
 
                         <img
-                            src="/uploads/<%= usuario.foto %>"
+                            src="/uploads/<%= usuario.foto %>" onerror="this.onerror=null;this.src='/img/icone_padrao.png'"
                             alt="Foto de perfil de <%= usuario.nome %>"
                         >
 
@@ -191,7 +194,7 @@
                                                 usuario.data_nascimento
                                             ).toISOString().split('T')[0]
                                             : ''
-                                    %>"
+                                    %>" min="<%= (() => { const d = new Date(); d.setFullYear(d.getFullYear() - 120); return d.toISOString().split('T')[0]; })() %>" max="<%= new Date().toISOString().split('T')[0] %>"
                                     required
                                 >
 

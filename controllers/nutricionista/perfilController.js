@@ -1,4 +1,5 @@
 const banco = require("../../config/database");
+const { dataNascimentoValida, emailValido, textoLimpo } = require("../../utils/validacoes");
 
 exports.mostrarPerfil = async (req, res) => {
         try {
@@ -8,8 +9,8 @@ exports.mostrarPerfil = async (req, res) => {
                 `
                 SELECT
                     id_nutricionista,
-                    nome,
-                    email,
+                    nomeLimpo,
+                    emailLimpo,
                     data_nascimento,
                     sexo,
                     crn,
@@ -104,6 +105,17 @@ exports.editar = async (req, res) => {
                 descricao
             } = req.body;
 
+            const nomeLimpo = textoLimpo(nome);
+            const emailLimpo = textoLimpo(email).toLowerCase();
+            if (nomeLimpo.length < 3 || nomeLimpo.length > 100 || !emailValido(emailLimpo) || emailLimpo.length > 150) {
+                if (req.file) require("../../utils/arquivos").removerArquivoEnviado(req.file.filename);
+                return res.status(400).send("Confira o nome e o e-mail informados.");
+            }
+            if (!dataNascimentoValida(data_nascimento)) {
+                if (req.file) require("../../utils/arquivos").removerArquivoEnviado(req.file.filename);
+                return res.status(400).send("Informe uma data de nascimento válida, entre hoje e os últimos 120 anos.");
+            }
+
             const [nutricionistas] = await banco.query(
                 `
                 SELECT foto
@@ -140,8 +152,8 @@ exports.editar = async (req, res) => {
                 WHERE id_nutricionista = ?
                 `,
                 [
-                    nome,
-                    email,
+                    nomeLimpo,
+                    emailLimpo,
                     data_nascimento,
                     sexo,
                     crn,
@@ -152,8 +164,8 @@ exports.editar = async (req, res) => {
                 ]
             );
 
-            req.session.usuario.nome = nome;
-            req.session.usuario.email = email;
+            req.session.usuario.nome = nomeLimpo;
+            req.session.usuario.email = emailLimpo;
             req.session.usuario.foto = foto;
 
             res.redirect("/nutricionista/perfil");

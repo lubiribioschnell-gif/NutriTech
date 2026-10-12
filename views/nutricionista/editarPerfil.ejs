@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="/css/auth.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"rel="stylesheet">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 
 <body class="pagina-editar-nutricionista">
@@ -78,7 +81,7 @@
 
                                 <div class="editar-nutricionista-foto-atual">
 
-                                    <img src="/uploads/<%= nutricionista.foto %>"
+                                    <img src="/uploads/<%= nutricionista.foto %>" onerror="this.onerror=null;this.src='/img/icone_padrao.png'"
                                         alt="Foto de perfil de <%= nutricionista.nome %>">
 
                                     <div>
@@ -151,7 +154,7 @@
                                                 nutricionista.data_nascimento
                                             ).toISOString().split('T')[0]
                                             : ''
-                                    %>" required>
+                                    %>" min="<%= (() => { const d = new Date(); d.setFullYear(d.getFullYear() - 120); return d.toISOString().split('T')[0]; })() %>" max="<%= new Date().toISOString().split('T')[0] %>" required>
 
                                                 </div>
 

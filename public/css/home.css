@@ -1452,3 +1452,10 @@ button {
         animation-iteration-count: 1 !important;
     }
 }
+
+/* Acessibilidade e contenção responsiva */
+:focus-visible { outline: 3px solid #176b50; outline-offset: 3px; }
+img { max-width: 100%; }
+.logo { min-width: 0; text-decoration: none; }
+.logo img { flex-shrink: 0; }
+@media (max-width: 600px) { .usuarioNavbar, .botao-perfil { min-width: 0; max-width: 100%; } .botao-perfil strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .fotoPerfil { flex-shrink: 0; } }

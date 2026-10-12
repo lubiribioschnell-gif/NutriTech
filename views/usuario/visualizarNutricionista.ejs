@@ -12,6 +12,9 @@
 
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/visualizarNutricionista.css">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 
 <body>
@@ -60,7 +63,7 @@
 
                         <% if (nutricionista.foto) { %>
 
-                            <img src="/uploads/<%= nutricionista.foto %>" alt="Foto de <%= nutricionista.nome %>"
+                            <img src="/uploads/<%= nutricionista.foto %>" onerror="this.onerror=null;this.src='/img/icone_padrao.png'" alt="Foto de <%= nutricionista.nome %>"
                                 class="foto-nutricionista">
 
                             <% } else { %>

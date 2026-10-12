@@ -10,6 +10,9 @@
 
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/nutricionistasUsuario.css">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 
 <body>
@@ -149,7 +152,7 @@
 
                                         <div class="profissional-avatar">
                                             <% if (solicitacaoAtual.nutricionista_foto) { %>
-                                                <img src="/uploads/<%= solicitacaoAtual.nutricionista_foto %>" alt="Foto do nutricionista">
+                                                <img src="/uploads/<%= solicitacaoAtual.nutricionista_foto %>" onerror="this.onerror=null;this.src='/img/icone_padrao.png'" alt="Foto do nutricionista">
                                             <% } else { %>
                                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                                     <circle cx="12" cy="8" r="4" />
@@ -251,7 +254,7 @@
 
                                             <div class="profissional-atual-avatar">
                                                 <% if (solicitacaoAtual.nutricionista_foto) { %>
-                                                    <img src="/uploads/<%= solicitacaoAtual.nutricionista_foto %>" alt="Foto do nutricionista">
+                                                    <img src="/uploads/<%= solicitacaoAtual.nutricionista_foto %>" onerror="this.onerror=null;this.src='/img/icone_padrao.png'" alt="Foto do nutricionista">
                                                 <% } else { %>
                                                     <svg viewBox="0 0 24 24" aria-hidden="true">
                                                         <circle cx="12" cy="8" r="4" />
@@ -440,7 +443,7 @@
 
                                                                     <% if (nutricionista.foto) { %>
 
-                                                                        <img src="/uploads/<%= nutricionista.foto %>"
+                                                                        <img src="/uploads/<%= nutricionista.foto %>" onerror="this.onerror=null;this.src='/img/icone_padrao.png'"
                                                                             alt="Foto de <%= nutricionista.nome %>">
 
                                                                         <% } else { %>
