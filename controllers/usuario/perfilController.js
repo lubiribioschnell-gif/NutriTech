@@ -4,7 +4,8 @@ const { dataNascimentoValida, emailValido, numeroValido, textoLimpo } = require(
 exports.mostrarPerfil = async (req, res) => {
     try {
 
- const [usuarios] = await db.query(`
+        const [usuarios] = await banco.query(
+          `
     SELECT
         id_usuario,
         nome,
