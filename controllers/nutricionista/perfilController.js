@@ -5,23 +5,22 @@ exports.mostrarPerfil = async (req, res) => {
         try {
             const idNutricionista = req.session.usuario.id;
 
-            const [nutricionistas] = await banco.query(
-                `
-                SELECT
-                    id_nutricionista,
-                    nomeLimpo,
-                    emailLimpo,
-                    data_nascimento,
-                    sexo,
-                    crn,
-                    telefone,
-                    descricao,
-                    foto
-                FROM nutricionistas
-                WHERE id_nutricionista = ?
-                `,
-                [idNutricionista]
-            );
+ const [usuarios] = await banco.query(
+    `
+    SELECT
+        id_usuario,
+        nome,
+        email,
+        altura,
+        peso,
+        sexo,
+        data_nascimento,
+        foto
+    FROM usuarios
+    WHERE id_usuario = ?
+    `,
+    [idUsuario]
+);
 
             if (nutricionistas.length === 0) {
                 return res
