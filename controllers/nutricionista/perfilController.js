@@ -19,7 +19,7 @@ exports.mostrarPerfil = async (req, res) => {
     FROM usuarios
     WHERE id_usuario = ?
     `,
-    [idUsuario]
+    [idNutricionista]
 );
 
             if (nutricionistas.length === 0) {
